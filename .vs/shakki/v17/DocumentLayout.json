@@ -3,6 +3,38 @@
   "WorkspaceRootPath": "C:\\Users\\anton\\Documents\\Koulu\\Peliohjelmointi\\GrandmastersChestBot\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{8A3C55B7-1025-43F5-AB30-1FC7B6CE847C}|shakki\\shakki.vcxproj|C:\\Users\\anton\\Documents\\Koulu\\Peliohjelmointi\\GrandmastersChestBot\\shakki\\kayttoliittyma.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{8A3C55B7-1025-43F5-AB30-1FC7B6CE847C}|shakki\\shakki.vcxproj|solutionrelative:shakki\\kayttoliittyma.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8A3C55B7-1025-43F5-AB30-1FC7B6CE847C}|shakki\\shakki.vcxproj|C:\\Users\\anton\\Documents\\Koulu\\Peliohjelmointi\\GrandmastersChestBot\\shakki\\asema.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{8A3C55B7-1025-43F5-AB30-1FC7B6CE847C}|shakki\\shakki.vcxproj|solutionrelative:shakki\\asema.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8A3C55B7-1025-43F5-AB30-1FC7B6CE847C}|shakki\\shakki.vcxproj|C:\\Users\\anton\\Documents\\Koulu\\Peliohjelmointi\\GrandmastersChestBot\\shakki\\asema.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{8A3C55B7-1025-43F5-AB30-1FC7B6CE847C}|shakki\\shakki.vcxproj|solutionrelative:shakki\\asema.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8A3C55B7-1025-43F5-AB30-1FC7B6CE847C}|shakki\\shakki.vcxproj|C:\\Users\\anton\\Documents\\Koulu\\Peliohjelmointi\\GrandmastersChestBot\\shakki\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{8A3C55B7-1025-43F5-AB30-1FC7B6CE847C}|shakki\\shakki.vcxproj|solutionrelative:shakki\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8A3C55B7-1025-43F5-AB30-1FC7B6CE847C}|shakki\\shakki.vcxproj|C:\\Users\\anton\\Documents\\Koulu\\Peliohjelmointi\\GrandmastersChestBot\\shakki\\kayttoliittyma.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{8A3C55B7-1025-43F5-AB30-1FC7B6CE847C}|shakki\\shakki.vcxproj|solutionrelative:shakki\\kayttoliittyma.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8A3C55B7-1025-43F5-AB30-1FC7B6CE847C}|shakki\\shakki.vcxproj|C:\\Users\\anton\\Documents\\Koulu\\Peliohjelmointi\\GrandmastersChestBot\\shakki\\ruutu.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{8A3C55B7-1025-43F5-AB30-1FC7B6CE847C}|shakki\\shakki.vcxproj|solutionrelative:shakki\\ruutu.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8A3C55B7-1025-43F5-AB30-1FC7B6CE847C}|shakki\\shakki.vcxproj|C:\\Users\\anton\\Documents\\Koulu\\Peliohjelmointi\\GrandmastersChestBot\\shakki\\nappula.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{8A3C55B7-1025-43F5-AB30-1FC7B6CE847C}|shakki\\shakki.vcxproj|solutionrelative:shakki\\nappula.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8A3C55B7-1025-43F5-AB30-1FC7B6CE847C}|shakki\\shakki.vcxproj|C:\\Users\\anton\\Documents\\Koulu\\Peliohjelmointi\\GrandmastersChestBot\\shakki\\nappula.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{8A3C55B7-1025-43F5-AB30-1FC7B6CE847C}|shakki\\shakki.vcxproj|solutionrelative:shakki\\nappula.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{8A3C55B7-1025-43F5-AB30-1FC7B6CE847C}|shakki\\shakki.vcxproj|C:\\Users\\anton\\Documents\\Koulu\\Peliohjelmointi\\GrandmastersChestBot\\shakki\\peli.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{8A3C55B7-1025-43F5-AB30-1FC7B6CE847C}|shakki\\shakki.vcxproj|solutionrelative:shakki\\peli.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
@@ -14,17 +46,125 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "asema.h",
+              "DocumentMoniker": "C:\\Users\\anton\\Documents\\Koulu\\Peliohjelmointi\\GrandmastersChestBot\\shakki\\asema.h",
+              "RelativeDocumentMoniker": "shakki\\asema.h",
+              "ToolTip": "C:\\Users\\anton\\Documents\\Koulu\\Peliohjelmointi\\GrandmastersChestBot\\shakki\\asema.h",
+              "RelativeToolTip": "shakki\\asema.h",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABUAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-01-15T08:48:28.826Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "asema.cpp",
+              "DocumentMoniker": "C:\\Users\\anton\\Documents\\Koulu\\Peliohjelmointi\\GrandmastersChestBot\\shakki\\asema.cpp",
+              "RelativeDocumentMoniker": "shakki\\asema.cpp",
+              "ToolTip": "C:\\Users\\anton\\Documents\\Koulu\\Peliohjelmointi\\GrandmastersChestBot\\shakki\\asema.cpp",
+              "RelativeToolTip": "shakki\\asema.cpp",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAACEAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-01-15T07:56:06.192Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "kayttoliittyma.cpp",
+              "DocumentMoniker": "C:\\Users\\anton\\Documents\\Koulu\\Peliohjelmointi\\GrandmastersChestBot\\shakki\\kayttoliittyma.cpp",
+              "RelativeDocumentMoniker": "shakki\\kayttoliittyma.cpp",
+              "ToolTip": "C:\\Users\\anton\\Documents\\Koulu\\Peliohjelmointi\\GrandmastersChestBot\\shakki\\kayttoliittyma.cpp",
+              "RelativeToolTip": "shakki\\kayttoliittyma.cpp",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAABcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-01-15T07:51:22.215Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "kayttoliittyma.h",
+              "DocumentMoniker": "C:\\Users\\anton\\Documents\\Koulu\\Peliohjelmointi\\GrandmastersChestBot\\shakki\\kayttoliittyma.h",
+              "RelativeDocumentMoniker": "shakki\\kayttoliittyma.h",
+              "ToolTip": "C:\\Users\\anton\\Documents\\Koulu\\Peliohjelmointi\\GrandmastersChestBot\\shakki\\kayttoliittyma.h",
+              "RelativeToolTip": "shakki\\kayttoliittyma.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-01-15T07:50:17.629Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "main.cpp",
+              "DocumentMoniker": "C:\\Users\\anton\\Documents\\Koulu\\Peliohjelmointi\\GrandmastersChestBot\\shakki\\main.cpp",
+              "RelativeDocumentMoniker": "shakki\\main.cpp",
+              "ToolTip": "C:\\Users\\anton\\Documents\\Koulu\\Peliohjelmointi\\GrandmastersChestBot\\shakki\\main.cpp",
+              "RelativeToolTip": "shakki\\main.cpp",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABgAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-01-15T07:45:31.769Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "nappula.cpp",
+              "DocumentMoniker": "C:\\Users\\anton\\Documents\\Koulu\\Peliohjelmointi\\GrandmastersChestBot\\shakki\\nappula.cpp",
+              "RelativeDocumentMoniker": "shakki\\nappula.cpp",
+              "ToolTip": "C:\\Users\\anton\\Documents\\Koulu\\Peliohjelmointi\\GrandmastersChestBot\\shakki\\nappula.cpp",
+              "RelativeToolTip": "shakki\\nappula.cpp",
+              "ViewState": "AgIAACQAAAAAAAAAAAAAAAsAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-01-15T07:25:40.295Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "nappula.h",
+              "DocumentMoniker": "C:\\Users\\anton\\Documents\\Koulu\\Peliohjelmointi\\GrandmastersChestBot\\shakki\\nappula.h",
+              "RelativeDocumentMoniker": "shakki\\nappula.h",
+              "ToolTip": "C:\\Users\\anton\\Documents\\Koulu\\Peliohjelmointi\\GrandmastersChestBot\\shakki\\nappula.h",
+              "RelativeToolTip": "shakki\\nappula.h",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAACUAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-01-15T07:22:43.191Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ruutu.cpp",
+              "DocumentMoniker": "C:\\Users\\anton\\Documents\\Koulu\\Peliohjelmointi\\GrandmastersChestBot\\shakki\\ruutu.cpp",
+              "RelativeDocumentMoniker": "shakki\\ruutu.cpp",
+              "ToolTip": "C:\\Users\\anton\\Documents\\Koulu\\Peliohjelmointi\\GrandmastersChestBot\\shakki\\ruutu.cpp",
+              "RelativeToolTip": "shakki\\ruutu.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-01-15T07:25:15.265Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "peli.cpp",
               "DocumentMoniker": "C:\\Users\\anton\\Documents\\Koulu\\Peliohjelmointi\\GrandmastersChestBot\\shakki\\peli.cpp",
               "RelativeDocumentMoniker": "shakki\\peli.cpp",
               "ToolTip": "C:\\Users\\anton\\Documents\\Koulu\\Peliohjelmointi\\GrandmastersChestBot\\shakki\\peli.cpp",
               "RelativeToolTip": "shakki\\peli.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2026-01-15T07:15:05.412Z",
               "EditorCaption": ""
