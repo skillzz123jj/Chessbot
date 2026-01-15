@@ -22,6 +22,51 @@ Kayttoliittyma* Kayttoliittyma::getInstance()
 
 void Kayttoliittyma::piirraLauta()
 {
+	for (int i = 0; i < 8; i++)
+	{	
+		for (int j = 0; j < 8; j++)
+		{
+			if (i % 2 == 0)
+			{
+				if (j % 2 == 0)
+				{
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_INTENSITY | BACKGROUND_RED |
+					BACKGROUND_GREEN | BACKGROUND_BLUE);
+				}
+				else
+				{
+					SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_INTENSITY |
+						BACKGROUND_GREEN);
+				}
+			}
+			else
+			{
+				if (j % 2 == 0)
+				{
+					SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_INTENSITY |
+						BACKGROUND_GREEN);		
+				}
+				else
+				{
+					SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_INTENSITY | BACKGROUND_RED |
+						BACKGROUND_GREEN | BACKGROUND_BLUE);
+				}
+			}
+
+			if (_asema->_lauta != NULL)
+			{
+				wcout << _asema->_lauta[i, j];
+			}
+			wcout << "   ";
+
+			if (j == 7)
+			{
+				wcout << "\n";
+
+				wcout << "a";
+			}
+		}
+	}
 }
 
 
