@@ -19,8 +19,13 @@ Nappula* Asema::mr = new Ratsu(L"\u265E", 1, MR);
 Nappula* Asema::ms = new Sotilas(L"\u265F", 1, MS);
 
 
+
 Asema::Asema()
 {
+	//Luodaan array alkuasema rivesit‰ s‰‰st‰‰ksemme if lauseissa
+	Nappula* valkoistenTakaRivi[8] = { vt, vr, vl, vd, vk, vl, vr, vt };
+	Nappula* mustienTakaRivi[8] = { mt, mr, ml, md, mk, ml, mr, mt };
+
 	// Ensin alustetaan kaikki laudan ruudut nappulla "NULL", koska muuten ruuduissa satunnaista tauhkaa
 
 	for (int i = 0; i < 8; i++)
@@ -32,21 +37,17 @@ Asema::Asema()
 	}
 
 	// Asetetaan alkuaseman mukaisesti nappulat ruuduille
-
-	for (int i = 0; i < 8; i++)
+	for (int j = 0; j < 8; j++)
 	{
-		for (int j = 0; j < 8; j++)
-		{
-			if (i == 1)
-			{
-				_lauta[i][j] = vs;
-			}
-			else if (i == 7)
-			{
-				_lauta[i][j] = ms;
-			}
-		}
+		//asetetaan yksikkˆ rivit paikalleen yksi kerrallaan
+		_lauta[0][j] = valkoistenTakaRivi[j];
+		_lauta[1][j] = vs;
+		
+		_lauta[6][j] = ms;
+		_lauta[7][j] = mustienTakaRivi[j];
 	}
+
+
 }
 
 

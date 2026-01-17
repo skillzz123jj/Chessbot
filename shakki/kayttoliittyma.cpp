@@ -22,10 +22,20 @@ Kayttoliittyma* Kayttoliittyma::getInstance()
 
 void Kayttoliittyma::piirraLauta()
 {
+	//asetetaan tulostus UTF16 tyyppiseksi, jotta shakkinappulat n‰kyv‰t oikein
+	_setmode(_fileno(stdout), _O_U16TEXT);
+
 	for (int i = 0; i < 8; i++)
 	{	
 		for (int j = 0; j < 8; j++)
 		{
+			if (j == 0)
+			{
+				//Muutetaan tulostus standardiksi, kirjainrivin tulostusta varten
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY);
+				wcout <<L" a ";
+			}
+
 			if (i % 2 == 0)
 			{
 				if (j % 2 == 0)
@@ -53,17 +63,22 @@ void Kayttoliittyma::piirraLauta()
 				}
 			}
 
-			if (_asema->_lauta != NULL)
+			if (_asema->_lauta[i][j] != NULL)
 			{
-				wcout << _asema->_lauta[i, j];
+				//Koska halutaan nappula keskelle ruutua, tulostetaan ensin 1 tyhj‰, sitten nappula ja 2 tyhj‰‰
+				wcout <<L" ";
+				wcout << _asema->_lauta[i][j]->getUnicode();
+				wcout <<L"  ";
 			}
-			wcout << "   ";
-
+			else
+			{
+				wcout <<L"    ";
+			}
+			
+			//Jos viimeisell‰ neliˆll‰ riviss‰, vaihdetaan rivi
 			if (j == 7)
 			{
 				wcout << "\n";
-
-				wcout << "a";
 			}
 		}
 	}
