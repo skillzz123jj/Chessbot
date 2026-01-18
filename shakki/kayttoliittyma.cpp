@@ -22,6 +22,9 @@ Kayttoliittyma* Kayttoliittyma::getInstance()
 
 void Kayttoliittyma::piirraLauta()
 {
+	wchar_t kirjaimet[8] = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h' };
+	wint_t numerot = 8;
+
 	//asetetaan tulostus UTF16 tyyppiseksi, jotta shakkinappulat näkyvät oikein
 	_setmode(_fileno(stdout), _O_U16TEXT);
 
@@ -33,7 +36,9 @@ void Kayttoliittyma::piirraLauta()
 			{
 				//Muutetaan tulostus standardiksi, kirjainrivin tulostusta varten
 				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY);
-				wcout <<L" a ";
+				wcout << numerot;
+				numerot -= 1;
+
 			}
 
 			if (i % 2 == 0)
@@ -82,6 +87,15 @@ void Kayttoliittyma::piirraLauta()
 			}
 		}
 	}
+			//Asetetaan standari väri ja lisätään loppuun kirjaimet
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_GREEN 
+			| FOREGROUND_BLUE | FOREGROUND_INTENSITY);
+
+			for (int i = 0; i < 8; i++)
+			{
+				wcout << L"  " << kirjaimet[i] << " ";
+			
+			}
 }
 
 
