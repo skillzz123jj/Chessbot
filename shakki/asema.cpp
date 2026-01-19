@@ -40,11 +40,12 @@ Asema::Asema()
 	for (int j = 0; j < 8; j++)
 	{
 		//asetetaan yksikkö rivit paikalleen yksi kerrallaan
-		_lauta[0][j] = valkoistenTakaRivi[j];
-		_lauta[1][j] = vs;
+		_lauta[0][j] = mustienTakaRivi[j];
+		_lauta[1][j] = ms;
+
+		_lauta[6][j] = vs;
+		_lauta[7][j] = valkoistenTakaRivi[j];
 		
-		_lauta[6][j] = ms;
-		_lauta[7][j] = mustienTakaRivi[j];
 	}
 
 

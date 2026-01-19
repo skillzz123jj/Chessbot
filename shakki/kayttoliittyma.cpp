@@ -71,13 +71,12 @@ void Kayttoliittyma::piirraLauta()
 			if (_asema->_lauta[i][j] != NULL)
 			{
 				//Koska halutaan nappula keskelle ruutua, tulostetaan ensin 1 tyhj‰, sitten nappula ja 2 tyhj‰‰
-				wcout <<L" ";
 				wcout << _asema->_lauta[i][j]->getUnicode();
-				wcout <<L"  ";
+				wcout <<L" ";
 			}
 			else
 			{
-				wcout <<L"    ";
+				wcout <<L"  ";
 			}
 			
 			//Jos viimeisell‰ neliˆll‰ riviss‰, vaihdetaan rivi
@@ -93,7 +92,7 @@ void Kayttoliittyma::piirraLauta()
 
 			for (int i = 0; i < 8; i++)
 			{
-				wcout << L"  " << kirjaimet[i] << " ";
+				wcout << L" " << kirjaimet[i];
 			
 			}
 }
