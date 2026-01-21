@@ -36,7 +36,7 @@ int main()
 	//		std::wcout << "Peli loppui";
 	//		continue;
 	//	}
-	//	Siirto siirto;
+		Siirto siirto;
 	//	if (asema.getSiirtovuoro() == koneenVari) {
 	//		MinMaxPaluu paluu;
 	//		if (koneenVari == 0) {
@@ -48,8 +48,8 @@ int main()
 	//		siirto = paluu._parasSiirto;
 	//	}
 	//	else {
-	//		siirto = Kayttoliittyma::getInstance()->
-	//			annaVastustajanSiirto();
+			siirto = Kayttoliittyma::getInstance()->
+			annaVastustajanSiirto();
 	//	}
 	//	asema.paivitaAsema(&siirto);
 	//}

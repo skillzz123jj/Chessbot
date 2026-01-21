@@ -3,7 +3,6 @@
 #include <string>
 #include <fcntl.h>
 #include <io.h>
-#include <iostream>
 #include "kayttoliittyma.h"
 
 using namespace std;
@@ -45,8 +44,8 @@ void Kayttoliittyma::piirraLauta()
 			{
 				if (j % 2 == 0)
 				{
-				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_INTENSITY | BACKGROUND_RED |
-					BACKGROUND_GREEN | BACKGROUND_BLUE);
+					SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_INTENSITY | BACKGROUND_RED |
+						BACKGROUND_GREEN | BACKGROUND_BLUE);
 				}
 				else
 				{
@@ -105,7 +104,34 @@ void Kayttoliittyma::piirraLauta()
 */
 Siirto Kayttoliittyma::annaVastustajanSiirto()
 {
-	Siirto siirto;
+	wstring move;
+	wcout << L"Whats your move:" << endl;
+	wcin >> move;
+	int lahtoX;
+	int lahtoY;
+	int loppuX;
+	int loppuY;
+	//_setmode(_fileno(stdout), _O_U8TEXT);
+
+	if (move == L"O-O" || move == L"O-O-O")
+	{
+	
+	}
+	else if (move.size() == 6)
+	{
+		move.erase(move[0]);
+	}
+	else
+	{
+		lahtoX = move[0] - 'a';
+		lahtoY = move[1] - 49;
+		loppuX = move[3] - 'a';
+		loppuY = move[4] - 49;
+	}
+	Ruutu lahtoRuutu = Ruutu(lahtoX, lahtoY);
+	Ruutu loppuRuutu = Ruutu(loppuX, loppuY);
+
+	Siirto siirto(lahtoRuutu, loppuRuutu);
 	return siirto;
 	
 }
