@@ -124,9 +124,9 @@ Siirto Kayttoliittyma::annaVastustajanSiirto()
 	else
 	{
 		lahtoX = move[0] - 'a';
-		lahtoY = move[1] - 49;
+		lahtoY = move[1] - '1';
 		loppuX = move[3] - 'a';
-		loppuY = move[4] - 49;
+		loppuY = move[4] - '1';
 	}
 	Ruutu lahtoRuutu = Ruutu(lahtoX, lahtoY);
 	Ruutu loppuRuutu = Ruutu(loppuX, loppuY);
