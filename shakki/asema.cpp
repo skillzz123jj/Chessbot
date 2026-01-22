@@ -28,24 +28,26 @@ Asema::Asema()
 
 	// Ensin alustetaan kaikki laudan ruudut nappulla "NULL", koska muuten ruuduissa satunnaista tauhkaa
 
-	for (int i = 0; i < 8; i++)
+	for (int y = 0; y < 8; y++)
 	{
-		for (int j = 0; j < 8; j++)
+		for (int x = 0; x < 8; x++)
 		{
-			_lauta[i][j] = NULL;
+			_lauta[y][x] = NULL;
 		}
 	}
 
 	// Asetetaan alkuaseman mukaisesti nappulat ruuduille
+	// Origo on vasemmassa alakulmassa (a1 = [0][0])
+	// Rivi 0 = rank 1 (valkoisten takarivi)
+	// Rivi 7 = rank 8 (mustien takarivi)
 	for (int j = 0; j < 8; j++)
 	{
 		//asetetaan yksikkö rivit paikalleen yksi kerrallaan
-		_lauta[0][j] = mustienTakaRivi[j];
-		_lauta[1][j] = ms;
+		_lauta[7][j] = mustienTakaRivi[j];  // Mustat rivi 8
+		_lauta[6][j] = ms;                   // Mustat sotilaat rivi 7
 
-		_lauta[6][j] = vs;
-		_lauta[7][j] = valkoistenTakaRivi[j];
-		
+		_lauta[1][j] = vs;                   // Valkeat sotilaat rivi 2
+		_lauta[0][j] = valkoistenTakaRivi[j]; // Valkeat rivi 1
 	}
 
 
@@ -54,7 +56,7 @@ Asema::Asema()
 
 void Asema::paivitaAsema(Siirto *siirto)
 {
-
+	
 	// Kaksoisaskel-lippu on oletusarvoisesti pois päältä.
 	// Asetetaan myöhemmin, jos tarvii.
 
@@ -67,7 +69,8 @@ void Asema::paivitaAsema(Siirto *siirto)
 
 
 	// Kaikki muut siirrot
-
+	Ruutu ruutu = siirto->getAlkuruutu();
+	Nappula* siirrettyNappula = _lauta[ruutu.getSarake()][ruutu.getRivi()];
 
 		//Ottaa siirron alkuruudussa olleen nappulan talteen 
 
@@ -228,7 +231,6 @@ double Asema::linjat(int vari)
 	//mustat
 	
 }
-
 
 // https://chessprogramming.wikispaces.com/Minimax MinMax-algoritmin pseudokoodi (lisäsin parametrina aseman)
 //int maxi(int depth, asema a) 
