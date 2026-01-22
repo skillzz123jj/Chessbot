@@ -75,52 +75,60 @@ void Asema::paivitaAsema(Siirto *siirto)
 	Ruutu loppuRuutu = siirto->getLoppuruutu();
 
 	//Otetaan nappula alkuruudusta
-	Nappula* siirrettyNappula = _lauta[alkuRuutu.getSarake()][alkuRuutu.getRivi()];
+	Nappula* siirrettyNappula = _lauta[alkuRuutu.getRivi()][alkuRuutu.getSarake()];
 
 	//Asetetaan lähtöruutu tyhjäksi 
-	_lauta[alkuRuutu.getSarake()][alkuRuutu.getRivi()] = NULL;
+	_lauta[alkuRuutu.getRivi()][alkuRuutu.getSarake()] = NULL;
 
 	//Sijoitetaan nappula uuteen sijaintiin
-	_lauta[loppuRuutu.getSarake()][loppuRuutu.getRivi()] = siirrettyNappula;
-	
+	_lauta[loppuRuutu.getRivi()][loppuRuutu.getSarake()] = siirrettyNappula;
+
+	//wcout << _lauta[loppuRuutu.getSarake()][loppuRuutu.getRivi()]->getKoodi() << endl;
+	//wcout << _lauta[loppuRuutu.getSarake()][loppuRuutu.getRivi()]->getUnicode() << endl;
+
+	//if (_lauta[loppuRuutu.getSarake()][loppuRuutu.getRivi()] != NULL)
+	//{
+	//	wcout << "ruutu ei ole null ruudussa " << loppuRuutu.getSarake() << loppuRuutu.getRivi() << endl;
+	//}
+
 	if (siirrettyNappula->getKoodi())
 	{
-		wcout << siirrettyNappula->getKoodi();
+		wcout << siirrettyNappula->getKoodi() << endl;
 	}
 
 	wcout << "testi" << _onkoMustaDTliikkunut << endl;
 	//Asetetaan nappuloiden flagit 
 	switch (siirrettyNappula->getKoodi()) 
 	{
-	case VK:
-		_onkoValkeaKuningasLiikkunut = true;
-		break;
-	case MK:
-		_onkoMustaKuningasLiikkunut = true;
-		break;
-	case VT:
-		if (alkuRuutu.getSarake() == 0)
-		{
-			_onkoValkeaDTliikkunut = true;
+		case VK:
+			_onkoValkeaKuningasLiikkunut = true;
+			break;
+		case MK:
+			_onkoMustaKuningasLiikkunut = true;
+			break;
+		case VT:
+			if (alkuRuutu.getSarake() == 0)
+			{
+				_onkoValkeaDTliikkunut = true;
+			}
+			else
+			{
+				_onkoValkeaKTliikkunut = true;
+			}
+			break;
+		case MT:
+			if (alkuRuutu.getSarake() == 0)
+			{
+				_onkoMustaDTliikkunut = true;
+			}
+			else
+			{
+				_onkoMustaKTliikkunut = true;
+			}
+			break;
+		default:
+			wcout << "Ei flageja" << endl;
 		}
-		else
-		{
-			_onkoValkeaKTliikkunut = true;
-		}
-		break;
-	case MT:
-		if (alkuRuutu.getSarake() == 0)
-		{
-			_onkoMustaDTliikkunut = true;
-		}
-		else
-		{
-			_onkoMustaKTliikkunut = true;
-		}
-		break;
-	default:
-		wcout << "Ei flageja" << endl;
-	}
 
 	if (getSiirtovuoro() == 1)
 	{
@@ -195,7 +203,7 @@ bool Asema::getOnkoValkeaDTliikkunut()
 
 bool Asema::getOnkoValkeaKTliikkunut() 
 {
-	return _onkoValkeaKTliikkunut = true;
+	return _onkoValkeaKTliikkunut;
 }
 
 

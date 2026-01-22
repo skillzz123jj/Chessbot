@@ -22,7 +22,6 @@ int main()
 	Peli peli(Kayttoliittyma::getInstance()->
 		kysyVastustajanVari());
 	std::list<Siirto> lista;
-	system("cls");
 	int koneenVari = peli.getKoneenVari();
 
 	while (lopetus != 0)*/// {
@@ -48,11 +47,12 @@ int main()
 	//		siirto = paluu._parasSiirto;
 	//	}
 	//	else {
-			siirto = Kayttoliittyma::getInstance()->
-			annaVastustajanSiirto();
+	siirto = Kayttoliittyma::getInstance()->
+	annaVastustajanSiirto();
 	//	}
 	asema.paivitaAsema(&siirto);
 	//}
+	system("cls");
 	Kayttoliittyma::getInstance()->piirraLauta();
 
 
