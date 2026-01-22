@@ -4,6 +4,8 @@
 #include "nappula.h"
 #include "ruutu.h"
 
+using namespace std;
+
 Nappula* Asema::vk = new Kuningas(L"\u2654", 0, VK);
 Nappula* Asema::vd = new Daami(L"\u2655", 0, VD);
 Nappula* Asema::vt = new Torni(L"\u2656", 0, VT);
@@ -69,8 +71,69 @@ void Asema::paivitaAsema(Siirto *siirto)
 
 
 	// Kaikki muut siirrot
-	Ruutu ruutu = siirto->getAlkuruutu();
-	Nappula* siirrettyNappula = _lauta[ruutu.getSarake()][ruutu.getRivi()];
+	Ruutu alkuRuutu = siirto->getAlkuruutu();
+	Ruutu loppuRuutu = siirto->getLoppuruutu();
+
+	//Otetaan nappula alkuruudusta
+	Nappula* siirrettyNappula = _lauta[alkuRuutu.getSarake()][alkuRuutu.getRivi()];
+
+	//Asetetaan lähtöruutu tyhjäksi 
+	_lauta[alkuRuutu.getSarake()][alkuRuutu.getRivi()] = NULL;
+
+	//Sijoitetaan nappula uuteen sijaintiin
+	_lauta[loppuRuutu.getSarake()][loppuRuutu.getRivi()] = siirrettyNappula;
+	
+	if (siirrettyNappula->getKoodi())
+	{
+		wcout << siirrettyNappula->getKoodi();
+	}
+
+	wcout << "testi" << _onkoMustaDTliikkunut << endl;
+	//Asetetaan nappuloiden flagit 
+	switch (siirrettyNappula->getKoodi()) 
+	{
+	case VK:
+		_onkoValkeaKuningasLiikkunut = true;
+		break;
+	case MK:
+		_onkoMustaKuningasLiikkunut = true;
+		break;
+	case VT:
+		if (alkuRuutu.getSarake() == 0)
+		{
+			_onkoValkeaDTliikkunut = true;
+		}
+		else
+		{
+			_onkoValkeaKTliikkunut = true;
+		}
+		break;
+	case MT:
+		if (alkuRuutu.getSarake() == 0)
+		{
+			_onkoMustaDTliikkunut = true;
+		}
+		else
+		{
+			_onkoMustaKTliikkunut = true;
+		}
+		break;
+	default:
+		wcout << "Ei flageja" << endl;
+	}
+
+	if (getSiirtovuoro() == 1)
+	{
+		setSiirtovuoro(0);
+
+	}
+	else
+	{
+		setSiirtovuoro(1);
+
+	}
+
+
 
 		//Ottaa siirron alkuruudussa olleen nappulan talteen 
 
@@ -101,49 +164,50 @@ void Asema::paivitaAsema(Siirto *siirto)
 
 int Asema::getSiirtovuoro() 
 {
-	return 0;
+	return _siirtovuoro;
 }
 
 
 void Asema::setSiirtovuoro(int vuoro) 
 {
-	
+	_siirtovuoro = vuoro;
 }
 
 
 bool Asema::getOnkoValkeaKuningasLiikkunut() 
 {
-	return false;
+	return _onkoValkeaKuningasLiikkunut;
 }
 
 
 bool Asema::getOnkoMustaKuningasLiikkunut() 
 {
-	return false;
+
+	return _onkoMustaKuningasLiikkunut;
 }
 
 
 bool Asema::getOnkoValkeaDTliikkunut() 
 {
-	return false;
+	return _onkoValkeaDTliikkunut;
 }
 
 
 bool Asema::getOnkoValkeaKTliikkunut() 
 {
-	return false;
+	return _onkoValkeaKTliikkunut = true;
 }
 
 
 bool Asema::getOnkoMustaDTliikkunut() 
 {
-	return false;
+	return _onkoMustaDTliikkunut;
 }
 
 
 bool Asema::getOnkoMustaKTliikkunut() 
 {
-	return false;
+	return _onkoMustaKTliikkunut;
 }
 
 

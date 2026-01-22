@@ -10,7 +10,7 @@
 enum
 {
 	VT,VR,VL,VD,VK,VS,
-	MT,MR,ML,MD,MK,MS
+	MT,MR,ML,MD,MK,MS   //Torni, ratsu, lähetti, daami, kuningas, sotilas
 };
 
 

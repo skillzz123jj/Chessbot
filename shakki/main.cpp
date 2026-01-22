@@ -51,8 +51,10 @@ int main()
 			siirto = Kayttoliittyma::getInstance()->
 			annaVastustajanSiirto();
 	//	}
-	//	asema.paivitaAsema(&siirto);
+	asema.paivitaAsema(&siirto);
 	//}
+	Kayttoliittyma::getInstance()->piirraLauta();
+
 
 	
 	return 0;
