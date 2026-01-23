@@ -51,12 +51,12 @@ private:
 
 	// Lisäinformaatio pelitilanteesta.
 	int _siirtovuoro;					// 0 = valkea, 1 = musta.
-	bool _onkoValkeaKuningasLiikkunut;	// Linnoitus ei ole sallittu, jos kuningas on liikkunut.
-	bool _onkoMustaKuningasLiikkunut;	// Linnoitus ei ole sallittu, jos kuningas on liikkunut.
-	bool _onkoValkeaDTliikkunut;		// Linnoitus ei ole sallittu, jos daamisivustan torni on liikkunut.
-	bool _onkoValkeaKTliikkunut;		// Linnoitus ei ole sallittu, jos kuningassivustan torni on liikkunut.
-	bool _onkoMustaDTliikkunut;			// Linnoitus ei ole sallittu, jos daamisuvustan torni on liikkunut.	
-	bool _onkoMustaKTliikkunut;			// Linnoitus ei ole sallittu, jos kuningassivustan torni on liikkunut.
+	bool _onkoValkeaKuningasLiikkunut = false;	// Linnoitus ei ole sallittu, jos kuningas on liikkunut.
+	bool _onkoMustaKuningasLiikkunut = false;	// Linnoitus ei ole sallittu, jos kuningas on liikkunut.
+	bool _onkoValkeaDTliikkunut = false;		// Linnoitus ei ole sallittu, jos daamisivustan torni on liikkunut.
+	bool _onkoValkeaKTliikkunut = false;		// Linnoitus ei ole sallittu, jos kuningassivustan torni on liikkunut.
+	bool _onkoMustaDTliikkunut = false;			// Linnoitus ei ole sallittu, jos daamisuvustan torni on liikkunut.	
+	bool _onkoMustaKTliikkunut = false;			// Linnoitus ei ole sallittu, jos kuningassivustan torni on liikkunut.
 
 	double laskeNappuloidenArvo(int);
 	bool onkoAvausTaiKeskipeli(int);

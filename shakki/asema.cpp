@@ -83,20 +83,7 @@ void Asema::paivitaAsema(Siirto *siirto)
 	//Sijoitetaan nappula uuteen sijaintiin
 	_lauta[loppuRuutu.getRivi()][loppuRuutu.getSarake()] = siirrettyNappula;
 
-	//wcout << _lauta[loppuRuutu.getSarake()][loppuRuutu.getRivi()]->getKoodi() << endl;
-	//wcout << _lauta[loppuRuutu.getSarake()][loppuRuutu.getRivi()]->getUnicode() << endl;
 
-	//if (_lauta[loppuRuutu.getSarake()][loppuRuutu.getRivi()] != NULL)
-	//{
-	//	wcout << "ruutu ei ole null ruudussa " << loppuRuutu.getSarake() << loppuRuutu.getRivi() << endl;
-	//}
-
-	if (siirrettyNappula->getKoodi())
-	{
-		wcout << siirrettyNappula->getKoodi() << endl;
-	}
-
-	wcout << "testi" << _onkoMustaDTliikkunut << endl;
 	//Asetetaan nappuloiden flagit 
 	switch (siirrettyNappula->getKoodi()) 
 	{
