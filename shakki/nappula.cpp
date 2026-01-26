@@ -124,8 +124,83 @@ void Kuningas::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema,
 
 void Sotilas::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, int vari)
 {
-	
-}
+		int x = ruutu->getRivi();
+		int y = ruutu->getSarake();
+
+		if (vari == 0) //Jos väri on valkoinen
+		{
+			if (asema->_lauta[x][y + 1] == NULL)
+			{
+				//Jos sotilaan yläpuolella ei ole nappulaa voidaan liikkua
+				Ruutu loppuRuutu = Ruutu(x, y + 1);
+				Siirto siirto(*ruutu, loppuRuutu);
+				lista.push_back(siirto);
+
+				//Jos sotilaan kahta yläpuolella ei ole nappulaa voidaan liikkua
+				if (y == 1 && asema->_lauta[x][y + 2] == NULL)
+				{
+					Ruutu loppuRuutu = Ruutu(x, y + 2);
+					Siirto siirto(*ruutu, loppuRuutu);
+					lista.push_back(siirto);
+				}
+			}
+
+			//Tarkistaa saako vasemmalta syötyä vihollisen nappulan
+			if (asema->_lauta[x - 1][y + 1] != NULL 
+			&& asema->_lauta[x - 1][y + 1]->getVari() != 0)
+			{
+				Ruutu loppuRuutu = Ruutu(x, y + 2);
+				Siirto siirto(*ruutu, loppuRuutu);
+				lista.push_back(siirto);
+			}
+
+			//Tarkistaa saako oikealta syötyä vihollisen nappulan
+			if (asema->_lauta[x + 1][y + 1] != NULL
+				&& asema->_lauta[x + 1][y + 1]->getVari() != 0)
+			{
+				Ruutu loppuRuutu = Ruutu(x, y + 2);
+				Siirto siirto(*ruutu, loppuRuutu);
+				lista.push_back(siirto);
+			}
+
+		}
+		else //Jos väri on musta
+		{
+			//Jos sotilaan yläpuolella ei ole nappulaa voidaan liikkua
+			if (asema->_lauta[x][y - 1] == NULL)
+			{
+				Ruutu loppuRuutu = Ruutu(x, y - 1);
+				Siirto siirto(*ruutu, loppuRuutu);
+				lista.push_back(siirto);
+
+				//Jos sotilaan kahta yläpuolella ei ole nappulaa voidaan liikkua
+				if (y == 1 && asema->_lauta[x][y + 2] == NULL)
+				{
+					Ruutu loppuRuutu = Ruutu(x, y + 2);
+					Siirto siirto(*ruutu, loppuRuutu);
+					lista.push_back(siirto);
+				}
+			}
+
+			//Tarkistaa saako vasemmalta syötyä vihollisen nappulan
+			if (asema->_lauta[x - 1][y + 1] != NULL
+				&& asema->_lauta[x - 1][y + 1]->getVari() != 0)
+			{
+				Ruutu loppuRuutu = Ruutu(x, y + 2);
+				Siirto siirto(*ruutu, loppuRuutu);
+				lista.push_back(siirto);
+			}
+
+			//Tarkistaa saako oikealta syötyä vihollisen nappulan
+			if (asema->_lauta[x + 1][y + 1] != NULL
+				&& asema->_lauta[x + 1][y + 1]->getVari() != 0)
+			{
+				Ruutu loppuRuutu = Ruutu(x, y + 2);
+				Siirto siirto(*ruutu, loppuRuutu);
+				lista.push_back(siirto);
+			}
+		}
+	}
 
 
 void Sotilas::lisaaSotilaanKorotukset(Siirto* siirto, std::list<Siirto>& lista, Asema* asema) {
