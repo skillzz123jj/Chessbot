@@ -111,17 +111,17 @@ Siirto Kayttoliittyma::annaVastustajanSiirto()
 
 	}
 
-	else if (move.size() == 6)
+	if (move.size() == 6)
 	{
-		move.erase(move[0]);
+		move.erase(0, 1);
 	}
-	else
-	{
-		lahtoX = move[0] - 'a';
-		lahtoY = move[1] - '1';
-		loppuX = move[3] - 'a';
-		loppuY = move[4] - '1';
-	}
+	
+	
+	lahtoX = move[0] - 'a';
+	lahtoY = move[1] - '1';
+	loppuX = move[3] - 'a';
+	loppuY = move[4] - '1';
+	
 	Ruutu lahtoRuutu = Ruutu(lahtoX, lahtoY);
 	Ruutu loppuRuutu = Ruutu(loppuX, loppuY);
 
