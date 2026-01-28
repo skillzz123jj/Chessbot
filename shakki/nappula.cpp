@@ -15,14 +15,142 @@ Nappula::Nappula(wstring unicode, int vari, int koodi)
 
 void Torni::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, int vari)
 {
+	int x = ruutu->getSarake();
+	int y = ruutu->getRivi();
 	
-}
+	//Suunta oikealle
+	for (int i = 1; i < 8; i++)
+	{
+		int tempX = x + i;
+		int tempY = y;
 
+		if (tempX >= 8) break;
+
+		if (asema->_lauta[tempY][tempX] != NULL)
+		{
+			Nappula* ruudunNappula = asema->_lauta[tempY][tempX];
+
+			if (ruudunNappula->getVari() == asema->getSiirtovuoro())
+			{
+				break;
+			}
+			else
+			{
+				Ruutu loppuRuutu = Ruutu(tempX, tempY);
+				Siirto siirto(*ruutu, loppuRuutu);
+				lista.push_back(siirto);
+				break;
+			}
+		}
+		else
+		{
+			Ruutu loppuRuutu = Ruutu(tempX, tempY);
+			Siirto siirto(*ruutu, loppuRuutu);
+			lista.push_back(siirto);
+		}
+	}
+
+	//Suunta vasemmalle
+	for (int i = 1; i < 8; i++)
+	{
+		int tempX = x - i;
+		int tempY = y;
+
+		if (tempX < 0) break;
+
+		if (asema->_lauta[tempY][tempX] != NULL)
+		{
+			Nappula* ruudunNappula = asema->_lauta[tempY][tempX];
+
+			if (ruudunNappula->getVari() == asema->getSiirtovuoro())
+			{
+				break;
+			}
+			else
+			{
+				Ruutu loppuRuutu = Ruutu(tempX, tempY);
+				Siirto siirto(*ruutu, loppuRuutu);
+				lista.push_back(siirto);
+				break;
+			}
+		}
+		else
+		{
+			Ruutu loppuRuutu = Ruutu(tempX, tempY);
+			Siirto siirto(*ruutu, loppuRuutu);
+			lista.push_back(siirto);
+		}
+	}
+
+	//Suunta ylös
+	for (int i = 1; i < 8; i++)
+	{
+		int tempX = x;
+		int tempY = y + i;
+
+		if (tempY >= 8) break;
+
+		if (asema->_lauta[tempY][tempX] != NULL)
+		{
+			Nappula* ruudunNappula = asema->_lauta[tempY][tempX];
+
+			if (ruudunNappula->getVari() == asema->getSiirtovuoro())
+			{
+				break;
+			}
+			else
+			{
+				Ruutu loppuRuutu = Ruutu(tempX, tempY);
+				Siirto siirto(*ruutu, loppuRuutu);
+				lista.push_back(siirto);
+				break;
+			}
+		}
+		else
+		{
+			Ruutu loppuRuutu = Ruutu(tempX, tempY);
+			Siirto siirto(*ruutu, loppuRuutu);
+			lista.push_back(siirto);
+		}
+	}
+
+	//Suunta alas
+	for (int i = 1; i < 8; i++)
+	{
+		int tempX = x;
+		int tempY = y - i;
+
+		if (tempY < 0) break;
+
+		if (asema->_lauta[tempY][tempX] != NULL)
+		{
+			Nappula* ruudunNappula = asema->_lauta[tempY][tempX];
+
+			if (ruudunNappula->getVari() == asema->getSiirtovuoro())
+			{
+				break;
+			}
+			else
+			{
+				Ruutu loppuRuutu = Ruutu(tempX, tempY);
+				Siirto siirto(*ruutu, loppuRuutu);
+				lista.push_back(siirto);
+				break;
+			}
+		}
+		else
+		{
+			Ruutu loppuRuutu = Ruutu(tempX, tempY);
+			Siirto siirto(*ruutu, loppuRuutu);
+			lista.push_back(siirto);
+		}
+	}
+}
 
 void Ratsu::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, int vari)
 {
-	int x = ruutu->getRivi();
-	int y = ruutu->getSarake();
+	int x = ruutu->getSarake();
+	int y = ruutu->getRivi();
 
 	int siirrot[8][2] = {
 	   { 2,  1}, { 2, -1},
@@ -40,9 +168,9 @@ void Ratsu::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, in
 		if (tempX < 0 || tempX >= 8 || tempY < 0 || tempY >= 8)
 			continue;
 
-		if (asema->_lauta[tempX][tempY] != NULL)
+		if (asema->_lauta[tempY][tempX] != NULL)
 		{
-			Nappula* ruudunNappula = asema->_lauta[tempX][tempY];
+			Nappula* ruudunNappula = asema->_lauta[tempY][tempX];
 
 			//Jos sijainnissa oleva nappula on saman värinen niin sinne ei voi siirtyä
 			if (ruudunNappula->getVari() == asema->getSiirtovuoro())
@@ -57,8 +185,8 @@ void Ratsu::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, in
 		else
 		{
 			Ruutu loppuRuutu = Ruutu(tempX, tempY);
-				Siirto siirto(*ruutu, loppuRuutu);
-				lista.push_back(siirto);
+			Siirto siirto(*ruutu, loppuRuutu);
+			lista.push_back(siirto);
 		}
 	}
 }
@@ -78,8 +206,8 @@ void Daami::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, in
 
 void Kuningas::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, int vari)
 {
-	int x = ruutu->getRivi();
-	int y = ruutu->getSarake();
+	int x = ruutu->getSarake();
+	int y = ruutu->getRivi();
 
 	int siirrot[8][2] = {
 	   { -1, 1}, { 0, 1},
@@ -98,9 +226,9 @@ void Kuningas::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema,
 		if (tempX < 0 || tempX >= 8 || tempY < 0 || tempY >= 8)
 			continue;
 
-		if (asema->_lauta[tempX][tempY] != NULL)
+		if (asema->_lauta[tempY][tempX] != NULL)
 		{
-			Nappula* ruudunNappula = asema->_lauta[tempX][tempY];
+			Nappula* ruudunNappula = asema->_lauta[tempY][tempX];
 
 			//Jos sijainnissa oleva nappula on saman värinen niin sinne ei voi siirtyä
 			if (ruudunNappula->getVari() == asema->getSiirtovuoro())
@@ -124,8 +252,8 @@ void Kuningas::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema,
 
 void Sotilas::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, int vari)
 {
-		int x = ruutu->getRivi();
-		int y = ruutu->getSarake();
+		int x = ruutu->getSarake();
+		int y = ruutu->getRivi();
 
 		if (vari == 0) //Jos väri on valkoinen
 		{
@@ -206,5 +334,3 @@ void Sotilas::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, 
 void Sotilas::lisaaSotilaanKorotukset(Siirto* siirto, std::list<Siirto>& lista, Asema* asema) {
 	
 }
-
-
