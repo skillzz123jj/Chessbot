@@ -98,10 +98,19 @@ Siirto Kayttoliittyma::annaVastustajanSiirto()
 	int loppuY;
 	//_setmode(_fileno(stdout), _O_U8TEXT);
 
-	if (move == L"O-O" || move == L"O-O-O")
+	if (move == L"O-O")
 	{
-	
+		Siirto siirto(true, false);
+		return siirto;
+
 	}
+	else if (move == L"O-O-O")
+	{
+		Siirto siirto(false, true);
+		return siirto;
+
+	}
+
 	else if (move.size() == 6)
 	{
 		move.erase(move[0]);
