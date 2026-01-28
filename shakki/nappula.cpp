@@ -21,19 +21,23 @@ void Torni::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, in
 	//Suunta oikealle
 	for (int i = 1; i < 8; i++)
 	{
+		//Set the temporary position. Y stays the same as we are checking horizontal moves
 		int tempX = x + i;
 		int tempY = y;
 
+		//If tempX is out bounds, break to stop running as the next ones will also be out of bounds
 		if (tempX >= 8) break;
 
 		if (asema->_lauta[tempY][tempX] != NULL)
 		{
 			Nappula* ruudunNappula = asema->_lauta[tempY][tempX];
 
+			//If piece is ours, break to keep the legal moves on the last legal position
 			if (ruudunNappula->getVari() == vari)
 			{
 				break;
 			}
+			//Else, add it to the list and break as rook has to stop on enemy square
 			else
 			{
 				Ruutu loppuRuutu = Ruutu(tempX, tempY);
@@ -42,6 +46,7 @@ void Torni::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, in
 				break;
 			}
 		}
+		//if square was empty, add it to legal moves
 		else
 		{
 			Ruutu loppuRuutu = Ruutu(tempX, tempY);
@@ -53,19 +58,23 @@ void Torni::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, in
 	//Suunta vasemmalle
 	for (int i = 1; i < 8; i++)
 	{
+		//Set the temporary position. Y stays the same as we are checking horizontal moves
 		int tempX = x - i;
 		int tempY = y;
 
+		//If tempX is out bounds, break to stop running as the next ones will also be out of bounds
 		if (tempX < 0) break;
 
 		if (asema->_lauta[tempY][tempX] != NULL)
 		{
 			Nappula* ruudunNappula = asema->_lauta[tempY][tempX];
 
+			//If piece is ours, break to keep the legal moves on the last legal position
 			if (ruudunNappula->getVari() == vari)
 			{
 				break;
 			}
+			//Else, add it to the list and break as rook has to stop on enemy square
 			else
 			{
 				Ruutu loppuRuutu = Ruutu(tempX, tempY);
@@ -74,6 +83,7 @@ void Torni::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, in
 				break;
 			}
 		}
+		//if square was empty, add it to legal moves
 		else
 		{
 			Ruutu loppuRuutu = Ruutu(tempX, tempY);
@@ -85,19 +95,23 @@ void Torni::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, in
 	//Suunta ylös
 	for (int i = 1; i < 8; i++)
 	{
+		//Set the temporary position. X stays the same as we are checking vertical moves
 		int tempX = x;
 		int tempY = y + i;
 
+		//If tempY is out bounds, break to stop running as the next ones will also be out of bounds
 		if (tempY >= 8) break;
 
 		if (asema->_lauta[tempY][tempX] != NULL)
 		{
 			Nappula* ruudunNappula = asema->_lauta[tempY][tempX];
 
+			//If piece is ours, break to keep the legal moves on the last legal position
 			if (ruudunNappula->getVari() == vari)
 			{
 				break;
 			}
+			//Else, add it to the list and break as rook has to stop on enemy square
 			else
 			{
 				Ruutu loppuRuutu = Ruutu(tempX, tempY);
@@ -106,6 +120,7 @@ void Torni::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, in
 				break;
 			}
 		}
+		//if square was empty, add it to legal moves
 		else
 		{
 			Ruutu loppuRuutu = Ruutu(tempX, tempY);
@@ -117,19 +132,23 @@ void Torni::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, in
 	//Suunta alas
 	for (int i = 1; i < 8; i++)
 	{
+		//Set the temporary position. X stays the same as we are checking vertical moves
 		int tempX = x;
 		int tempY = y - i;
 
+		//If tempY is out bounds, break to stop running as the next ones will also be out of bounds
 		if (tempY < 0) break;
 
 		if (asema->_lauta[tempY][tempX] != NULL)
 		{
 			Nappula* ruudunNappula = asema->_lauta[tempY][tempX];
 
+			//If piece is ours, break to keep the legal moves on the last legal position
 			if (ruudunNappula->getVari() == vari)
 			{
 				break;
 			}
+			//Else, add it to the list and break as rook has to stop on enemy square
 			else
 			{
 				Ruutu loppuRuutu = Ruutu(tempX, tempY);
@@ -138,6 +157,7 @@ void Torni::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, in
 				break;
 			}
 		}
+		//if square was empty, add it to legal moves
 		else
 		{
 			Ruutu loppuRuutu = Ruutu(tempX, tempY);
