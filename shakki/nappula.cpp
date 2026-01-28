@@ -30,7 +30,7 @@ void Torni::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, in
 		{
 			Nappula* ruudunNappula = asema->_lauta[tempY][tempX];
 
-			if (ruudunNappula->getVari() == asema->getSiirtovuoro())
+			if (ruudunNappula->getVari() == vari)
 			{
 				break;
 			}
@@ -62,7 +62,7 @@ void Torni::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, in
 		{
 			Nappula* ruudunNappula = asema->_lauta[tempY][tempX];
 
-			if (ruudunNappula->getVari() == asema->getSiirtovuoro())
+			if (ruudunNappula->getVari() == vari)
 			{
 				break;
 			}
@@ -94,7 +94,7 @@ void Torni::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, in
 		{
 			Nappula* ruudunNappula = asema->_lauta[tempY][tempX];
 
-			if (ruudunNappula->getVari() == asema->getSiirtovuoro())
+			if (ruudunNappula->getVari() == vari)
 			{
 				break;
 			}
@@ -126,7 +126,7 @@ void Torni::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, in
 		{
 			Nappula* ruudunNappula = asema->_lauta[tempY][tempX];
 
-			if (ruudunNappula->getVari() == asema->getSiirtovuoro())
+			if (ruudunNappula->getVari() == vari)
 			{
 				break;
 			}
@@ -173,7 +173,7 @@ void Ratsu::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, in
 			Nappula* ruudunNappula = asema->_lauta[tempY][tempX];
 
 			//Jos sijainnissa oleva nappula on saman v‰rinen niin sinne ei voi siirty‰
-			if (ruudunNappula->getVari() == asema->getSiirtovuoro())
+			if (ruudunNappula->getVari() == vari)
 				continue;
 			else //Se lis‰t‰‰n listaan mahdollisista liikkeist‰ jos nappula on eri v‰rinen
 			{
@@ -231,7 +231,7 @@ void Kuningas::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema,
 			Nappula* ruudunNappula = asema->_lauta[tempY][tempX];
 
 			//Jos sijainnissa oleva nappula on saman v‰rinen niin sinne ei voi siirty‰
-			if (ruudunNappula->getVari() == asema->getSiirtovuoro())
+			if (ruudunNappula->getVari() == vari)
 				continue;
 			else //Se lis‰t‰‰n listaan mahdollisista liikkeist‰ jos nappula on eri v‰rinen
 			{
