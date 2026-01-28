@@ -358,5 +358,7 @@ void Asema::huolehdiKuninkaanShakeista(std::list<Siirto>& lista, int vari)
 
 
 void Asema::annaLaillisetSiirrot(std::list<Siirto>& lista) {
-	
+
+	//Ruutu* nappulanRuutu = new Ruutu(2, 3);
+	//_lauta[2][3]->annaSiirrot(lista, nappulanRuutu, this, _lauta[2][3]->getVari());
 }
