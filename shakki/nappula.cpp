@@ -214,7 +214,156 @@ void Ratsu::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, in
 
 void Lahetti::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, int vari)
 {
-	
+	int x = ruutu->getSarake();
+	int y = ruutu->getRivi();
+
+	//Suunta vasemmalle ylös
+	for (int i = 1; i < 8; i++)
+	{
+		//Set the temporary position. x decreases and y increments as we go diagonally to top left
+		int tempX = x - i;
+		int tempY = y + i;
+
+		//If tempX is out bounds, break to stop running as the next ones will also be out of bounds
+		if (tempX < 0 || tempY >= 8) break;
+
+		if (asema->_lauta[tempY][tempX] != NULL)
+		{
+			Nappula* ruudunNappula = asema->_lauta[tempY][tempX];
+
+			//If piece is ours, break to keep the legal moves on the last legal position
+			if (ruudunNappula->getVari() == vari)
+			{
+				break;
+			}
+			//Else, add it to the list and break as bishop has to stop on enemy square
+			else
+			{
+				Ruutu loppuRuutu = Ruutu(tempX, tempY);
+				Siirto siirto(*ruutu, loppuRuutu);
+				lista.push_back(siirto);
+				break;
+			}
+		}
+		//if square was empty, add it to legal moves
+		else
+		{
+			Ruutu loppuRuutu = Ruutu(tempX, tempY);
+			Siirto siirto(*ruutu, loppuRuutu);
+			lista.push_back(siirto);
+		}
+	}
+
+	//Suunta oikealle ylös
+	for (int i = 1; i < 8; i++)
+	{
+		//Set the temporary position. x and y increment as we go diagonally to top right
+		int tempX = x + i;
+		int tempY = y + i;
+
+		//If tempX is out bounds, break to stop running as the next ones will also be out of bounds
+		if (tempX >= 8 || tempY >= 8) break;
+
+		if (asema->_lauta[tempY][tempX] != NULL)
+		{
+			Nappula* ruudunNappula = asema->_lauta[tempY][tempX];
+
+			//If piece is ours, break to keep the legal moves on the last legal position
+			if (ruudunNappula->getVari() == vari)
+			{
+				break;
+			}
+			//Else, add it to the list and break as bishop has to stop on enemy square
+			else
+			{
+				Ruutu loppuRuutu = Ruutu(tempX, tempY);
+				Siirto siirto(*ruutu, loppuRuutu);
+				lista.push_back(siirto);
+				break;
+			}
+		}
+		//if square was empty, add it to legal moves
+		else
+		{
+			Ruutu loppuRuutu = Ruutu(tempX, tempY);
+			Siirto siirto(*ruutu, loppuRuutu);
+			lista.push_back(siirto);
+		}
+	}
+
+	//Suunta vasemmalle alas
+	for (int i = 1; i < 8; i++)
+	{
+		//Set the temporary position. x and y decrease as we go diagonally to bottom left
+		int tempX = x - i;
+		int tempY = y - i;
+
+		//If tempY is out bounds, break to stop running as the next ones will also be out of bounds
+		if (tempX < 0 || tempY < 0) break;
+
+		if (asema->_lauta[tempY][tempX] != NULL)
+		{
+			Nappula* ruudunNappula = asema->_lauta[tempY][tempX];
+
+			//If piece is ours, break to keep the legal moves on the last legal position
+			if (ruudunNappula->getVari() == vari)
+			{
+				break;
+			}
+			//Else, add it to the list and break as bishop has to stop on enemy square
+			else
+			{
+				Ruutu loppuRuutu = Ruutu(tempX, tempY);
+				Siirto siirto(*ruutu, loppuRuutu);
+				lista.push_back(siirto);
+				break;
+			}
+		}
+		//if square was empty, add it to legal moves
+		else
+		{
+			Ruutu loppuRuutu = Ruutu(tempX, tempY);
+			Siirto siirto(*ruutu, loppuRuutu);
+			lista.push_back(siirto);
+		}
+	}
+
+	//Suunta oikealle alas
+	for (int i = 1; i < 8; i++)
+	{
+		//Set the temporary position. x increments and y decrements as we go diagonally to bottom right.
+		int tempX = x + 1;
+		int tempY = y - i;
+
+		//If tempY is out bounds, break to stop running as the next ones will also be out of bounds
+		if (tempX >= 8 || tempY < 0) break;
+
+		if (asema->_lauta[tempY][tempX] != NULL)
+		{
+			Nappula* ruudunNappula = asema->_lauta[tempY][tempX];
+
+			//If piece is ours, break to keep the legal moves on the last legal position
+			if (ruudunNappula->getVari() == vari)
+			{
+				break;
+			}
+			//Else, add it to the list and break as bishop has to stop on enemy square
+			else
+			{
+				Ruutu loppuRuutu = Ruutu(tempX, tempY);
+				Siirto siirto(*ruutu, loppuRuutu);
+				lista.push_back(siirto);
+				break;
+			}
+		}
+		//if square was empty, add it to legal moves
+		else
+		{
+			Ruutu loppuRuutu = Ruutu(tempX, tempY);
+			Siirto siirto(*ruutu, loppuRuutu);
+			lista.push_back(siirto);
+		}
+	}
 }
 
 
