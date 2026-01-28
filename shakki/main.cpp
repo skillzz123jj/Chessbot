@@ -12,21 +12,33 @@ using namespace std;
 
 int main()
 {
+	Peli peli(Kayttoliittyma::getInstance()->kysyVastustajanVari());
+	
 	wcout << "HeippariShakki\n";
 	wcout << "Tervetuloa pelaamaan!\n";
 	//int lopetus = 100;
 	Asema asema; 
 	Kayttoliittyma::getInstance()->aseta_asema(&asema);
+	Kayttoliittyma::getInstance()->piirraLauta();
+	
+	while (true)
+	{
+	
+		Siirto siirto;
+		siirto = Kayttoliittyma::getInstance()->
+		annaVastustajanSiirto();
+		asema.paivitaAsema(&siirto);
+	
+		system("cls");
+		Kayttoliittyma::getInstance()->piirraLauta();
+	}
 /*
 * z
-	Peli peli(Kayttoliittyma::getInstance()->
-		kysyVastustajanVari());
 	std::list<Siirto> lista;
 	int koneenVari = peli.getKoneenVari();
 
 	while (lopetus != 0)*/// {
 	/*	lista.clear();*/
-		Kayttoliittyma::getInstance()->piirraLauta();
 	//	wcout << "\n";
 	//	// Tarkasta onko peli loppu?
 	//	asema.annaLaillisetSiirrot(lista);
@@ -35,7 +47,6 @@ int main()
 	//		std::wcout << "Peli loppui";
 	//		continue;
 	//	}
-		Siirto siirto;
 	//	if (asema.getSiirtovuoro() == koneenVari) {
 	//		MinMaxPaluu paluu;
 	//		if (koneenVari == 0) {
@@ -47,13 +58,8 @@ int main()
 	//		siirto = paluu._parasSiirto;
 	//	}
 	//	else {
-	siirto = Kayttoliittyma::getInstance()->
-	annaVastustajanSiirto();
 	//	}
-	asema.paivitaAsema(&siirto);
 	//}
-	system("cls");
-	Kayttoliittyma::getInstance()->piirraLauta();
 
 
 	

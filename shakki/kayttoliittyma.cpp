@@ -90,7 +90,7 @@ void Kayttoliittyma::piirraLauta()
 Siirto Kayttoliittyma::annaVastustajanSiirto()
 {
 	wstring move;
-	wcout << L"Whats your move:" << endl;
+	wcout << L"Anna siirtosi:" << endl;
 	wcin >> move;
 	int lahtoX;
 	int lahtoY;
@@ -133,5 +133,19 @@ Siirto Kayttoliittyma::annaVastustajanSiirto()
 
 int Kayttoliittyma::kysyVastustajanVari()
 {
-	return 0;
+	while (true) 
+	{
+		wcout <<L"Valitse puolesi valkoinen (0) tai musta (1)" << endl;
+		wstring vari;
+		wcin >> vari;
+
+		if (vari == L"0")
+		{
+			return 0;
+		}
+		else if (vari == L"1")
+		{
+			return 1;
+		}
+	}
 }
