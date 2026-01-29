@@ -369,7 +369,8 @@ void Lahetti::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, 
 
 void Daami::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, int vari)
 {
-	
+	Torni::annaSiirrot(lista, ruutu, asema, vari);
+	Lahetti::annaSiirrot(lista, ruutu, asema, vari);
 }
 
 
@@ -443,19 +444,19 @@ void Sotilas::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, 
 			}
 
 			//Tarkistaa saako vasemmalta syötyä vihollisen nappulan
-			if (asema->_lauta[x - 1][y + 1] != NULL 
-			&& asema->_lauta[x - 1][y + 1]->getVari() != 0)
+			if (asema->_lauta[x - 1][y - 1] != NULL 
+			&& asema->_lauta[x - 1][y - 1]->getVari() != 0)
 			{
-				Ruutu loppuRuutu = Ruutu(x, y + 2);
+				Ruutu loppuRuutu = Ruutu(x - 1, y - 1);
 				Siirto siirto(*ruutu, loppuRuutu);
 				lista.push_back(siirto);
 			}
 
 			//Tarkistaa saako oikealta syötyä vihollisen nappulan
-			if (asema->_lauta[x + 1][y + 1] != NULL
-				&& asema->_lauta[x + 1][y + 1]->getVari() != 0)
+			if (asema->_lauta[x + 1][y - 1] != NULL
+				&& asema->_lauta[x + 1][y - 1]->getVari() != 0)
 			{
-				Ruutu loppuRuutu = Ruutu(x, y + 2);
+				Ruutu loppuRuutu = Ruutu(x + 1, y - 1);
 				Siirto siirto(*ruutu, loppuRuutu);
 				lista.push_back(siirto);
 			}
@@ -471,9 +472,9 @@ void Sotilas::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, 
 				lista.push_back(siirto);
 
 				//Jos sotilaan kahta yläpuolella ei ole nappulaa voidaan liikkua
-				if (y == 1 && asema->_lauta[x][y + 2] == NULL)
+				if (y == 7 && asema->_lauta[x][y - 2] == NULL)
 				{
-					Ruutu loppuRuutu = Ruutu(x, y + 2);
+					Ruutu loppuRuutu = Ruutu(x, y - 2);
 					Siirto siirto(*ruutu, loppuRuutu);
 					lista.push_back(siirto);
 				}
