@@ -115,6 +115,34 @@ Siirto Kayttoliittyma::annaVastustajanSiirto()
 	{
 		move.erase(0, 1);
 	}
+	else if (move.size() == 2)
+	{
+		lahtoX = move[0] - 'a';
+		lahtoY = move[1] - '1';
+
+		Ruutu* lahtoRuutu = new Ruutu(lahtoX, lahtoY);
+
+		Nappula* nappula = _asema->_lauta[lahtoY][lahtoX];
+
+		std::list<Siirto> lista;
+		lista.clear();
+		nappula->annaSiirrot(lista, lahtoRuutu, _asema, nappula->getVari());
+
+		for (auto s : lista)
+		{
+			wint_t x = s.getLoppuruutu().getSarake();
+			wint_t y = s.getLoppuruutu().getRivi();
+
+			wchar_t letter = x + L'a';
+
+			wcout << letter << " : " << (y + 1) << endl;
+		}
+
+		//for debugging purposes
+		Siirto siirto(*lahtoRuutu, lista.begin()->getLoppuruutu());
+		delete lahtoRuutu;
+		return siirto;
+	}
 	
 	
 	lahtoX = move[0] - 'a';

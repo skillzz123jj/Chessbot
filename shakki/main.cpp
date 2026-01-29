@@ -29,7 +29,7 @@ int main()
 		annaVastustajanSiirto();
 		asema.paivitaAsema(&siirto);
 	
-		system("cls");
+		//system("cls");
 		Kayttoliittyma::getInstance()->piirraLauta();
 	}
 /*
