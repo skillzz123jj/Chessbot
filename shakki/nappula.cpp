@@ -427,7 +427,7 @@ void Sotilas::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, 
 
 		if (vari == 0) //Jos väri on valkoinen
 		{
-			if (asema->_lauta[x][y + 1] == NULL)
+			if (asema->_lauta[y + 1][x] == NULL)
 			{
 				//Jos sotilaan yläpuolella ei ole nappulaa voidaan liikkua
 				Ruutu loppuRuutu = Ruutu(x, y + 1);
@@ -435,7 +435,7 @@ void Sotilas::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, 
 				lista.push_back(siirto);
 
 				//Jos sotilaan kahta yläpuolella ei ole nappulaa voidaan liikkua
-				if (y == 1 && asema->_lauta[x][y + 2] == NULL)
+				if (y == 1 && asema->_lauta[y + 2][x] == NULL)
 				{
 					Ruutu loppuRuutu = Ruutu(x, y + 2);
 					Siirto siirto(*ruutu, loppuRuutu);
@@ -443,36 +443,42 @@ void Sotilas::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, 
 				}
 			}
 
-			//Tarkistaa saako vasemmalta syötyä vihollisen nappulan
-			if (asema->_lauta[x - 1][y - 1] != NULL 
-			&& asema->_lauta[x - 1][y - 1]->getVari() != 0)
+			if (x - 1 >= 0 || y + 1 < 8)
 			{
-				Ruutu loppuRuutu = Ruutu(x - 1, y - 1);
-				Siirto siirto(*ruutu, loppuRuutu);
-				lista.push_back(siirto);
+				//Tarkistaa saako vasemmalta syötyä vihollisen nappulan
+				if (asema->_lauta[y + 1][x - 1] != NULL
+					&& asema->_lauta[y + 1][x - 1]->getVari() != 0)
+				{
+					Ruutu loppuRuutu = Ruutu(x - 1, y - 1);
+					Siirto siirto(*ruutu, loppuRuutu);
+					lista.push_back(siirto);
+				}
 			}
 
-			//Tarkistaa saako oikealta syötyä vihollisen nappulan
-			if (asema->_lauta[x + 1][y - 1] != NULL
-				&& asema->_lauta[x + 1][y - 1]->getVari() != 0)
+			if (x + 1 < 8 || y + 1 < 8)
 			{
-				Ruutu loppuRuutu = Ruutu(x + 1, y - 1);
-				Siirto siirto(*ruutu, loppuRuutu);
-				lista.push_back(siirto);
+				//Tarkistaa saako oikealta syötyä vihollisen nappulan
+				if (asema->_lauta[y + 1][x + 1] != NULL
+					&& asema->_lauta[y + 1][x + 1]->getVari() != 0)
+				{
+					Ruutu loppuRuutu = Ruutu(x + 1, y - 1);
+					Siirto siirto(*ruutu, loppuRuutu);
+					lista.push_back(siirto);
+				}
 			}
 
 		}
 		else //Jos väri on musta
 		{
 			//Jos sotilaan yläpuolella ei ole nappulaa voidaan liikkua
-			if (asema->_lauta[x][y - 1] == NULL)
+			if (asema->_lauta[y - 1][x] == NULL)
 			{
 				Ruutu loppuRuutu = Ruutu(x, y - 1);
 				Siirto siirto(*ruutu, loppuRuutu);
 				lista.push_back(siirto);
 
 				//Jos sotilaan kahta yläpuolella ei ole nappulaa voidaan liikkua
-				if (y == 7 && asema->_lauta[x][y - 2] == NULL)
+				if (y == 7 && asema->_lauta[y - 2][x] == NULL)
 				{
 					Ruutu loppuRuutu = Ruutu(x, y - 2);
 					Siirto siirto(*ruutu, loppuRuutu);
@@ -480,22 +486,28 @@ void Sotilas::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, 
 				}
 			}
 
-			//Tarkistaa saako vasemmalta syötyä vihollisen nappulan
-			if (asema->_lauta[x - 1][y + 1] != NULL
-				&& asema->_lauta[x - 1][y + 1]->getVari() != 0)
+			if (x - 1 >= 0 || y - 1 <= 0)
 			{
-				Ruutu loppuRuutu = Ruutu(x, y + 2);
-				Siirto siirto(*ruutu, loppuRuutu);
-				lista.push_back(siirto);
+				//Tarkistaa saako vasemmalta syötyä vihollisen nappulan
+				if (asema->_lauta[y - 1][x - 1] != NULL
+					&& asema->_lauta[y - 1][x - 1]->getVari() != 1)
+				{
+					Ruutu loppuRuutu = Ruutu(x, y + 2);
+					Siirto siirto(*ruutu, loppuRuutu);
+					lista.push_back(siirto);
+				}
 			}
 
-			//Tarkistaa saako oikealta syötyä vihollisen nappulan
-			if (asema->_lauta[x + 1][y + 1] != NULL
-				&& asema->_lauta[x + 1][y + 1]->getVari() != 0)
+			if (x - 1 >= 0 || y - 1 <= 8)
 			{
-				Ruutu loppuRuutu = Ruutu(x, y + 2);
-				Siirto siirto(*ruutu, loppuRuutu);
-				lista.push_back(siirto);
+				//Tarkistaa saako oikealta syötyä vihollisen nappulan
+				if (asema->_lauta[y - 1][x + 1] != NULL
+					&& asema->_lauta[y - 1][x + 1]->getVari() != 1)
+				{
+					Ruutu loppuRuutu = Ruutu(x, y + 2);
+					Siirto siirto(*ruutu, loppuRuutu);
+					lista.push_back(siirto);
+				}
 			}
 		}
 	}

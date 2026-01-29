@@ -121,6 +121,8 @@ Siirto Kayttoliittyma::annaVastustajanSiirto()
 		lahtoY = move[1] - '1';
 
 		Ruutu* lahtoRuutu = new Ruutu(lahtoX, lahtoY);
+		Ruutu* loppuRuutu = new Ruutu(lahtoX, lahtoY);
+
 
 		Nappula* nappula = _asema->_lauta[lahtoY][lahtoX];
 
@@ -139,8 +141,9 @@ Siirto Kayttoliittyma::annaVastustajanSiirto()
 		}
 
 		//for debugging purposes
-		Siirto siirto(*lahtoRuutu, lista.begin()->getLoppuruutu());
+		Siirto siirto(*lahtoRuutu, *loppuRuutu);
 		delete lahtoRuutu;
+		delete loppuRuutu;
 		return siirto;
 	}
 	
