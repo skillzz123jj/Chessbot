@@ -60,6 +60,7 @@ void Asema::paivitaAsema(Siirto *siirto)
 {
 	
 	// Kaksoisaskel-lippu on oletusarvoisesti pois päältä.
+	kaksoisaskelSarakkeella = -1;
 	// Asetetaan myöhemmin, jos tarvii.
 
 
@@ -111,6 +112,16 @@ void Asema::paivitaAsema(Siirto *siirto)
 			else
 			{
 				_onkoMustaKTliikkunut = true;
+			}
+		case VS:
+			if (loppuRuutu.getRivi() == 3 && alkuRuutu.getRivi() == 1)
+			{
+				kaksoisaskelSarakkeella = loppuRuutu.getSarake();
+			}
+		case MS:
+			if (loppuRuutu.getRivi() == 5 && alkuRuutu.getRivi() == 7)
+			{
+				kaksoisaskelSarakkeella = loppuRuutu.getSarake();
 			}
 			break;
 		default:
