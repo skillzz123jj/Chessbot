@@ -498,7 +498,7 @@ void Sotilas::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, 
 				lista.push_back(siirto);
 
 				//Jos sotilaan kahta yläpuolella ei ole nappulaa voidaan liikkua
-				if (y == 7 && asema->_lauta[y - 2][x] == NULL)
+				if (y == 6 && asema->_lauta[y - 2][x] == NULL)
 				{
 					Ruutu loppuRuutu = Ruutu(x, y - 2);
 					Siirto siirto(*ruutu, loppuRuutu);
