@@ -466,6 +466,26 @@ void Sotilas::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, 
 					lista.push_back(siirto);
 				}
 			}
+				//Katsotaan onko kaksoisaskel on tapahtunut
+				if (y == 4 && asema->kaksoisaskelSarakkeella != -1)
+				{
+					//Tehdään ohestalyönti oikealle
+					if (asema->kaksoisaskelSarakkeella == x + 1)
+					{
+						if (asema->_lauta[y + 1][x + 1] == NULL)
+						{
+							lista.push_back(Siirto(*ruutu, Ruutu(x + 1, y + 1)));
+						}
+
+					}//Tehdään ohestalyönti vasemmalle
+					if (asema->kaksoisaskelSarakkeella == x - 1)
+					{
+						if (asema->_lauta[y + 1][x - 1] == NULL)
+						{
+							lista.push_back(Siirto(*ruutu, Ruutu(x - 1, y + 1)));
+						}
+					}
+				}
 
 		}
 		else //Jos väri on musta
@@ -504,9 +524,30 @@ void Sotilas::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, 
 				if (asema->_lauta[y - 1][x + 1] != NULL
 					&& asema->_lauta[y - 1][x + 1]->getVari() != 1)
 				{
-					Ruutu loppuRuutu = Ruutu(x + 1, y + 1);
+					Ruutu loppuRuutu = Ruutu(x + 1, y - 1);
 					Siirto siirto(*ruutu, loppuRuutu);
 					lista.push_back(siirto);
+				}
+			}
+
+			//Katsotaan onko kaksoisaskel on tapahtunut
+			if (y == 3 && asema->kaksoisaskelSarakkeella != -1)
+			{
+				//Tehdään ohestalyönti oikealle
+				if (asema->kaksoisaskelSarakkeella == x + 1)
+				{
+					if (asema->_lauta[y - 1][x + 1] == NULL)
+					{
+						lista.push_back(Siirto(*ruutu, Ruutu(x + 1, y - 1)));
+					}
+
+				}//Tehdään ohestalyönti vasemmalle
+				if (asema->kaksoisaskelSarakkeella == x - 1)
+				{
+					if (asema->_lauta[y - 1][x - 1] == NULL)
+					{
+						lista.push_back(Siirto(*ruutu, Ruutu(x - 1, y - 1)));
+					}
 				}
 			}
 		}

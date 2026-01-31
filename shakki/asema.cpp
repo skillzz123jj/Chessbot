@@ -121,7 +121,7 @@ void Asema::paivitaAsema(Siirto *siirto)
 			}
 			break;
 		case MS:
-			if (loppuRuutu.getRivi() == 5 && alkuRuutu.getRivi() == 7)
+			if (loppuRuutu.getRivi() == 4 && alkuRuutu.getRivi() == 6)
 			{
 				kaksoisaskelSarakkeella = loppuRuutu.getSarake();
 			}
