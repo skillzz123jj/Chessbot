@@ -113,19 +113,19 @@ void Asema::paivitaAsema(Siirto *siirto)
 			{
 				_onkoMustaKTliikkunut = true;
 			}
+			break;
 		case VS:
 			if (loppuRuutu.getRivi() == 3 && alkuRuutu.getRivi() == 1)
 			{
 				kaksoisaskelSarakkeella = loppuRuutu.getSarake();
 			}
+			break;
 		case MS:
 			if (loppuRuutu.getRivi() == 5 && alkuRuutu.getRivi() == 7)
 			{
 				kaksoisaskelSarakkeella = loppuRuutu.getSarake();
 			}
 			break;
-		default:
-			wcout << "Ei flageja" << endl;
 		}
 
 	if (getSiirtovuoro() == 1)
