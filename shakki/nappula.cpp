@@ -449,7 +449,7 @@ void Sotilas::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, 
 				if (asema->_lauta[y + 1][x - 1] != NULL
 					&& asema->_lauta[y + 1][x - 1]->getVari() != 0)
 				{
-					Ruutu loppuRuutu = Ruutu(x - 1, y - 1);
+					Ruutu loppuRuutu = Ruutu(x - 1, y + 1);
 					Siirto siirto(*ruutu, loppuRuutu);
 					lista.push_back(siirto);
 				}
@@ -461,7 +461,7 @@ void Sotilas::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, 
 				if (asema->_lauta[y + 1][x + 1] != NULL
 					&& asema->_lauta[y + 1][x + 1]->getVari() != 0)
 				{
-					Ruutu loppuRuutu = Ruutu(x + 1, y - 1);
+					Ruutu loppuRuutu = Ruutu(x + 1, y + 1);
 					Siirto siirto(*ruutu, loppuRuutu);
 					lista.push_back(siirto);
 				}
@@ -492,7 +492,7 @@ void Sotilas::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, 
 				if (asema->_lauta[y - 1][x - 1] != NULL
 					&& asema->_lauta[y - 1][x - 1]->getVari() != 1)
 				{
-					Ruutu loppuRuutu = Ruutu(x, y + 2);
+					Ruutu loppuRuutu = Ruutu(x - 1, y - 1);
 					Siirto siirto(*ruutu, loppuRuutu);
 					lista.push_back(siirto);
 				}
@@ -504,7 +504,7 @@ void Sotilas::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, 
 				if (asema->_lauta[y - 1][x + 1] != NULL
 					&& asema->_lauta[y - 1][x + 1]->getVari() != 1)
 				{
-					Ruutu loppuRuutu = Ruutu(x, y + 2);
+					Ruutu loppuRuutu = Ruutu(x + 1, y + 1);
 					Siirto siirto(*ruutu, loppuRuutu);
 					lista.push_back(siirto);
 				}
