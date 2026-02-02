@@ -50,7 +50,7 @@ public:
 private:
 
 	// Lisäinformaatio pelitilanteesta.
-	int _siirtovuoro;					// 0 = valkea, 1 = musta.
+	int _siirtovuoro = 0;					// 0 = valkea, 1 = musta.
 	bool _onkoValkeaKuningasLiikkunut = false;	// Linnoitus ei ole sallittu, jos kuningas on liikkunut.
 	bool _onkoMustaKuningasLiikkunut = false;	// Linnoitus ei ole sallittu, jos kuningas on liikkunut.
 	bool _onkoValkeaDTliikkunut = false;		// Linnoitus ei ole sallittu, jos daamisivustan torni on liikkunut.
