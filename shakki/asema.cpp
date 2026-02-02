@@ -65,10 +65,81 @@ void Asema::paivitaAsema(Siirto *siirto)
 
 
 	//Tarkastetaan on siirto lyhyt linna
+	if (siirto->onkoLyhytLinna())
+	{
+		//Valkoisen lyhyt linna
+		if (_siirtovuoro == 0)
+		{
+			//Siirret‰‰n nappulat ja asetetaan flagit
+			_lauta[0][7] = NULL;
+			_lauta[0][6] = vk;
+			_lauta[0][5] = vt;
+			_lauta[0][4] = NULL;
+			_onkoValkeaKTliikkunut = true;
+			_onkoValkeaKuningasLiikkunut = true;
 
+		}
+		else
+		{
+			_lauta[7][7] = NULL;
+			_lauta[7][6] = mk;
+			_lauta[7][5] = mt;
+			_lauta[7][4] = NULL;
+			_onkoMustaKTliikkunut = true;
+			_onkoMustaKuningasLiikkunut = true;
+		}
 
+		if (_siirtovuoro == 1)
+		{
+			_siirtovuoro = 0;
+		}
+		else
+		{
+			_siirtovuoro = 1;
+		}
+
+		wcout << "siirtovuoro: " << _siirtovuoro << endl;
+
+		return;
+	}
 	// onko pitk‰ linna
+	if (siirto->onkoPitk‰linna())
+	{
+		//Valkoisen lyhyt linna
+		if (_siirtovuoro == 0)
+		{
+			//Siirret‰‰n nappulat ja asetetaan flagit
+			_lauta[0][0] = NULL;
+			_lauta[0][1] = NULL;
+			_lauta[0][2] = vk;
+			_lauta[0][3] = vt;
+			_lauta[0][4] = NULL;
+			_onkoValkeaDTliikkunut = true;
+			_onkoValkeaKuningasLiikkunut = true;
+		}
+		else
+		{
+			_lauta[7][0] = NULL;
+			_lauta[7][1] = NULL;
+			_lauta[7][2] = mk;
+			_lauta[7][3] = mt;
+			_lauta[7][4] = NULL;
+			_onkoMustaDTliikkunut = true;
+			_onkoMustaKuningasLiikkunut = true;
+		}
 
+		if (_siirtovuoro == 1)
+		{
+			_siirtovuoro = 0;
+		}
+		else
+		{
+			_siirtovuoro = 1;
+		}
+
+		wcout << "siirtovuoro: " << _siirtovuoro << endl;
+		return;
+	}
 
 
 	// Kaikki muut siirrot
@@ -128,15 +199,13 @@ void Asema::paivitaAsema(Siirto *siirto)
 			break;
 		}
 
-	if (getSiirtovuoro() == 1)
+	if (_siirtovuoro == 1)
 	{
-		setSiirtovuoro(0);
-
+		_siirtovuoro = 0;
 	}
 	else
 	{
-		setSiirtovuoro(1);
-
+		_siirtovuoro = 1;
 	}
 
 
