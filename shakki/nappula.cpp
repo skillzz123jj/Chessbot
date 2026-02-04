@@ -653,11 +653,13 @@ void Sotilas::lisaaSotilaanKorotukset(Siirto* siirto, std::list<Siirto>& lista, 
 
 	//Alternative way to do -- decide which one looks better
 
+	//Alustetaan jokaisen korotustyypin siirto
 	Siirto daamiKorotus = *siirto;
 	Siirto torniKorotus = *siirto;
 	Siirto lahettiKorotus = *siirto;
 	Siirto ratsuKorotus = *siirto;
 
+	//Jos v‰ri on valkoinen, asetetaan valkoiset napit, muuten mustat
 	if (vari == 0)
 	{
 		daamiKorotus._miksikorotetaan = Asema::vd;
@@ -672,6 +674,8 @@ void Sotilas::lisaaSotilaanKorotukset(Siirto* siirto, std::list<Siirto>& lista, 
 		lahettiKorotus._miksikorotetaan = Asema::ml;
 		ratsuKorotus._miksikorotetaan = Asema::mr;
 	}
+
+	//Lis‰t‰‰n listaan kaikki siirrot
 	lista.push_back(daamiKorotus);
 	lista.push_back(torniKorotus);
 	lista.push_back(lahettiKorotus);
