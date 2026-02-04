@@ -432,7 +432,16 @@ void Sotilas::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, 
 				//Jos sotilaan yläpuolella ei ole nappulaa voidaan liikkua
 				Ruutu loppuRuutu = Ruutu(x, y + 1);
 				Siirto siirto(*ruutu, loppuRuutu);
-				lista.push_back(siirto);
+
+				// Katsotaan onko ruutu korotusruutu
+				if (y + 1 == 7)
+				{
+					lisaaSotilaanKorotukset(&siirto, lista, asema);
+				}
+				else
+				{
+					lista.push_back(siirto);
+				}
 
 				//Jos sotilaan kahta yläpuolella ei ole nappulaa voidaan liikkua
 				if (y == 1 && asema->_lauta[y + 2][x] == NULL)
@@ -451,7 +460,15 @@ void Sotilas::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, 
 				{
 					Ruutu loppuRuutu = Ruutu(x - 1, y + 1);
 					Siirto siirto(*ruutu, loppuRuutu);
-					lista.push_back(siirto);
+
+					if (y + 1 == 7)
+					{
+						lisaaSotilaanKorotukset(&siirto, lista, asema);
+					}
+					else
+					{
+						lista.push_back(siirto);
+					}
 				}
 			}
 
@@ -463,7 +480,15 @@ void Sotilas::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, 
 				{
 					Ruutu loppuRuutu = Ruutu(x + 1, y + 1);
 					Siirto siirto(*ruutu, loppuRuutu);
-					lista.push_back(siirto);
+
+					if (y + 1 == 7)
+					{
+						lisaaSotilaanKorotukset(&siirto, lista, asema);
+					}
+					else
+					{
+						lista.push_back(siirto);
+					}
 				}
 			}
 				//Katsotaan onko kaksoisaskel on tapahtunut
@@ -495,7 +520,15 @@ void Sotilas::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, 
 			{
 				Ruutu loppuRuutu = Ruutu(x, y - 1);
 				Siirto siirto(*ruutu, loppuRuutu);
-				lista.push_back(siirto);
+
+				if (y - 1 == 0)
+				{
+					lisaaSotilaanKorotukset(&siirto, lista, asema);
+				}
+				else
+				{
+					lista.push_back(siirto);
+				}
 
 				//Jos sotilaan kahta yläpuolella ei ole nappulaa voidaan liikkua
 				if (y == 6 && asema->_lauta[y - 2][x] == NULL)
@@ -514,7 +547,16 @@ void Sotilas::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, 
 				{
 					Ruutu loppuRuutu = Ruutu(x - 1, y - 1);
 					Siirto siirto(*ruutu, loppuRuutu);
-					lista.push_back(siirto);
+					
+					if (y - 1 == 0)
+					{
+						lisaaSotilaanKorotukset(&siirto, lista, asema);
+					}
+					else
+					{
+						lista.push_back(siirto);
+					}
+					
 				}
 			}
 
@@ -526,7 +568,15 @@ void Sotilas::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, 
 				{
 					Ruutu loppuRuutu = Ruutu(x + 1, y - 1);
 					Siirto siirto(*ruutu, loppuRuutu);
-					lista.push_back(siirto);
+					
+					if (y - 1 == 0)
+					{
+						lisaaSotilaanKorotukset(&siirto, lista, asema);
+					}
+					else
+					{
+						lista.push_back(siirto);
+					}
 				}
 			}
 
