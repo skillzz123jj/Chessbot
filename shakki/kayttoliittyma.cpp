@@ -137,6 +137,14 @@ Siirto Kayttoliittyma::annaVastustajanSiirto()
 
 			wchar_t letter = x + L'a';
 
+
+			//Jos siirrolla on _miksikorotetaan arvo, tulostetaan miksi nappula korotettaisiin siirto tehtäessä
+			if (s._miksikorotetaan != 0)
+			{
+				wcout << letter << " : " << (y + 1) << " = " << s._miksikorotetaan->getUnicode() << endl;
+				continue;
+			}
+
 			wcout << letter << " : " << (y + 1) << endl;
 		}
 
