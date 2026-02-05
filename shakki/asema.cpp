@@ -441,4 +441,13 @@ void Asema::annaLaillisetSiirrot(std::list<Siirto>& lista) {
 
 	//Ruutu* nappulanRuutu = new Ruutu(2, 3);
 	//_lauta[2][3]->annaSiirrot(lista, nappulanRuutu, this, _lauta[2][3]->getVari());
+
+	for (int y = 0; y < 8; y++)
+	{
+		for (int x = 0; x < 8; x++)
+		{
+			Ruutu* nappulanRuutu = new Ruutu(x, y);
+			_lauta[y][x]->annaSiirrot(lista, nappulanRuutu, this, _lauta[y][x]->getVari());
+		}
+	}
 }
