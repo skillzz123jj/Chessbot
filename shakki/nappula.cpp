@@ -607,52 +607,6 @@ void Sotilas::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, 
 void Sotilas::lisaaSotilaanKorotukset(Siirto* siirto, std::list<Siirto>& lista, Asema* asema) {
 	int vari = this->getVari();
 
-	//Siirto daamiKorotus = *siirto;
-	//if (vari == 0)
-	//{
-	//	daamiKorotus._miksikorotetaan = Asema::vd;
-	//}
-	//else
-	//{
-	//	daamiKorotus._miksikorotetaan = Asema::md;
-	//}
-	//lista.push_back(daamiKorotus);
-
-	//Siirto torniKorotus = *siirto;
-	//if (vari == 0)
-	//{
-	//	torniKorotus._miksikorotetaan = Asema::vt;
-	//}
-	//else
-	//{
-	//	torniKorotus._miksikorotetaan = Asema::mt;
-	//}
-	//lista.push_back(torniKorotus);
-
-	//Siirto lahettiKorotus = *siirto;
-	//if (vari == 0)
-	//{
-	//	lahettiKorotus._miksikorotetaan = Asema::vl;
-	//}
-	//else
-	//{
-	//	lahettiKorotus._miksikorotetaan = Asema::ml;
-	//}
-	//lista.push_back(lahettiKorotus);
-
-	//Siirto ratsuKorotus = *siirto;
-	//if (vari == 0)
-	//{
-	//	ratsuKorotus._miksikorotetaan = Asema::vr;
-	//}
-	//else
-	//{
-	//	ratsuKorotus._miksikorotetaan = Asema::mr;
-	//}
-	//lista.push_back(ratsuKorotus);
-
-	//Alternative way to do -- decide which one looks better
-
 	//Alustetaan jokaisen korotustyypin siirto
 	Siirto daamiKorotus = *siirto;
 	Siirto torniKorotus = *siirto;
@@ -662,17 +616,17 @@ void Sotilas::lisaaSotilaanKorotukset(Siirto* siirto, std::list<Siirto>& lista, 
 	//Jos v‰ri on valkoinen, asetetaan valkoiset napit, muuten mustat
 	if (vari == 0)
 	{
-		daamiKorotus._miksikorotetaan = Asema::vd;
-		torniKorotus._miksikorotetaan = Asema::vt;
-		lahettiKorotus._miksikorotetaan = Asema::vl;
-		ratsuKorotus._miksikorotetaan = Asema::vr;
+		daamiKorotus._miksikorotetaan = asema->vd;
+		torniKorotus._miksikorotetaan = asema->vt;
+		lahettiKorotus._miksikorotetaan = asema->vl;
+		ratsuKorotus._miksikorotetaan = asema->vr;
 	}
 	else
 	{
-		daamiKorotus._miksikorotetaan = Asema::md;
-		torniKorotus._miksikorotetaan = Asema::mt;
-		lahettiKorotus._miksikorotetaan = Asema::ml;
-		ratsuKorotus._miksikorotetaan = Asema::mr;
+		daamiKorotus._miksikorotetaan = asema->md;
+		torniKorotus._miksikorotetaan = asema->mt;
+		lahettiKorotus._miksikorotetaan = asema->ml;
+		ratsuKorotus._miksikorotetaan = asema->mr;
 	}
 
 	//Lis‰t‰‰n listaan kaikki siirrot
