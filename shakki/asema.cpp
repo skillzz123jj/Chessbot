@@ -426,7 +426,14 @@ MinMaxPaluu Asema::mini(int syvyys)
 
 bool Asema::onkoRuutuUhattu(Ruutu* ruutu, int vastustajanVari)
 {
+	if (vastustajanVari == 0)
+	{
 
+	}
+	else
+	{
+
+	}
 	return false;
 }
 
@@ -441,13 +448,27 @@ void Asema::annaLaillisetSiirrot(std::list<Siirto>& lista) {
 
 	//Ruutu* nappulanRuutu = new Ruutu(2, 3);
 	//_lauta[2][3]->annaSiirrot(lista, nappulanRuutu, this, _lauta[2][3]->getVari());
-
-	for (int y = 0; y < 8; y++)
+	int kx = 0;
+	int ky = 0;
+	for (int x = 0; x < 8; x++)
 	{
-		for (int x = 0; x < 8; x++)
+		for (int y = 0; y < 8; y++)
 		{
+			if (_lauta[y][x]->getKoodi() == VK && getSiirtovuoro() == 0)
+			{
+				Ruutu* ruutu = new Ruutu(x, y);
+				onkoRuutuUhattu(ruutu, 1);
+			}
+			else if (_lauta[y][x]->getKoodi() == MK && getSiirtovuoro() == 1)
+			{
+				Ruutu* ruutu = new Ruutu(x, y);
+				onkoRuutuUhattu(ruutu, 0);
+			}
+			
+			
 			Ruutu* nappulanRuutu = new Ruutu(x, y);
 			_lauta[y][x]->annaSiirrot(lista, nappulanRuutu, this, _lauta[y][x]->getVari());
 		}
 	}
 }
+
