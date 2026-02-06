@@ -426,15 +426,28 @@ MinMaxPaluu Asema::mini(int syvyys)
 
 bool Asema::onkoRuutuUhattu(Ruutu* ruutu, int vastustajanVari)
 {
-	if (vastustajanVari == 0)
+	//T‰‰ll‰ k‰yd‰‰n kaikki vastustajan napit l‰pi
+	for (int x = 0; x < 8; x++)
 	{
+		for (int y = 0; y < 8; y++)
+		{
+			Ruutu* ruutu = new Ruutu(x, y);
 
-	}
-	else
-	{
+			if (_lauta[y][x] != NULL && _lauta[y][x]->getVari() == vastustajanVari)
+			{
+				//Jos mik‰‰n vastustajan nappi p‰‰see annettuun kuninkaaseen palautetaan true eli on uhattu
+				if (ruutu->getSarake() == x && ruutu->getRivi() == y)
+				{
+					return true;
+				}
+				else
+				{
+					return false; //Muulloin liike on ok eli palautetaan false
+				}
 
+			}
+		}
 	}
-	return false;
 }
 
 
@@ -446,29 +459,46 @@ void Asema::huolehdiKuninkaanShakeista(std::list<Siirto>& lista, int vari)
 
 void Asema::annaLaillisetSiirrot(std::list<Siirto>& lista) {
 
-	//Ruutu* nappulanRuutu = new Ruutu(2, 3);
-	//_lauta[2][3]->annaSiirrot(lista, nappulanRuutu, this, _lauta[2][3]->getVari());
-	int kx = 0;
-	int ky = 0;
 	for (int x = 0; x < 8; x++)
 	{
 		for (int y = 0; y < 8; y++)
 		{
-			if (_lauta[y][x]->getKoodi() == VK && getSiirtovuoro() == 0)
+			Nappula* nappula = _lauta[y][x];
+
+			//Katsotaan t‰m‰n vuoron kuninkaan paikka laudalla
+			if ((getSiirtovuoro() == 0 && nappula->getKoodi() == VK) ||
+				(getSiirtovuoro() == 1 && nappula->getKoodi() == MK))
 			{
-				Ruutu* ruutu = new Ruutu(x, y);
-				onkoRuutuUhattu(ruutu, 1);
+				Ruutu* kuningasRuutu = new Ruutu(x, y);
 			}
-			else if (_lauta[y][x]->getKoodi() == MK && getSiirtovuoro() == 1)
+
+			//Katsotaan valkoisille kaikki siirrot (lailliset/laittomat)
+			if (getSiirtovuoro() == 0)
 			{
-				Ruutu* ruutu = new Ruutu(x, y);
-				onkoRuutuUhattu(ruutu, 0);
+				if (nappula != NULL && nappula->getVari() == 0)
+				{
+					if (_lauta[y][x]->getKoodi() == VK)
+					{
+						Ruutu* kuningasRuutu = new Ruutu(x, y);
+
+					}
+					Ruutu* ruutu = new Ruutu(x, y);
+					nappula->annaSiirrot(lista, ruutu, this, 0);
+				}
 			}
-			
-			
-			Ruutu* nappulanRuutu = new Ruutu(x, y);
-			_lauta[y][x]->annaSiirrot(lista, nappulanRuutu, this, _lauta[y][x]->getVari());
 		}
+	
 	}
+
+
+	//T‰ss‰ k‰yd‰‰n l‰pi kaikki raakasiirrot 
+	for (auto s : lista)
+	{
+		wint_t x = s.getLoppuruutu().getSarake();
+		wint_t y = s.getLoppuruutu().getRivi();
+		wcout << x << ":" << y << endl;
+	}
+
+
 }
 
