@@ -425,30 +425,35 @@ MinMaxPaluu Asema::mini(int syvyys)
 
 
 bool Asema::onkoRuutuUhattu(Ruutu* ruutu, int vastustajanVari)
-{
-	//Täällä käydään kaikki vastustajan napit läpi
+{	
+	//generoidaan kaikki vastustajan siirrot
+	std::list<Siirto> lista;
+
 	for (int x = 0; x < 8; x++)
 	{
 		for (int y = 0; y < 8; y++)
 		{
-			Ruutu* ruutu = new Ruutu(x, y);
-
-			if (_lauta[y][x] != NULL && _lauta[y][x]->getVari() == vastustajanVari)
+			Nappula* n = _lauta[y][x];
+			if (n != NULL && n->getVari() == vastustajanVari)
 			{
-				//Jos mikään vastustajan nappi pääsee annettuun kuninkaaseen palautetaan true eli on uhattu
-				if (ruutu->getSarake() == x && ruutu->getRivi() == y)
-				{
-					return true;
-				}
-				else
-				{
-					return false; //Muulloin liike on ok eli palautetaan false
-				}
-
+				Ruutu alku(x, y);
+				n->annaSiirrot(lista, &alku, this, vastustajanVari);
 			}
 		}
 	}
+	//Käydään kaikki siirrot läpi ja jos joku niistä vastaa vastustajan kuninkaan koordinaatteja palautetaan että on uhattu
+	for (auto s : lista)
+	{
+		if (s.getLoppuruutu().getSarake() == ruutu->getRivi() &&
+			s.getLoppuruutu().getRivi() == ruutu->getRivi())
+		{
+			return true;
+		}
+	}
+
+	return false;
 }
+
 
 
 void Asema::huolehdiKuninkaanShakeista(std::list<Siirto>& lista, int vari) 
@@ -459,6 +464,9 @@ void Asema::huolehdiKuninkaanShakeista(std::list<Siirto>& lista, int vari)
 
 void Asema::annaLaillisetSiirrot(std::list<Siirto>& lista) {
 
+	int vastustajanVari = 0;
+	int kuningasX = 0;
+	int kuningasY = 0;
 	for (int x = 0; x < 8; x++)
 	{
 		for (int y = 0; y < 8; y++)
@@ -466,28 +474,43 @@ void Asema::annaLaillisetSiirrot(std::list<Siirto>& lista) {
 			Nappula* nappula = _lauta[y][x];
 
 			//Katsotaan tämän vuoron kuninkaan paikka laudalla
-			if ((getSiirtovuoro() == 0 && nappula->getKoodi() == VK) ||
-				(getSiirtovuoro() == 1 && nappula->getKoodi() == MK))
+			if ((getSiirtovuoro() == 0 && nappula != NULL && nappula->getKoodi() == VK) ||
+				(getSiirtovuoro() == 1 && nappula != NULL && nappula->getKoodi() == MK))
 			{
-				Ruutu* kuningasRuutu = new Ruutu(x, y);
+				kuningasX = x;
+				kuningasY = y;
 			}
 
 			//Katsotaan valkoisille kaikki siirrot (lailliset/laittomat)
-			if (getSiirtovuoro() == 0)
+		if (getSiirtovuoro() == 1)
 			{
 				if (nappula != NULL && nappula->getVari() == 0)
 				{
 					if (_lauta[y][x]->getKoodi() == VK)
 					{
 						Ruutu* kuningasRuutu = new Ruutu(x, y);
+						vastustajanVari = 1;
 
 					}
 					Ruutu* ruutu = new Ruutu(x, y);
 					nappula->annaSiirrot(lista, ruutu, this, 0);
 				}
 			}
+		else//Katsotaan mustille kaikki siirrot
+		{
+			if (nappula != NULL && nappula->getVari() == 1)
+			{
+				if (_lauta[y][x]->getKoodi() == MK)
+				{
+					Ruutu* kuningasRuutu = new Ruutu(x, y);
+					vastustajanVari = 0;
+
+				}
+				Ruutu* ruutu = new Ruutu(x, y);
+				nappula->annaSiirrot(lista, ruutu, this, 1);
+			}
 		}
-	
+		}
 	}
 
 
@@ -496,7 +519,22 @@ void Asema::annaLaillisetSiirrot(std::list<Siirto>& lista) {
 	{
 		wint_t x = s.getLoppuruutu().getSarake();
 		wint_t y = s.getLoppuruutu().getRivi();
-		wcout << x << ":" << y << endl;
+
+		wint_t xt = s.getAlkuruutu().getSarake();
+		wint_t yt = s.getAlkuruutu().getRivi();
+		wchar_t letter = x + L'a';
+		wchar_t lettert = xt + L'a';
+
+		//Käydään läpi kaikki generoidut raakasiirrot ja generoidaan vastustajan siirrot ja tarkistetaan 
+		Ruutu* kuningasRuutu = new Ruutu(kuningasX, kuningasY);
+		if (onkoRuutuUhattu(kuningasRuutu, vastustajanVari))
+		{
+
+			wcout << vastustajanVari << L"opponents turn";
+			wcout << L" from " << lettert << L" : " << yt + 1 << L" to " << letter << L" : " << y + 1 << endl;
+		}
+		
+		delete kuningasRuutu;
 	}
 
 
