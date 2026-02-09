@@ -20,10 +20,26 @@ int main()
 	Asema asema; 
 	Kayttoliittyma::getInstance()->aseta_asema(&asema);
 	Kayttoliittyma::getInstance()->piirraLauta();
-	
+	std::list<Siirto> lista;
+
+
 	while (true)
 	{
-	
+		lista.clear();
+		asema.annaLaillisetSiirrot(lista);
+
+		for (Siirto s : lista)
+		{
+			wchar_t letterA = s.getAlkuruutu().getSarake() + L'a';
+			wchar_t letterL = s.getLoppuruutu().getSarake() + L'a';
+
+			wcout << "x: " << letterA << " y: " << s.getAlkuruutu().getRivi() + 1 << " | ";
+			wcout << "x: " << letterL << " y: " << s.getLoppuruutu().getRivi() + 1 << endl;
+
+		}
+		wcout << lista.size() << endl;
+
+
 		Siirto siirto;
 		siirto = Kayttoliittyma::getInstance()->
 		annaVastustajanSiirto();
@@ -41,7 +57,6 @@ int main()
 	/*	lista.clear();*/
 	//	wcout << "\n";
 	//	// Tarkasta onko peli loppu?
-	//	asema.annaLaillisetSiirrot(lista);
 	//	if (lista.size() == 0) {
 	//		lopetus = 0;
 	//		std::wcout << "Peli loppui";

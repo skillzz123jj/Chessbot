@@ -426,6 +426,29 @@ MinMaxPaluu Asema::mini(int syvyys)
 
 bool Asema::onkoRuutuUhattu(Ruutu* ruutu, int vastustajanVari)
 {
+	list<Siirto> raakaLista;
+	for (int y = 0; y < 8; y++)
+	{
+		for (int x = 0; x < 8; x++)
+		{
+			if (_lauta[y][x] != NULL && _lauta[y][x]->getVari() == vastustajanVari)
+			{
+				Ruutu ruutu(x, y);
+				_lauta[y][x]->annaSiirrot(raakaLista, &ruutu, this, vastustajanVari);
+			}
+		}
+	}
+
+	for (Siirto s : raakaLista)
+	{
+		int y = s.getLoppuruutu().getRivi();
+		int x = s.getLoppuruutu().getSarake();
+
+		if (ruutu->getRivi() == y && ruutu->getSarake() == x)
+		{
+			return true;
+		}
+	}
 
 	return false;
 }
@@ -433,21 +456,63 @@ bool Asema::onkoRuutuUhattu(Ruutu* ruutu, int vastustajanVari)
 
 void Asema::huolehdiKuninkaanShakeista(std::list<Siirto>& lista, int vari) 
 { 
-	
-}
-
-
-void Asema::annaLaillisetSiirrot(std::list<Siirto>& lista) {
-
-	//Ruutu* nappulanRuutu = new Ruutu(2, 3);
-	//_lauta[2][3]->annaSiirrot(lista, nappulanRuutu, this, _lauta[2][3]->getVari());
+	list<Siirto> laillisetSiirrot;
+	int vastustajanVari = (vari == 0) ? 1 : 0;
+	// Asetetaan ulos laudasta, ettei tule sekannusta tilanteessa jossa kuningasta ei löydy
+	int kuninkaanX = -1;
+	int kuninkaanY = -1;
+	Asema asemanKopio = *this;
 
 	for (int y = 0; y < 8; y++)
 	{
 		for (int x = 0; x < 8; x++)
 		{
-			Ruutu* nappulanRuutu = new Ruutu(x, y);
-			_lauta[y][x]->annaSiirrot(lista, nappulanRuutu, this, _lauta[y][x]->getVari());
+			if (_lauta[y][x] && _lauta[y][x]->getKoodi() == VK && vari == 0)
+			{
+				kuninkaanX = x;
+				kuninkaanY = y;
+
+			}
+			else if (_lauta[y][x] && _lauta[y][x]->getKoodi() == MK && vari == 1)
+			{
+				kuninkaanX = x;
+				kuninkaanY = y;
+			}
 		}
 	}
+
+	for (Siirto s : lista)
+	{
+		paivitaAsema(&s);
+		Ruutu kuninkaanRuutu(kuninkaanX, kuninkaanY);
+		if (!onkoRuutuUhattu(&kuninkaanRuutu, vastustajanVari))
+		{
+			laillisetSiirrot.push_back(s);
+		}
+
+		// Siirron tarkastuksen jälkeen palataan alkutilanteeseen
+		*this = asemanKopio;
+	}
+
+	lista = laillisetSiirrot;
+}
+
+
+void Asema::annaLaillisetSiirrot(std::list<Siirto>& lista) {
+	for (int y = 0; y < 8; y++)
+	{
+		for (int x = 0; x < 8; x++)
+		{
+			if (_lauta[y][x] != NULL && _lauta[y][x]->getVari() == _siirtovuoro)
+			{
+				//Tehtiin aiemmin
+				//Ruutu* ruutu = new Ruutu(x, y);
+				//Voi käyttää myös:
+				Ruutu ruutu(x, y);
+				_lauta[y][x]->annaSiirrot(lista, &ruutu, this, _lauta[y][x]->getVari());
+			}
+		}
+	}
+
+	huolehdiKuninkaanShakeista(lista, _siirtovuoro);
 }
