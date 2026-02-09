@@ -436,19 +436,33 @@ bool Asema::onkoRuutuUhattu(Ruutu* ruutu, int vastustajanVari)
 			Nappula* n = _lauta[y][x];
 			if (n != NULL && n->getVari() == vastustajanVari)
 			{
-				Ruutu alku(x, y);
-				n->annaSiirrot(lista, &alku, this, vastustajanVari);
+				Ruutu* alku = new Ruutu(x, y);
+				n->annaSiirrot(lista, alku, this, vastustajanVari);
 			}
 		}
 	}
+
+
 	//K‰yd‰‰n kaikki siirrot l‰pi ja jos joku niist‰ vastaa vastustajan kuninkaan koordinaatteja palautetaan ett‰ on uhattu
 	for (auto s : lista)
 	{
-		if (s.getLoppuruutu().getSarake() == ruutu->getRivi() &&
+		wint_t x = s.getLoppuruutu().getSarake();
+		wint_t y = s.getLoppuruutu().getRivi();
+
+		wint_t xt = s.getAlkuruutu().getSarake();
+		wint_t yt = s.getAlkuruutu().getRivi();
+		wchar_t letter = x + L'a';
+		wchar_t lettert = xt + L'a';
+
+		if (s.getLoppuruutu().getSarake() == ruutu->getSarake() &&
 			s.getLoppuruutu().getRivi() == ruutu->getRivi())
 		{
+		
+			wcout << "cant move " << letter << " : " << y + 1 << " to " << lettert << " : " << yt +1 << endl;
+
 			return true;
 		}
+		
 	}
 
 	return false;
@@ -474,8 +488,8 @@ void Asema::annaLaillisetSiirrot(std::list<Siirto>& lista) {
 			Nappula* nappula = _lauta[y][x];
 
 			//Katsotaan t‰m‰n vuoron kuninkaan paikka laudalla
-			if ((getSiirtovuoro() == 0 && nappula != NULL && nappula->getKoodi() == VK) ||
-				(getSiirtovuoro() == 1 && nappula != NULL && nappula->getKoodi() == MK))
+			if ((getSiirtovuoro() == 1 && nappula != NULL && nappula->getKoodi() == VK) ||
+				(getSiirtovuoro() == 0 && nappula != NULL && nappula->getKoodi() == MK))
 			{
 				kuningasX = x;
 				kuningasY = y;
@@ -516,7 +530,7 @@ void Asema::annaLaillisetSiirrot(std::list<Siirto>& lista) {
 
 	//T‰ss‰ k‰yd‰‰n l‰pi kaikki raakasiirrot 
 	for (auto s : lista)
-	{
+	{	
 		wint_t x = s.getLoppuruutu().getSarake();
 		wint_t y = s.getLoppuruutu().getRivi();
 
@@ -529,14 +543,13 @@ void Asema::annaLaillisetSiirrot(std::list<Siirto>& lista) {
 		Ruutu* kuningasRuutu = new Ruutu(kuningasX, kuningasY);
 		if (onkoRuutuUhattu(kuningasRuutu, vastustajanVari))
 		{
-
-			wcout << vastustajanVari << L"opponents turn";
-			wcout << L" from " << lettert << L" : " << yt + 1 << L" to " << letter << L" : " << y + 1 << endl;
+			wcout << "catched" << endl;
+		
 		}
 		
 		delete kuningasRuutu;
 	}
 
-
+	//tarvitaan funktio joka tekee siirrot v‰liaikaisesti laudalle
 }
 
