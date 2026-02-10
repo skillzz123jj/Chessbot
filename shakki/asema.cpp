@@ -427,6 +427,7 @@ MinMaxPaluu Asema::mini(int syvyys)
 bool Asema::onkoRuutuUhattu(Ruutu* ruutu, int vastustajanVari)
 {
 	list<Siirto> raakaLista;
+
 	for (int y = 0; y < 8; y++)
 	{
 		for (int x = 0; x < 8; x++)
@@ -436,8 +437,16 @@ bool Asema::onkoRuutuUhattu(Ruutu* ruutu, int vastustajanVari)
 				Ruutu ruutu(x, y);
 				_lauta[y][x]->annaSiirrot(raakaLista, &ruutu, this, vastustajanVari);
 			}
+
+			if (_lauta[y][x] && _lauta[y][x]->getKoodi() == VK ||
+				_lauta[y][x] && _lauta[y][x]->getKoodi() == MK)
+			{
+				ruutu->setSarake(x);
+				ruutu->setRivi(y);
+			}
 		}
 	}
+
 
 	for (Siirto s : raakaLista)
 	{
