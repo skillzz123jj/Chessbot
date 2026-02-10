@@ -425,131 +425,94 @@ MinMaxPaluu Asema::mini(int syvyys)
 
 
 bool Asema::onkoRuutuUhattu(Ruutu* ruutu, int vastustajanVari)
-{	
-	//generoidaan kaikki vastustajan siirrot
-	std::list<Siirto> lista;
-
-	for (int x = 0; x < 8; x++)
+{
+	list<Siirto> raakaLista;
+	for (int y = 0; y < 8; y++)
 	{
-		for (int y = 0; y < 8; y++)
+		for (int x = 0; x < 8; x++)
 		{
-			Nappula* n = _lauta[y][x];
-			if (n != NULL && n->getVari() == vastustajanVari)
+			if (_lauta[y][x] != NULL && _lauta[y][x]->getVari() == vastustajanVari)
 			{
-				Ruutu* alku = new Ruutu(x, y);
-				n->annaSiirrot(lista, alku, this, vastustajanVari);
+				Ruutu ruutu(x, y);
+				_lauta[y][x]->annaSiirrot(raakaLista, &ruutu, this, vastustajanVari);
 			}
 		}
 	}
 
-
-	//Käydään kaikki siirrot läpi ja jos joku niistä vastaa vastustajan kuninkaan koordinaatteja palautetaan että on uhattu
-	for (auto s : lista)
+	for (Siirto s : raakaLista)
 	{
-		wint_t x = s.getLoppuruutu().getSarake();
-		wint_t y = s.getLoppuruutu().getRivi();
+		int y = s.getLoppuruutu().getRivi();
+		int x = s.getLoppuruutu().getSarake();
 
-		wint_t xt = s.getAlkuruutu().getSarake();
-		wint_t yt = s.getAlkuruutu().getRivi();
-		wchar_t letter = x + L'a';
-		wchar_t lettert = xt + L'a';
-
-		if (s.getLoppuruutu().getSarake() == ruutu->getSarake() &&
-			s.getLoppuruutu().getRivi() == ruutu->getRivi())
+		if (ruutu->getRivi() == y && ruutu->getSarake() == x)
 		{
-		
-			wcout << "cant move " << letter << " : " << y + 1 << " to " << lettert << " : " << yt +1 << endl;
-
 			return true;
 		}
-		
 	}
 
 	return false;
 }
 
 
-
 void Asema::huolehdiKuninkaanShakeista(std::list<Siirto>& lista, int vari) 
 { 
-	
+	list<Siirto> laillisetSiirrot;
+	int vastustajanVari = (vari == 0) ? 1 : 0;
+	// Asetetaan ulos laudasta, ettei tule sekannusta tilanteessa jossa kuningasta ei löydy
+	int kuninkaanX = -1;
+	int kuninkaanY = -1;
+	Asema asemanKopio = *this;
+
+	for (int y = 0; y < 8; y++)
+	{
+		for (int x = 0; x < 8; x++)
+		{
+			if (_lauta[y][x] && _lauta[y][x]->getKoodi() == VK && vari == 0)
+			{
+				kuninkaanX = x;
+				kuninkaanY = y;
+
+			}
+			else if (_lauta[y][x] && _lauta[y][x]->getKoodi() == MK && vari == 1)
+			{
+				kuninkaanX = x;
+				kuninkaanY = y;
+			}
+		}
+	}
+
+	for (Siirto s : lista)
+	{
+		paivitaAsema(&s);
+		Ruutu kuninkaanRuutu(kuninkaanX, kuninkaanY);
+		if (!onkoRuutuUhattu(&kuninkaanRuutu, vastustajanVari))
+		{
+			laillisetSiirrot.push_back(s);
+		}
+
+		// Siirron tarkastuksen jälkeen palataan alkutilanteeseen
+		*this = asemanKopio;
+	}
+
+	lista = laillisetSiirrot;
 }
 
 
 void Asema::annaLaillisetSiirrot(std::list<Siirto>& lista) {
-
-	int vastustajanVari = 0;
-	int kuningasX = 0;
-	int kuningasY = 0;
-	for (int x = 0; x < 8; x++)
+	for (int y = 0; y < 8; y++)
 	{
-		for (int y = 0; y < 8; y++)
+		for (int x = 0; x < 8; x++)
 		{
-			Nappula* nappula = _lauta[y][x];
-
-			//Katsotaan tämän vuoron kuninkaan paikka laudalla
-			if ((getSiirtovuoro() == 1 && nappula != NULL && nappula->getKoodi() == VK) ||
-				(getSiirtovuoro() == 0 && nappula != NULL && nappula->getKoodi() == MK))
+			if (_lauta[y][x] != NULL && _lauta[y][x]->getVari() == _siirtovuoro)
 			{
-				kuningasX = x;
-				kuningasY = y;
+				//Tehtiin aiemmin
+				//Ruutu* ruutu = new Ruutu(x, y);
+				//Voi käyttää myös:
+				Ruutu ruutu(x, y);
+				_lauta[y][x]->annaSiirrot(lista, &ruutu, this, _lauta[y][x]->getVari());
 			}
-
-			//Katsotaan valkoisille kaikki siirrot (lailliset/laittomat)
-		if (getSiirtovuoro() == 1)
-			{
-				if (nappula != NULL && nappula->getVari() == 0)
-				{
-					if (_lauta[y][x]->getKoodi() == VK)
-					{
-						Ruutu* kuningasRuutu = new Ruutu(x, y);
-						vastustajanVari = 1;
-
-					}
-					Ruutu* ruutu = new Ruutu(x, y);
-					nappula->annaSiirrot(lista, ruutu, this, 0);
-				}
-			}
-		else//Katsotaan mustille kaikki siirrot
-		{
-			if (nappula != NULL && nappula->getVari() == 1)
-			{
-				if (_lauta[y][x]->getKoodi() == MK)
-				{
-					Ruutu* kuningasRuutu = new Ruutu(x, y);
-					vastustajanVari = 0;
-
-				}
-				Ruutu* ruutu = new Ruutu(x, y);
-				nappula->annaSiirrot(lista, ruutu, this, 1);
-			}
-		}
 		}
 	}
 
-
-	//Tässä käydään läpi kaikki raakasiirrot 
-	for (auto s : lista)
-	{	
-		wint_t x = s.getLoppuruutu().getSarake();
-		wint_t y = s.getLoppuruutu().getRivi();
-
-		wint_t xt = s.getAlkuruutu().getSarake();
-		wint_t yt = s.getAlkuruutu().getRivi();
-		wchar_t letter = x + L'a';
-		wchar_t lettert = xt + L'a';
-
-		//Käydään läpi kaikki generoidut raakasiirrot ja generoidaan vastustajan siirrot ja tarkistetaan 
-		Ruutu* kuningasRuutu = new Ruutu(kuningasX, kuningasY);
-		if (onkoRuutuUhattu(kuningasRuutu, vastustajanVari))
-		{
-			wcout << "catched" << endl;
-		
-		}
-		
-		delete kuningasRuutu;
-	}
-
-	//tarvitaan funktio joka tekee siirrot väliaikaisesti laudalle
+	huolehdiKuninkaanShakeista(lista, _siirtovuoro);
 }
-
