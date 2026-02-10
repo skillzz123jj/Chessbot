@@ -463,27 +463,27 @@ void Asema::huolehdiKuninkaanShakeista(std::list<Siirto>& lista, int vari)
 	int kuninkaanY = -1;
 	Asema asemanKopio = *this;
 
-	for (int y = 0; y < 8; y++)
-	{
-		for (int x = 0; x < 8; x++)
-		{
-			if (_lauta[y][x] && _lauta[y][x]->getKoodi() == VK && vari == 0)
-			{
-				kuninkaanX = x;
-				kuninkaanY = y;
-
-			}
-			else if (_lauta[y][x] && _lauta[y][x]->getKoodi() == MK && vari == 1)
-			{
-				kuninkaanX = x;
-				kuninkaanY = y;
-			}
-		}
-	}
-
 	for (Siirto s : lista)
 	{
 		paivitaAsema(&s);
+		for (int y = 0; y < 8; y++)
+		{
+			for (int x = 0; x < 8; x++)
+			{
+				if (_lauta[y][x] && _lauta[y][x]->getKoodi() == VK && vari == 0)
+				{
+					kuninkaanX = x;
+					kuninkaanY = y;
+
+				}
+				else if (_lauta[y][x] && _lauta[y][x]->getKoodi() == MK && vari == 1)
+				{
+					kuninkaanX = x;
+					kuninkaanY = y;
+				}
+			}
+		}
+
 		Ruutu kuninkaanRuutu(kuninkaanX, kuninkaanY);
 		if (!onkoRuutuUhattu(&kuninkaanRuutu, vastustajanVari))
 		{
