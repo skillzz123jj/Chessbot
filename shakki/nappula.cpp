@@ -5,11 +5,12 @@
 using namespace std;
 
 
-Nappula::Nappula(wstring unicode, int vari, int koodi)
+Nappula::Nappula(wstring unicode, int vari, int koodi, float arvo)
 {
 	_unicode = unicode;
 	_vari = vari;
 	_koodi = koodi;
+	_arvo = arvo;
 }
 
 
@@ -417,11 +418,6 @@ void Kuningas::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema,
 			lista.push_back(siirto);
 		}
 	}
-
-	Siirto lyhytLinna(true, false);
-	Siirto pitkaLinna(false, true);
-	lista.push_back(lyhytLinna);
-	lista.push_back(pitkaLinna);
 }
 
 
