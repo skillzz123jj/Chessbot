@@ -428,16 +428,19 @@ bool Asema::onkoRuutuUhattu(Ruutu* ruutu, int vastustajanVari)
 {
 	list<Siirto> raakaLista;
 
+	//K‰yd‰‰n lauta l‰pi ja kasataan kaikki vastustajan raakasiirrot
 	for (int y = 0; y < 8; y++)
 	{
 		for (int x = 0; x < 8; x++)
 		{
+			//Jos laudalla on vastustajan nappi niin sille haetaan kaikki raakasirrot
 			if (_lauta[y][x] != NULL && _lauta[y][x]->getVari() == vastustajanVari)
 			{
 				Ruutu ruutu(x, y);
 				_lauta[y][x]->annaSiirrot(raakaLista, &ruutu, this, vastustajanVari);
 			}
 
+			//Kunkun koordinaattien muutos t‰ss‰ ??
 			if (_lauta[y][x] && _lauta[y][x]->getKoodi() == VK ||
 				_lauta[y][x] && _lauta[y][x]->getKoodi() == MK)
 			{
@@ -447,7 +450,7 @@ bool Asema::onkoRuutuUhattu(Ruutu* ruutu, int vastustajanVari)
 		}
 	}
 
-
+	//Katsotaan vastaako mik‰‰n siirto vastustajan kuninkaan koordinaatteja
 	for (Siirto s : raakaLista)
 	{
 		int y = s.getLoppuruutu().getRivi();
@@ -472,9 +475,12 @@ void Asema::huolehdiKuninkaanShakeista(std::list<Siirto>& lista, int vari)
 	int kuninkaanY = -1;
 	Asema asemanKopio = *this;
 
+	//K‰yd‰‰n raakasiirrot l‰pi 
 	for (Siirto s : lista)
 	{
-		paivitaAsema(&s);
+		paivitaAsema(&s);   
+
+		//K‰yd‰‰n lauta l‰pi ja p‰ivitet‰‰n kuninkaan koordinaatit 
 		for (int y = 0; y < 8; y++)
 		{
 			for (int x = 0; x < 8; x++)
@@ -508,15 +514,13 @@ void Asema::huolehdiKuninkaanShakeista(std::list<Siirto>& lista, int vari)
 
 
 void Asema::annaLaillisetSiirrot(std::list<Siirto>& lista) {
+	//K‰yd‰‰n lauta l‰pi ja haetaan kaikki raakasiirrot
 	for (int y = 0; y < 8; y++)
 	{
 		for (int x = 0; x < 8; x++)
 		{
 			if (_lauta[y][x] != NULL && _lauta[y][x]->getVari() == _siirtovuoro)
 			{
-				//Tehtiin aiemmin
-				//Ruutu* ruutu = new Ruutu(x, y);
-				//Voi k‰ytt‰‰ myˆs:
 				Ruutu ruutu(x, y);
 				_lauta[y][x]->annaSiirrot(lista, &ruutu, this, _lauta[y][x]->getVari());
 			}
