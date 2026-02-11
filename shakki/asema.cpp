@@ -439,14 +439,6 @@ bool Asema::onkoRuutuUhattu(Ruutu* ruutu, int vastustajanVari)
 				Ruutu ruutu(x, y);
 				_lauta[y][x]->annaSiirrot(raakaLista, &ruutu, this, vastustajanVari);
 			}
-
-			//Kunkun koordinaattien muutos tässä ??
-			if (_lauta[y][x] && _lauta[y][x]->getKoodi() == VK ||
-				_lauta[y][x] && _lauta[y][x]->getKoodi() == MK)
-			{
-				ruutu->setSarake(x);
-				ruutu->setRivi(y);
-			}
 		}
 	}
 
