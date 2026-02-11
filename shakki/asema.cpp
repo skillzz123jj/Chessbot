@@ -6,19 +6,19 @@
 
 using namespace std;
 
-Nappula* Asema::vk = new Kuningas(L"\u2654", 0, VK);
-Nappula* Asema::vd = new Daami(L"\u2655", 0, VD);
-Nappula* Asema::vt = new Torni(L"\u2656", 0, VT);
-Nappula* Asema::vl = new Lahetti(L"\u2657", 0, VL);
-Nappula* Asema::vr = new Ratsu(L"\u2658", 0, VR);
-Nappula* Asema::vs = new Sotilas(L"\u2659", 0, VS);
+Nappula* Asema::vk = new Kuningas(L"\u2654", 0, VK, 0);
+Nappula* Asema::vd = new Daami(L"\u2655", 0, VD, 9);
+Nappula* Asema::vt = new Torni(L"\u2656", 0, VT, 5);
+Nappula* Asema::vl = new Lahetti(L"\u2657", 0, VL, 5.25);
+Nappula* Asema::vr = new Ratsu(L"\u2658", 0, VR, 3);
+Nappula* Asema::vs = new Sotilas(L"\u2659", 0, VS, 1);
 
-Nappula* Asema::mk = new Kuningas(L"\u265A", 1, MK);
-Nappula* Asema::md = new Daami(L"\u265B", 1, MD);
-Nappula* Asema::mt = new Torni(L"\u265C", 1, MT);
-Nappula* Asema::ml = new Lahetti(L"\u265D", 1, ML);
-Nappula* Asema::mr = new Ratsu(L"\u265E", 1, MR);
-Nappula* Asema::ms = new Sotilas(L"\u265F", 1, MS);
+Nappula* Asema::mk = new Kuningas(L"\u265A", 1, MK, 0);
+Nappula* Asema::md = new Daami(L"\u265B", 1, MD, 9);
+Nappula* Asema::mt = new Torni(L"\u265C", 1, MT, 5);
+Nappula* Asema::ml = new Lahetti(L"\u265D", 1, ML, 5.25);
+Nappula* Asema::mr = new Ratsu(L"\u265E", 1, MR, 3);
+Nappula* Asema::ms = new Sotilas(L"\u265F", 1, MS, 1);
 
 
 
@@ -302,7 +302,7 @@ vai olla est‰m‰ss‰ vastustajan korotusta siksi ei oteta kantaa
 */
 double Asema::evaluoi() 
 {
-	return 0;
+	laskeNappuloidenArvo(0);
 
 	//kertoimet asetettu sen takia ett‰ niiden avulla asioiden painoarvoa voidaan s‰‰t‰‰ helposti yhdest‰ paikasta
 	
@@ -319,8 +319,28 @@ double Asema::evaluoi()
 
 double Asema::laskeNappuloidenArvo(int vari) 
 {
-	return 0;
-	
+	int mustat = 0;
+	int valkoiset = 0;
+
+	for (int y = 0; y < 8; y++)
+	{
+		for (int x = 0; x < 8; x++)
+		{
+			if (_lauta[y][x] != NULL)
+			{
+				if (_lauta[y][x]->getVari() == 0)
+				{
+					valkoiset += _lauta[y][x]->getArvo();
+				}
+				else
+				{
+					mustat += _lauta[y][x]->getArvo();
+				}
+			}
+		}
+	}
+
+	return valkoiset - mustat;
 }
 
 
@@ -506,7 +526,8 @@ void Asema::huolehdiKuninkaanShakeista(std::list<Siirto>& lista, int vari)
 
 
 void Asema::annaLaillisetSiirrot(std::list<Siirto>& lista) {
-	//K‰yd‰‰n lauta l‰pi ja haetaan kaikki raakasiirrot
+
+	//K‰yd‰‰n lauta l‰pi ja otetaan siiron tekev‰n v‰rin raakasiirrot
 	for (int y = 0; y < 8; y++)
 	{
 		for (int x = 0; x < 8; x++)
