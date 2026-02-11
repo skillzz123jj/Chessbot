@@ -33,8 +33,8 @@ int main()
 			wchar_t letterA = s.getAlkuruutu().getSarake() + L'a';
 			wchar_t letterL = s.getLoppuruutu().getSarake() + L'a';
 
-			wcout << "x: " << letterA << " y: " << s.getAlkuruutu().getRivi() + 1 << " | ";
-			wcout << "x: " << letterL << " y: " << s.getLoppuruutu().getRivi() + 1 << endl;
+			wcout << letterA << s.getAlkuruutu().getRivi() + 1 << "-";
+			wcout << letterL << s.getLoppuruutu().getRivi() + 1 << endl;
 
 		}
 		wcout << lista.size() << endl;
