@@ -98,7 +98,6 @@ void Asema::paivitaAsema(Siirto *siirto)
 			_siirtovuoro = 1;
 		}
 
-		wcout << "siirtovuoro: " << _siirtovuoro << endl;
 
 		return;
 	}
@@ -137,7 +136,6 @@ void Asema::paivitaAsema(Siirto *siirto)
 			_siirtovuoro = 1;
 		}
 
-		wcout << "siirtovuoro: " << _siirtovuoro << endl;
 		return;
 	}
 
@@ -541,7 +539,7 @@ void Asema::huolehdiKuninkaanShakeista(std::list<Siirto>& lista, int vari)
 		{
 			if (vari == 0)
 			{
-				if (_lauta[0][5] == NULL && _lauta[0][6] == NULL && !getOnkoValkeaKTliikkunut() && !getOnkoValkeaKuningasLiikkunut())
+				if (asemanKopio._lauta[0][5] == NULL && asemanKopio._lauta[0][6] == NULL && !asemanKopio.getOnkoValkeaKTliikkunut() && !asemanKopio.getOnkoValkeaKuningasLiikkunut())
 				{
 					Ruutu f1(5, 0);
 					Ruutu g1(6, 0);
@@ -553,7 +551,7 @@ void Asema::huolehdiKuninkaanShakeista(std::list<Siirto>& lista, int vari)
 			}
 			else
 			{
-				if (_lauta[7][5] == NULL && _lauta[7][6] == NULL && !getOnkoMustaKTliikkunut() && !getOnkoMustaKuningasLiikkunut())
+				if (asemanKopio._lauta[7][5] == NULL && asemanKopio._lauta[7][6] == NULL && !asemanKopio.getOnkoMustaKTliikkunut() && !asemanKopio.getOnkoMustaKuningasLiikkunut())
 				{
 					Ruutu f8(5, 7);
 					Ruutu g8(6, 7);
@@ -568,7 +566,7 @@ void Asema::huolehdiKuninkaanShakeista(std::list<Siirto>& lista, int vari)
 		{
 			if (vari == 0)
 			{
-				if (_lauta[0][1] == NULL && _lauta[0][2] == NULL && _lauta[0][3] && !getOnkoValkeaDTliikkunut() && !getOnkoValkeaKuningasLiikkunut())
+				if (asemanKopio._lauta[0][1] == NULL && asemanKopio._lauta[0][2] == NULL && asemanKopio._lauta[0][3] && !asemanKopio.getOnkoValkeaDTliikkunut() && !asemanKopio.getOnkoValkeaKuningasLiikkunut())
 				{
 					Ruutu b1(1, 0);
 					Ruutu c1(2, 0);
@@ -581,7 +579,7 @@ void Asema::huolehdiKuninkaanShakeista(std::list<Siirto>& lista, int vari)
 			}
 			else
 			{
-				if (_lauta[7][1] == NULL && _lauta[7][2] == NULL && _lauta[7][3] == NULL && !getOnkoMustaDTliikkunut() && !getOnkoMustaKuningasLiikkunut())
+				if (asemanKopio._lauta[7][1] == NULL && asemanKopio._lauta[7][2] == NULL && asemanKopio._lauta[7][3] == NULL && !asemanKopio.getOnkoMustaDTliikkunut() && !asemanKopio.getOnkoMustaKuningasLiikkunut())
 				{
 					Ruutu b8(1, 7);
 					Ruutu c8(2, 7);
