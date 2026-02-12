@@ -5,7 +5,7 @@
 using namespace std;
 
 
-Nappula::Nappula(wstring unicode, int vari, int koodi, float arvo)
+Nappula::Nappula(wstring unicode, int vari, int koodi, double arvo)
 {
 	_unicode = unicode;
 	_vari = vari;
