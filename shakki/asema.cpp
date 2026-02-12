@@ -103,7 +103,7 @@ void Asema::paivitaAsema(Siirto *siirto)
 		return;
 	}
 	// onko pitkä linna
-	if (siirto->onkoPitkälinna())
+	if (siirto->onkoPitkaLinna())
 	{
 		//Valkoisen lyhyt linna
 		if (_siirtovuoro == 0)
@@ -531,9 +531,67 @@ void Asema::huolehdiKuninkaanShakeista(std::list<Siirto>& lista, int vari)
 		}
 
 		Ruutu kuninkaanRuutu(kuninkaanX, kuninkaanY);
-		if (!onkoRuutuUhattu(&kuninkaanRuutu, vastustajanVari))
+		if (!onkoRuutuUhattu(&kuninkaanRuutu, vastustajanVari) && !s.onkoLyhytLinna() && !s.onkoPitkaLinna())
 		{
 			laillisetSiirrot.push_back(s);
+		}
+
+		//Tarkistetaan onko ruudut kuninkaan ja tornin välissä joko varattuja tai uhattuja
+		if (s.onkoLyhytLinna())
+		{
+			if (vari == 0)
+			{
+				if (_lauta[0][5] == NULL && _lauta[0][6] == NULL && !getOnkoValkeaKTliikkunut() && !getOnkoValkeaKuningasLiikkunut())
+				{
+					Ruutu f1(5, 0);
+					Ruutu g1(6, 0);
+					if (!onkoRuutuUhattu(&f1, 1) && !onkoRuutuUhattu(&g1, 1) && !onkoRuutuUhattu(&kuninkaanRuutu, 1))
+					{
+						laillisetSiirrot.push_back(s);
+					}
+				}
+			}
+			else
+			{
+				if (_lauta[7][5] == NULL && _lauta[7][6] == NULL && !getOnkoMustaKTliikkunut() && !getOnkoMustaKuningasLiikkunut())
+				{
+					Ruutu f8(5, 7);
+					Ruutu g8(6, 7);
+					if (!onkoRuutuUhattu(&f8, 0) && !onkoRuutuUhattu(&g8, 0) && !onkoRuutuUhattu(&kuninkaanRuutu, 0) )
+					{
+						laillisetSiirrot.push_back(s);
+					}
+				}
+			}
+		}
+		if (s.onkoPitkaLinna())
+		{
+			if (vari == 0)
+			{
+				if (_lauta[0][1] == NULL && _lauta[0][2] == NULL && _lauta[0][3] && !getOnkoValkeaDTliikkunut() && !getOnkoValkeaKuningasLiikkunut())
+				{
+					Ruutu b1(1, 0);
+					Ruutu c1(2, 0);
+					Ruutu d1(3, 0);
+					if (!onkoRuutuUhattu(&b1, 1) && !onkoRuutuUhattu(&c1, 1) && !onkoRuutuUhattu(&d1, 1) && !onkoRuutuUhattu(&kuninkaanRuutu, 1))
+					{
+						laillisetSiirrot.push_back(s);
+					}
+				}
+			}
+			else
+			{
+				if (_lauta[7][1] == NULL && _lauta[7][2] == NULL && _lauta[7][3] == NULL && !getOnkoMustaDTliikkunut() && !getOnkoMustaKuningasLiikkunut())
+				{
+					Ruutu b8(1, 7);
+					Ruutu c8(2, 7);
+					Ruutu d8(3, 7);
+					if (!onkoRuutuUhattu(&b8, 0) && !onkoRuutuUhattu(&c8, 0) && !onkoRuutuUhattu(&d8, 0) && !onkoRuutuUhattu(&kuninkaanRuutu, 0))
+					{
+						laillisetSiirrot.push_back(s);
+					}
+				}
+			}
 		}
 
 		// Siirron tarkastuksen jälkeen palataan alkutilanteeseen
