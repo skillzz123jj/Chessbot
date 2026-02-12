@@ -339,8 +339,14 @@ double Asema::laskeNappuloidenArvo(int vari)
 			}
 		}
 	}
-
-	return valkoiset - mustat;
+	if (vari == 0)
+	{
+		return valkoiset;
+	}
+	else
+	{
+		return mustat;
+	}
 }
 
 
@@ -416,6 +422,15 @@ double Asema::linjat(int vari)
 MinMaxPaluu Asema::minimax(int syvyys)
 {
 	MinMaxPaluu paluuarvo;
+	if (getSiirtovuoro() == 0)
+	{
+		paluuarvo = maxi(syvyys);
+	}
+	else
+	{
+		paluuarvo = mini(syvyys);
+	}
+
 
 	// Generoidaan aseman lailliset siirrot.
 	
@@ -433,6 +448,8 @@ MinMaxPaluu Asema::minimax(int syvyys)
 MinMaxPaluu Asema::maxi(int syvyys) 
 {
 	MinMaxPaluu paluu;
+	double maximi = -10000;
+	
 	return paluu;
 }
 
