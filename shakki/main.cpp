@@ -30,6 +30,16 @@ int main()
 
 		for (Siirto s : lista)
 		{
+			if (s.onkoLyhytLinna())
+			{
+				wcout << "O-O" << endl;
+				continue;
+			}
+			if (s.onkoPitkaLinna())
+			{
+				wcout << "O-O-O" << endl;
+				continue;
+			}
 			wchar_t letterA = s.getAlkuruutu().getSarake() + L'a';
 			wchar_t letterL = s.getLoppuruutu().getSarake() + L'a';
 
