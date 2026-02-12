@@ -302,7 +302,8 @@ vai olla est‰m‰ss‰ vastustajan korotusta siksi ei oteta kantaa
 */
 double Asema::evaluoi() 
 {
-	laskeNappuloidenArvo(0);
+	double valkoiset = laskeNappuloidenArvo(0);
+	double mustat = laskeNappuloidenArvo(1);
 
 	//kertoimet asetettu sen takia ett‰ niiden avulla asioiden painoarvoa voidaan s‰‰t‰‰ helposti yhdest‰ paikasta
 	
@@ -314,6 +315,7 @@ double Asema::evaluoi()
 	
 	// 4. Arvosta linjoja
 	
+	return valkoiset - mustat;
 }
 
 
