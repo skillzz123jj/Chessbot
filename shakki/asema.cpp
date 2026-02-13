@@ -531,16 +531,128 @@ MinMaxPaluu Asema::minimax(int syvyys)
 
 MinMaxPaluu Asema::maxi(int syvyys) 
 {
+	list<Siirto> lista;
+	Ruutu kuninkaanRuutu;
+	this->annaLaillisetSiirrot(lista);
+	double arvo;
+	Asema uusiAsema;
+	Siirto _parasSiirto;
 	MinMaxPaluu paluu;
-	double maximi = -10000;
 	
+	// onko matti tai patti, jos on, poistutaan
+	if (lista.size() == 0)
+	{
+		for (int y = 0; y < 8; y++)
+		{
+			for (int x = 0; x < 8; x++)
+			{
+				if (this->_lauta[y][x] != NULL)
+				{
+					if (this->_lauta[y][x]->getKoodi() == VK)
+					{
+						kuninkaanRuutu.setSarake(x);
+						kuninkaanRuutu.setRivi(y);
+					}
+				}
+			}
+		}
+		//matti
+		if (this->onkoRuutuUhattu(&kuninkaanRuutu, 1))
+		{
+			paluu._evaluointiArvo = -10000;
+			return paluu;
+		}
+		//patti
+		else
+		{
+			paluu._evaluointiArvo = 0;
+			return paluu;
+		}
+	}
+	//rekursion kanta
+	if (syvyys == 0)
+	{
+		paluu._evaluointiArvo = this->evaluoi();
+		return paluu;
+	}
+	double maximi = -10000;
+	for (Siirto s : lista)
+	{
+		uusiAsema = *this;
+		uusiAsema.paivitaAsema(&s);
+		arvo = uusiAsema.mini(syvyys - 1)._evaluointiArvo;
+		if (arvo > maximi)
+		{
+			maximi = arvo;
+			_parasSiirto = s;
+		}
+	}
+	paluu._evaluointiArvo = maximi;
+	paluu._parasSiirto = _parasSiirto;
 	return paluu;
 }
 
 
 MinMaxPaluu Asema::mini(int syvyys) 
 {
+	list<Siirto> lista;
+	Ruutu kuninkaanRuutu;
+	this->annaLaillisetSiirrot(lista);
+	double arvo;
+	Asema uusiAsema;
+	Siirto _parasSiirto;
 	MinMaxPaluu paluu;
+
+	// onko matti tai patti, jos on, poistutaan
+	if (lista.size() == 0)
+	{
+		for (int y = 0; y < 8; y++)
+		{
+			for (int x = 0; x < 8; x++)
+			{
+				if (this->_lauta[y][x] != NULL)
+				{
+					if (this->_lauta[y][x]->getKoodi() == MK)
+					{
+						kuninkaanRuutu.setSarake(x);
+						kuninkaanRuutu.setRivi(y);
+					}
+				}
+			}
+		}
+		//matti
+		if (this->onkoRuutuUhattu(&kuninkaanRuutu, 0))
+		{
+			paluu._evaluointiArvo = 10000;
+			return paluu;
+		}
+		//patti
+		else
+		{
+			paluu._evaluointiArvo = 0;
+			return paluu;
+		}
+	}
+	//rekursion kanta
+	if (syvyys == 0)
+	{
+		paluu._evaluointiArvo = this->evaluoi();
+		return paluu;
+	}
+	double minimi = 10000;
+	for (Siirto s : lista)
+	{
+		uusiAsema = *this;
+		uusiAsema.paivitaAsema(&s);
+		arvo = uusiAsema.maxi(syvyys - 1)._evaluointiArvo;
+		if (arvo < minimi)
+		{
+			minimi = arvo;
+			_parasSiirto = s;
+		}
+	}
+	paluu._evaluointiArvo = minimi;
+	paluu._parasSiirto = _parasSiirto;
 	return paluu;
 }
 
