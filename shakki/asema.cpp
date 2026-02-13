@@ -360,8 +360,8 @@ double Asema::evaluoi()
 
 double Asema::laskeNappuloidenArvo(int vari) 
 {
-	int mustat = 0;
-	int valkoiset = 0;
+	double mustat = 0;
+	double valkoiset = 0;
 
 	for (int y = 0; y < 8; y++)
 	{
