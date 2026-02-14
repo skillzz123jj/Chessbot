@@ -607,7 +607,7 @@ void Asema::huolehdiKuninkaanShakeista(std::list<Siirto>& lista, int vari)
 		{
 			if (vari == 0)
 			{
-				if (asemanKopio._lauta[0][1] == NULL && asemanKopio._lauta[0][2] == NULL && asemanKopio._lauta[0][3] && !asemanKopio.getOnkoValkeaDTliikkunut() && !asemanKopio.getOnkoValkeaKuningasLiikkunut())
+				if (asemanKopio._lauta[0][1] == NULL && asemanKopio._lauta[0][2] == NULL && asemanKopio._lauta[0][3] == NULL && !asemanKopio.getOnkoValkeaDTliikkunut() && !asemanKopio.getOnkoValkeaKuningasLiikkunut())
 				{
 					Ruutu b1(1, 0);
 					Ruutu c1(2, 0);
