@@ -137,9 +137,9 @@ void Asema::paivitaAsema(Siirto *siirto)
 
 		return;
 	}
+	
+	// Koska siirto ei ollut linnoitus, katsotaan ensin onko se ohestalyönti, jos ei niin korotus ja jos ei kumpikaan niin tehdään aivan tavallinen siirto.
 
-
-	// Kaikki muut siirrot
 	Ruutu alkuRuutu = siirto->getAlkuruutu();
 	Ruutu loppuRuutu = siirto->getLoppuruutu();
 
