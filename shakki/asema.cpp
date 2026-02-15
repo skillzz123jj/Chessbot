@@ -75,7 +75,6 @@ void Asema::paivitaAsema(Siirto *siirto)
 			_lauta[0][4] = NULL;
 			_onkoValkeaKTliikkunut = true;
 			_onkoValkeaKuningasLiikkunut = true;
-
 		}
 		else
 		{
@@ -96,7 +95,6 @@ void Asema::paivitaAsema(Siirto *siirto)
 		{
 			_siirtovuoro = 1;
 		}
-
 
 		return;
 	}
@@ -297,7 +295,6 @@ bool Asema::getOnkoValkeaKuningasLiikkunut()
 
 bool Asema::getOnkoMustaKuningasLiikkunut() 
 {
-
 	return _onkoMustaKuningasLiikkunut;
 }
 
@@ -461,12 +458,8 @@ double Asema::nappuloitaKeskella(int vari)
 	
 	//valkeille ydinkeskusta
 
-	
-	
 	//valkeille laitakeskusta
 	
-
-
 	//mustille ydinkeskusta
 	
 	//mustille laitakeskusta
@@ -481,7 +474,6 @@ double Asema::linjat(int vari)
 	//valkoiset
 	
 	//mustat
-	
 }
 
 // https://chessprogramming.wikispaces.com/Minimax MinMax-algoritmin pseudokoodi (lisäsin parametrina aseman)
@@ -517,7 +509,6 @@ MinMaxPaluu Asema::minimax(int syvyys)
 	{
 		//paluuarvo = mini(syvyys);
 	}
-
 
 	// Generoidaan aseman lailliset siirrot.
 	
