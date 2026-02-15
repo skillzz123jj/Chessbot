@@ -58,11 +58,8 @@ Asema::Asema()
 
 void Asema::paivitaAsema(Siirto *siirto)
 {
-	
-	// Kaksoisaskel-lippu on oletusarvoisesti pois päältä.
+	// Nollataan kaksoisaskel-lippu, asetetaan uudelleen alla jos tarvii
 	kaksoisaskelSarakkeella = -1;
-	// Asetetaan myöhemmin, jos tarvii.
-
 
 	//Tarkastetaan on siirto lyhyt linna
 	if (siirto->onkoLyhytLinna())
@@ -89,6 +86,7 @@ void Asema::paivitaAsema(Siirto *siirto)
 			_onkoMustaKuningasLiikkunut = true;
 		}
 
+		// Vaihdetaan siirtovuoro ja lopetaan suoritus, ettei normaali siirtotapa toteudu
 		if (_siirtovuoro == 1)
 		{
 			_siirtovuoro = 0;
@@ -127,6 +125,7 @@ void Asema::paivitaAsema(Siirto *siirto)
 			_onkoMustaKuningasLiikkunut = true;
 		}
 
+		// Vaihdetaan siirtovuoro ja lopetaan suoritus, ettei normaali siirtotapa toteudu
 		if (_siirtovuoro == 1)
 		{
 			_siirtovuoro = 0;
@@ -147,12 +146,54 @@ void Asema::paivitaAsema(Siirto *siirto)
 	//Otetaan nappula alkuruudusta
 	Nappula* siirrettyNappula = _lauta[alkuRuutu.getRivi()][alkuRuutu.getSarake()];
 
-	//Asetetaan lähtöruutu tyhjäksi 
-	_lauta[alkuRuutu.getRivi()][alkuRuutu.getSarake()] = NULL;
-
-	//Sijoitetaan nappula uuteen sijaintiin
-	_lauta[loppuRuutu.getRivi()][loppuRuutu.getSarake()] = siirrettyNappula;
-
+	// Ohestalyönti: sotilas liikkuu viistosti tyhjään ruutuun, poistetaan vieressä oleva sotilas
+	if ((siirrettyNappula->getKoodi() == VS || siirrettyNappula->getKoodi() == MS) && alkuRuutu.getSarake() != loppuRuutu.getSarake() && _lauta[loppuRuutu.getRivi()][loppuRuutu.getSarake()] == NULL)
+	{
+		//Aseta alkuruutu ja viereinen ruutu NULLiksi
+		_lauta[alkuRuutu.getRivi()][loppuRuutu.getSarake()] = NULL;
+		_lauta[alkuRuutu.getRivi()][alkuRuutu.getSarake()] = NULL;
+		
+		//Asetetaan loppuruutuun siirrettyNappula
+		_lauta[loppuRuutu.getRivi()][loppuRuutu.getSarake()] = siirrettyNappula;
+	}
+	// Saapuuko valkoinen sotilas korotusriville
+	else if (siirrettyNappula->getKoodi() == VS && loppuRuutu.getRivi() == 7)
+	{
+		//Alkuruutu NULLiksi
+		_lauta[alkuRuutu.getRivi()][alkuRuutu.getSarake()] = NULL;
+		
+		//Onko asetettu miksikorotetaan arvo, jos ei niin korotetaan daamiksi
+		if (siirto->_miksikorotetaan != 0)
+		{
+			_lauta[loppuRuutu.getRivi()][loppuRuutu.getSarake()] = siirto->_miksikorotetaan;
+		}
+		else
+		{
+			_lauta[loppuRuutu.getRivi()][loppuRuutu.getSarake()] = vd;
+		}
+	
+	}
+	// Saapuuko musta sotilas korotusriville
+	else if (siirrettyNappula->getKoodi() == MS && loppuRuutu.getRivi() == 0)
+	{
+		//Alkuruutu NULLiksi
+		_lauta[alkuRuutu.getRivi()][alkuRuutu.getSarake()] = NULL;
+		if (siirto->_miksikorotetaan != 0)
+		{
+			_lauta[loppuRuutu.getRivi()][loppuRuutu.getSarake()] = siirto->_miksikorotetaan;
+		}
+		//Onko asetettu miksikorotetaan arvo, jos ei niin korotetaan daamiksi
+		else
+		{
+			_lauta[loppuRuutu.getRivi()][loppuRuutu.getSarake()] = md;
+		}
+	}
+	// Normaali siirto
+	else
+	{
+		_lauta[alkuRuutu.getRivi()][alkuRuutu.getSarake()] = NULL;
+		_lauta[loppuRuutu.getRivi()][loppuRuutu.getSarake()] = siirrettyNappula;
+	}
 
 	//Asetetaan nappuloiden flagit 
 	switch (siirrettyNappula->getKoodi()) 
