@@ -341,14 +341,15 @@ vai olla est‰m‰ss‰ vastustajan korotusta siksi ei oteta kantaa
 */
 double Asema::evaluoi() 
 {
-	double valkoiset = laskeNappuloidenArvo(0);
-	double mustat = laskeNappuloidenArvo(1);
-
 	//kertoimet asetettu sen takia ett‰ niiden avulla asioiden painoarvoa voidaan s‰‰t‰‰ helposti yhdest‰ paikasta
 	
 	//1. Nappuloiden arvo
+	double valkoiset = laskeNappuloidenArvo(0);
+	double mustat = laskeNappuloidenArvo(1);
 	
 	//2. Kuningas turvassa
+	bool ValkuTaiKeski = onkoAvausTaiKeskipeli(0);
+	bool MalkuTaiKeski = onkoAvausTaiKeskipeli(1);
 	
 	//3. Arvosta keskustaa
 	
@@ -393,14 +394,53 @@ double Asema::laskeNappuloidenArvo(int vari)
 
 bool Asema::onkoAvausTaiKeskipeli(int vari) 
 {
-	return 0;
-	// Jos upseereita 3 tai v‰hemm‰n on loppupeli
-	// mutta jos daami laudalla on loppueli vasta kun kuin vain daami j‰ljell‰
-	
-	//Jos vari on 0 eli valkoiset
-	//niin on keskipeli jos mustalla upseereita yli 2 tai jos daami+1
-	
+	int valkoisetUpseerit = 0;
+	int mustatUpseerit = 0;
 
+	bool vDaamiLaudalla;
+	bool mDaamiLaudalla;
+	return 0;
+	for (int y = 0; y < 8; y++)
+	{
+		for (int x = 0; x < 8; x++)
+		{
+			if (_lauta[y][x] != NULL)
+			{
+				int koodi = _lauta[y][x]->getKoodi();
+
+				if (koodi == VR || koodi == VL || koodi == VT || koodi == VD)
+				{
+					valkoisetUpseerit++;
+					if (koodi == VD) vDaamiLaudalla = true;
+				}
+				if (koodi == MR || koodi == ML || koodi == MT || koodi == MD)
+				{
+					mustatUpseerit++;
+					if (koodi == MD) mDaamiLaudalla = true;
+				}
+			}
+		}
+	}
+	if (vari == 0) // Valkoisen perspektiivist‰, eli tarkistetaan musta
+	{
+		if (mustatUpseerit > 2)
+			return true;
+
+		if (mDaamiLaudalla && mustatUpseerit > 1)
+			return true;
+
+		return false; // endgame
+	}
+	else // Mustan perspektiivist‰, eli tarkistetaan valkoinen
+	{
+		if (valkoisetUpseerit > 2)
+			return true;
+
+		if (vDaamiLaudalla && valkoisetUpseerit > 1)
+			return true;
+
+		return false; // endgame
+	}
 }
 
 
