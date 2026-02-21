@@ -339,6 +339,9 @@ vai olla estämässä vastustajan korotusta siksi ei oteta kantaa
 3. Arvosta keskustaa sotilailla ja ratsuilla
 4. Arvosta pitkiä linjoja daami, torni ja lähetti
 */
+
+
+
 double Asema::evaluoi() 
 {
 	//kertoimet asetettu sen takia että niiden avulla asioiden painoarvoa voidaan säätää helposti yhdestä paikasta
@@ -372,11 +375,11 @@ double Asema::laskeNappuloidenArvo(int vari)
 			{
 				if (_lauta[y][x]->getVari() == 0)
 				{
-					valkoiset += _lauta[y][x]->getArvo();
+					valkoiset += _lauta[y][x]->annaArvo(y, x, onkoAvausTaiKeskipeli(vari));
 				}
 				else
 				{
-					mustat += _lauta[y][x]->getArvo();
+					mustat += _lauta[y][x]->annaArvo(y, x, onkoAvausTaiKeskipeli(vari));
 				}
 			}
 		}
