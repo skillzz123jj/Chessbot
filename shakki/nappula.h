@@ -97,6 +97,7 @@ class Sotilas : public Nappula {
 public:
 	Sotilas(std::wstring unicode, int vari, int koodi, double arvo) : Nappula(unicode, vari, koodi, arvo) {}
 	void annaSiirrot(std::list<Siirto>& lista, Ruutu*, Asema*, int vari);
+	double annaArvo(int y, int x, bool keskipeli);
 private:
 	void lisaaSotilaanKorotukset(Siirto*, std::list<Siirto>& lista, Asema*);
 };
