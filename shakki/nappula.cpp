@@ -170,6 +170,9 @@ void Torni::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, in
 
 double Torni::annaArvo(int y, int x, bool keskipeli)
 {
+	int mg_piece_value = 477;
+	int eg_piece_value = 512;
+
 	if (keskipeli)
 	{
 		int mg_rook_table[64] = {
@@ -185,7 +188,7 @@ double Torni::annaArvo(int y, int x, bool keskipeli)
 
 		int index = y * 8 + x;
 
-		return mg_rook_table[index];
+		return mg_piece_value +	mg_rook_table[index];
 	}
 	else
 	{
@@ -202,7 +205,7 @@ double Torni::annaArvo(int y, int x, bool keskipeli)
 
 		int index = y * 8 + x;
 
-		return eg_rook_table[index];
+		return eg_piece_value + eg_rook_table[index];
 
 	}
 }
@@ -254,6 +257,9 @@ void Ratsu::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, in
 
 double Ratsu::annaArvo(int y, int x, bool keskipeli)
 {
+	int mg_piece_value = 337;
+	int eg_piece_value = 281;
+
 	if (keskipeli)
 	{
 		int mg_knight_table[64] = {
@@ -269,7 +275,7 @@ double Ratsu::annaArvo(int y, int x, bool keskipeli)
 
 		int index = y * 8 + x;
 
-		return mg_knight_table[index];
+		return mg_piece_value + mg_knight_table[index];
 	}
 	else
 	{
@@ -286,7 +292,7 @@ double Ratsu::annaArvo(int y, int x, bool keskipeli)
 
 		int index = y * 8 + x;
 
-		return eg_knight_table[index];
+		return eg_piece_value + eg_knight_table[index];
 
 	}
 }
@@ -412,7 +418,7 @@ void Lahetti::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, 
 	for (int i = 1; i < 8; i++)
 	{
 		//Set the temporary position. x increments and y decrements as we go diagonally to bottom right.
-		int tempX = x + 1;
+		int tempX = x + i;
 		int tempY = y - i;
 
 		//If tempY is out bounds, break to stop running as the next ones will also be out of bounds
@@ -448,6 +454,9 @@ void Lahetti::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, 
 
 double Lahetti::annaArvo(int y, int x, bool keskipeli)
 {
+	int mg_piece_value = 365;
+	int eg_piece_value = 297;
+
 	if (keskipeli)
 	{
 		int mg_bishop_table[64] = {
@@ -463,7 +472,7 @@ double Lahetti::annaArvo(int y, int x, bool keskipeli)
 
 		int index = y * 8 + x;
 
-		return mg_bishop_table[index];
+		return mg_piece_value + mg_bishop_table[index];
 	}
 	else
 	{
@@ -480,7 +489,7 @@ double Lahetti::annaArvo(int y, int x, bool keskipeli)
 
 		int index = y * 8 + x;
 
-		return eg_bishop_table[index];
+		return eg_piece_value + eg_bishop_table[index];
 
 	}
 }
@@ -494,6 +503,9 @@ void Daami::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, in
 
 double Daami::annaArvo(int y, int x, bool keskipeli)
 {
+	int mg_piece_value = 1025;
+	int eg_piece_value = 936;
+
 	if (keskipeli)
 	{
 		int mg_queen_table[64] = {
@@ -509,7 +521,7 @@ double Daami::annaArvo(int y, int x, bool keskipeli)
 
 		int index = y * 8 + x;
 
-		return mg_queen_table[index];
+		return mg_piece_value + mg_queen_table[index];
 	}
 	else
 	{
@@ -526,7 +538,7 @@ double Daami::annaArvo(int y, int x, bool keskipeli)
 
 		int index = y * 8 + x;
 
-		return eg_queen_table[index];
+		return eg_piece_value + eg_queen_table[index];
 
 	}
 }
@@ -806,6 +818,9 @@ void Sotilas::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, 
 
 	double Sotilas::annaArvo(int y, int x, bool keskipeli)
 	{
+		int mg_piece_value = 82;
+		int eg_piece_value = 94;
+
 		if (keskipeli)
 		{
 			int mg_pawn_table[64] = {
@@ -821,7 +836,7 @@ void Sotilas::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, 
 
 			int index = y * 8 + x;
 
-			return mg_pawn_table[index];
+			return mg_piece_value + mg_pawn_table[index];
 		}
 		else
 		{
@@ -838,7 +853,7 @@ void Sotilas::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, 
 
 			int index = y * 8 + x;
 
-			return eg_pawn_table[index];
+			return eg_piece_value + eg_pawn_table[index];
 
 		}
 	}

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <algorithm>
 #include "asema.h"
 #include "minMaxPaluu.h"
 #include "nappula.h"
@@ -367,6 +368,8 @@ double Asema::laskeNappuloidenArvo(int vari)
 	double mustat = 0;
 	double valkoiset = 0;
 
+	bool avausTaiKeski = onkoAvausTaiKeskipeli(vari);
+
 	for (int y = 0; y < 8; y++)
 	{
 		for (int x = 0; x < 8; x++)
@@ -375,11 +378,11 @@ double Asema::laskeNappuloidenArvo(int vari)
 			{
 				if (_lauta[y][x]->getVari() == 0)
 				{
-					valkoiset += _lauta[y][x]->annaArvo(y, x, onkoAvausTaiKeskipeli(vari));
+					valkoiset += _lauta[y][x]->annaArvo(y, x, avausTaiKeski);
 				}
 				else
 				{
-					mustat += _lauta[y][x]->annaArvo(y, x, onkoAvausTaiKeskipeli(vari));
+					mustat += _lauta[y][x]->annaArvo(y, x, avausTaiKeski);
 				}
 			}
 		}
@@ -400,9 +403,9 @@ bool Asema::onkoAvausTaiKeskipeli(int vari)
 	int valkoisetUpseerit = 0;
 	int mustatUpseerit = 0;
 
-	bool vDaamiLaudalla;
-	bool mDaamiLaudalla;
-	return 0;
+	bool vDaamiLaudalla = false; 
+	bool mDaamiLaudalla = false;
+	//return 0; // poista returnaus
 	for (int y = 0; y < 8; y++)
 	{
 		for (int x = 0; x < 8; x++)
@@ -508,11 +511,11 @@ MinMaxPaluu Asema::minimax(int syvyys)
 	MinMaxPaluu paluuarvo;
 	if (getSiirtovuoro() == 0)
 	{
-		paluuarvo = maxi(syvyys);
+		//paluuarvo = maxi(syvyys);
 	}
 	else
 	{
-		paluuarvo = mini(syvyys);
+		//paluuarvo = mini(syvyys);
 	}
 
 
@@ -529,7 +532,7 @@ MinMaxPaluu Asema::minimax(int syvyys)
 }
 
 
-MinMaxPaluu Asema::maxi(int syvyys) 
+MinMaxPaluu Asema::maxi(int syvyys, double alpha, double beta) 
 {
 	list<Siirto> lista;
 	Ruutu kuninkaanRuutu;
@@ -580,11 +583,16 @@ MinMaxPaluu Asema::maxi(int syvyys)
 	{
 		uusiAsema = *this;
 		uusiAsema.paivitaAsema(&s);
-		arvo = uusiAsema.mini(syvyys - 1)._evaluointiArvo;
+		arvo = uusiAsema.mini(syvyys - 1, alpha, beta)._evaluointiArvo;
 		if (arvo > maximi)
 		{
 			maximi = arvo;
 			_parasSiirto = s;
+		}
+		alpha = max(alpha, arvo);
+		if (beta <= alpha) {
+			//wcout << L"used alpha-beta pruning" << endl;
+			break;
 		}
 	}
 	paluu._evaluointiArvo = maximi;
@@ -593,7 +601,7 @@ MinMaxPaluu Asema::maxi(int syvyys)
 }
 
 
-MinMaxPaluu Asema::mini(int syvyys) 
+MinMaxPaluu Asema::mini(int syvyys, double alpha, double beta) 
 {
 	list<Siirto> lista;
 	Ruutu kuninkaanRuutu;
@@ -644,11 +652,16 @@ MinMaxPaluu Asema::mini(int syvyys)
 	{
 		uusiAsema = *this;
 		uusiAsema.paivitaAsema(&s);
-		arvo = uusiAsema.maxi(syvyys - 1)._evaluointiArvo;
+		arvo = uusiAsema.maxi(syvyys - 1, alpha, beta)._evaluointiArvo;
 		if (arvo < minimi)
 		{
 			minimi = arvo;
 			_parasSiirto = s;
+		}
+		beta = min(beta, arvo);
+		if (beta <= alpha) {
+			//wcout << L"used alpha-beta pruning" << endl;
+			break;
 		}
 	}
 	paluu._evaluointiArvo = minimi;

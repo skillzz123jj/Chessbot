@@ -26,6 +26,7 @@ int main()
 
 	while (lopetus != 0) {
 		lista.clear();
+		system("cls");
 		Kayttoliittyma::getInstance()->piirraLauta();
 		wcout << "\n";
 		// Tarkasta onko peli loppu?
@@ -46,8 +47,8 @@ int main()
 			wchar_t letterA = s.getAlkuruutu().getSarake() + L'a';
 			wchar_t letterL = s.getLoppuruutu().getSarake() + L'a';
 
-			wcout << letterA << s.getAlkuruutu().getRivi() + 1 << "-";
-			wcout << letterL << s.getLoppuruutu().getRivi() + 1 << endl;
+			//wcout << letterA << s.getAlkuruutu().getRivi() + 1 << "-";
+			//wcout << letterL << s.getLoppuruutu().getRivi() + 1 << endl;
 
 		}
 		wcout << lista.size() << endl;
@@ -61,11 +62,14 @@ int main()
 		Siirto siirto;
 		if (asema.getSiirtovuoro() == koneenVari) {
 			MinMaxPaluu paluu;
+			int syvyys = 4;
+			double alpha = -10000;
+			double beta = 10000;
 			if (koneenVari == 0) {
-				paluu = asema.maxi(3);
+				paluu = asema.maxi(syvyys, alpha, beta);
 			}
 			else {
-				paluu = asema.mini(3);
+				paluu = asema.mini(syvyys, alpha, beta);
 			}
 			siirto = paluu._parasSiirto;
 		}
