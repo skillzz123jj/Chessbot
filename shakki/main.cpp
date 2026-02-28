@@ -9,6 +9,7 @@
 #include "asema.h"
 
 using namespace std; 
+using std::wcout;
 
 int main()
 {
@@ -24,11 +25,25 @@ int main()
 	system("cls");
 	int koneenVari = peli.getKoneenVari();
 
+	Siirto koneenEdellinenSiirto;
+	bool koneenSiirtoTehty = false;
+
 	while (lopetus != 0) {
 		lista.clear();
 		system("cls");
 		Kayttoliittyma::getInstance()->piirraLauta();
 		wcout << "\n";
+
+		//Printtaa koneen siirto
+		if (koneenSiirtoTehty)
+		{
+			wchar_t letterA = koneenEdellinenSiirto.getAlkuruutu().getSarake() + L'a';
+			wchar_t letterL = koneenEdellinenSiirto.getLoppuruutu().getSarake() + L'a';
+
+			wcout << L"Koneen siirto " << letterA << koneenEdellinenSiirto.getAlkuruutu().getRivi() + 1 << "-"
+			<< letterL << koneenEdellinenSiirto.getLoppuruutu().getRivi() + 1 << endl;
+		}
+			
 		// Tarkasta onko peli loppu?
 		asema.annaLaillisetSiirrot(lista);
 
@@ -72,6 +87,9 @@ int main()
 				paluu = asema.mini(syvyys, alpha, beta);
 			}
 			siirto = paluu._parasSiirto;
+			koneenEdellinenSiirto = siirto;
+			koneenSiirtoTehty = true;
+			
 		}
 		else {
 			siirto = Kayttoliittyma::getInstance()->
