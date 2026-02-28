@@ -4,6 +4,8 @@
 #include <fcntl.h>
 #include <io.h>
 #include "kayttoliittyma.h"
+#include "asema.h"
+
 
 using namespace std;
 
@@ -90,70 +92,131 @@ void Kayttoliittyma::piirraLauta()
 Siirto Kayttoliittyma::annaVastustajanSiirto()
 {
 	wstring move;
-	wcout << L"Anna siirtosi:" << endl;
-	wcin >> move;
 	int lahtoX;
 	int lahtoY;
 	int loppuX;
 	int loppuY;
 	//_setmode(_fileno(stdout), _O_U8TEXT);
+	bool laillinen = false;
 
-	if (move == L"O-O")
+
+	while (!laillinen)
 	{
-		Siirto siirto(true, false);
-		return siirto;
-
-	}
-	else if (move == L"O-O-O")
-	{
-		Siirto siirto(false, true);
-		return siirto;
-
-	}
-
-	if (move.size() == 6)
-	{
-		move.erase(0, 1);
-	}
-	else if (move.size() == 2)
-	{
-		lahtoX = move[0] - 'a';
-		lahtoY = move[1] - '1';
-
-		Ruutu* lahtoRuutu = new Ruutu(lahtoX, lahtoY);
-		Ruutu* loppuRuutu = new Ruutu(lahtoX, lahtoY);
-
-
-		Nappula* nappula = _asema->_lauta[lahtoY][lahtoX];
+		wcout << L"Anna siirtosi:" << endl;
+		wcin >> move;
+		Asema* asema = _asema;
 
 		std::list<Siirto> lista;
-		lista.clear();
-		nappula->annaSiirrot(lista, lahtoRuutu, _asema, nappula->getVari());
+		asema->annaLaillisetSiirrot(lista);
 
-		for (auto s : lista)
+
+		for (auto siirto : lista)
 		{
-			wint_t x = s.getLoppuruutu().getSarake();
-			wint_t y = s.getLoppuruutu().getRivi();
-
-			wchar_t letter = x + L'a';
-
-
-			//Jos siirrolla on _miksikorotetaan arvo, tulostetaan miksi nappula korotettaisiin siirto tehtäessä
-			if (s._miksikorotetaan != 0)
+			if (move == L"O-O" && siirto.onkoLyhytLinna())
 			{
-				wcout << letter << " : " << (y + 1) << " = " << s._miksikorotetaan->getUnicode() << endl;
-				continue;
-			}
+				laillinen = true;
 
-			wcout << letter << " : " << (y + 1) << endl;
+
+			}
+			else if (move == L"O-O-O" && siirto.onkoPitkaLinna())
+			{
+				laillinen = true;
+
+
+			}
+			if (move.size() == 5)
+			{
+				lahtoX = move[0] - 'a';
+				lahtoY = move[1] - '1';
+				loppuX = move[3] - 'a';
+				loppuY = move[4] - '1';
+
+				Ruutu lahtoRuutu = Ruutu(lahtoX, lahtoY);
+				Ruutu loppuRuutu = Ruutu(loppuX, loppuY);
+
+				int siirtoLahtoX = siirto.getAlkuruutu().getSarake();
+				int siirtoLahtoY = siirto.getAlkuruutu().getRivi();
+
+				int siirtoLoppuX = siirto.getLoppuruutu().getSarake();
+				int siirtoLoppuY = siirto.getLoppuruutu().getRivi();
+
+				int inputLahtoX = lahtoX;
+				int inputLahtoY = lahtoY;
+
+				int inputLoppuX = loppuX;
+				int inputLoppuY = loppuY;
+
+
+				Siirto siirto(lahtoRuutu, loppuRuutu);
+				if (siirtoLahtoX == inputLahtoX && siirtoLahtoY == inputLahtoY &&
+					siirtoLoppuX == inputLoppuX && siirtoLoppuY == inputLoppuY)
+				{
+					laillinen = true;
+				}
+			}
+			
+		}
+		wcout << L"Syötä laillinen siirto." << endl;
+	}
+
+		if (move == L"O-O")
+		{
+			Siirto siirto(true, false);
+			return siirto;
+
+		}
+		else if (move == L"O-O-O")
+		{
+			Siirto siirto(false, true);
+			return siirto;
+
 		}
 
-		//for debugging purposes
-		Siirto siirto(*lahtoRuutu, *loppuRuutu);
-		delete lahtoRuutu;
-		delete loppuRuutu;
-		return siirto;
-	}
+		if (move.size() == 6)
+		{
+			move.erase(0, 1);
+		}
+		else if (move.size() == 2)
+		{
+			lahtoX = move[0] - 'a';
+			lahtoY = move[1] - '1';
+
+			Ruutu* lahtoRuutu = new Ruutu(lahtoX, lahtoY);
+			Ruutu* loppuRuutu = new Ruutu(lahtoX, lahtoY);
+
+
+			Nappula* nappula = _asema->_lauta[lahtoY][lahtoX];
+
+			std::list<Siirto> lista;
+			lista.clear();
+			nappula->annaSiirrot(lista, lahtoRuutu, _asema, nappula->getVari());
+
+			for (auto s : lista)
+			{
+				wint_t x = s.getLoppuruutu().getSarake();
+				wint_t y = s.getLoppuruutu().getRivi();
+
+				wchar_t letter = x + L'a';
+
+
+				//Jos siirrolla on _miksikorotetaan arvo, tulostetaan miksi nappula korotettaisiin siirto tehtäessä
+				if (s._miksikorotetaan != 0)
+				{
+					wcout << letter << " : " << (y + 1) << " = " << s._miksikorotetaan->getUnicode() << endl;
+					continue;
+				}
+
+				wcout << letter << " : " << (y + 1) << endl;
+			}
+
+			//for debugging purposes
+			Siirto siirto(*lahtoRuutu, *loppuRuutu);
+			delete lahtoRuutu;
+			delete loppuRuutu;
+			return siirto;
+		}
+	
+	
 	
 	
 	lahtoX = move[0] - 'a';
