@@ -58,7 +58,7 @@ int main()
 		Siirto siirto;
 		if (asema.getSiirtovuoro() == koneenVari) {
 			MinMaxPaluu paluu;
-			int syvyys = 3;
+			int syvyys = 4;
 			double alpha = -10000;
 			double beta = 10000;
 			if (koneenVari == 0) {
