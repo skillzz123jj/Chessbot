@@ -322,11 +322,11 @@ double Asema::laskeNappuloidenArvo(int vari)
 			{
 				if (_lauta[y][x]->getVari() == 0)
 				{
-					valkoiset += _lauta[y][x]->annaArvo(y, x, avausTaiKeski);
+					valkoiset += _lauta[y][x]->annaArvo(y, x, avausTaiKeski, 0);
 				}
 				else
 				{
-					mustat += _lauta[y][x]->annaArvo(y, x, avausTaiKeski);
+					mustat += _lauta[y][x]->annaArvo(y, x, avausTaiKeski, 1);
 				}
 			}
 		}

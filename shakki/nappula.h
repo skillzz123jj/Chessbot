@@ -32,7 +32,7 @@ public:
 	// Siirtojen generointi. Puhdas virtuaalifunktio, eli aliluokat toteuttavat tämän
 	// omalla tavallaan.
 	virtual void annaSiirrot(std::list<Siirto>& lista, Ruutu*, Asema*, int vari) = 0;
-	virtual double annaArvo(int y, int x, bool keskipeli) = 0;
+	virtual double annaArvo(int y, int x, bool keskipeli, int vari) = 0;
 
 	void setUnicode(std::wstring unicode)	{ _unicode = unicode;			}
 	std::wstring getUnicode()				{ return _unicode;				}
@@ -50,7 +50,7 @@ class Torni : public virtual Nappula {
 public:
 	Torni(std::wstring unicode, int vari, int koodi, double arvo) : Nappula(unicode, vari, koodi, arvo) {}
 	void annaSiirrot(std::list<Siirto>& lista, Ruutu*, Asema*, int vari);
-	double annaArvo(int y, int x, bool keskipeli);
+	double annaArvo(int y, int x, bool keskipeli, int vari);
 
 };
 
@@ -59,7 +59,7 @@ class Ratsu : public Nappula {
 public:
 	Ratsu(std::wstring unicode, int vari, int koodi, double arvo) : Nappula(unicode, vari, koodi, arvo) {}
 	void annaSiirrot(std::list<Siirto>& lista, Ruutu*, Asema*, int vari);
-	double annaArvo(int y, int x, bool keskipeli);
+	double annaArvo(int y, int x, bool keskipeli, int vari);
 
 };
 
@@ -69,7 +69,7 @@ class Lahetti : public virtual Nappula {
 public:
 	Lahetti(std::wstring unicode, int vari, int koodi, double arvo) : Nappula(unicode, vari, koodi, arvo) {}
 	void annaSiirrot(std::list<Siirto>& lista, Ruutu*, Asema*, int vari);
-	double annaArvo(int y, int x, bool keskipeli);
+	double annaArvo(int y, int x, bool keskipeli, int vari);
 
 };
 
@@ -79,7 +79,7 @@ public:
 	Daami(std::wstring unicode, int vari, int koodi, double arvo) : 
 		Nappula(unicode, vari, koodi, arvo), Lahetti(unicode, vari, koodi, arvo), Torni(unicode, vari, koodi, arvo) {}
 	void annaSiirrot(std::list<Siirto>& lista, Ruutu*, Asema*, int vari);
-	double annaArvo(int y, int x, bool keskipeli);
+	double annaArvo(int y, int x, bool keskipeli, int vari);
 
 };
 
@@ -88,7 +88,7 @@ class Kuningas : public Nappula {
 public:
 	Kuningas(std::wstring unicode, int vari, int koodi, double arvo) : Nappula(unicode, vari, koodi, arvo) {}
 	void annaSiirrot(std::list<Siirto>& lista, Ruutu*, Asema*, int vari);
-	double annaArvo(int y, int x, bool keskipeli);
+	double annaArvo(int y, int x, bool keskipeli, int vari);
 
 };
 
@@ -97,7 +97,7 @@ class Sotilas : public Nappula {
 public:
 	Sotilas(std::wstring unicode, int vari, int koodi, double arvo) : Nappula(unicode, vari, koodi, arvo) {}
 	void annaSiirrot(std::list<Siirto>& lista, Ruutu*, Asema*, int vari);
-	double annaArvo(int y, int x, bool keskipeli);
+	double annaArvo(int y, int x, bool keskipeli, int vari);
 private:
 	void lisaaSotilaanKorotukset(Siirto*, std::list<Siirto>& lista, Asema*);
 };
