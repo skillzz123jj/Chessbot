@@ -47,28 +47,8 @@ int main()
 		// Tarkasta onko peli loppu?
 		asema.annaLaillisetSiirrot(lista);
 
-		for (Siirto s : lista)
-		{
-			if (s.onkoLyhytLinna())
-			{
-				wcout << "O-O" << endl;
-				continue;
-			}
-			if (s.onkoPitkaLinna())
-			{
-				wcout << "O-O-O" << endl;
-				continue;
-			}
-			wchar_t letterA = s.getAlkuruutu().getSarake() + L'a';
-			wchar_t letterL = s.getLoppuruutu().getSarake() + L'a';
-
-			//wcout << letterA << s.getAlkuruutu().getRivi() + 1 << "-";
-			//wcout << letterL << s.getLoppuruutu().getRivi() + 1 << endl;
-
-		}
 		wcout << lista.size() << endl;
-
-		
+	
 		if (lista.size() == 0) {
 			lopetus = 0;
 			std::wcout << "Peli loppui";
@@ -77,7 +57,7 @@ int main()
 		Siirto siirto;
 		if (asema.getSiirtovuoro() == koneenVari) {
 			MinMaxPaluu paluu;
-			int syvyys = 4;
+			int syvyys = 3;
 			double alpha = -10000;
 			double beta = 10000;
 			if (koneenVari == 0) {
