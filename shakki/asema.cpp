@@ -245,32 +245,6 @@ void Asema::paivitaAsema(Siirto *siirto)
 	{
 		_siirtovuoro = 1;
 	}
-
-
-
-		//Ottaa siirron alkuruudussa olleen nappulan talteen 
-
-
-		//Laittaa talteen otetun nappulan uuteen ruutuun
-
-
-		// Tarkistetaan oliko sotilaan kaksoisaskel
-		// (asetetaan kaksoisaskel-lippu)
-
-		// Ohestalyönti on tyhjään ruutuun. Vieressä oleva (sotilas) poistetaan.
-
-		//// Katsotaan jos nappula on sotilas ja rivi on päätyrivi niin ei vaihdeta nappulaa 
-		////eli alkuruutuun laitetaan null ja loppuruudussa on jo kliittymän laittama nappula MIIKKA, ei taida minmaxin kanssa hehkua?
-
-		//
-		////muissa tapauksissa alkuruutuun null ja loppuruutuun sama alkuruudusta lähtenyt nappula
-
-		// katsotaan jos liikkunut nappula on kuningas niin muutetaan onkoKuningasLiikkunut arvo (molemmille väreille)
-
-		// katsotaan jos liikkunut nappula on torni niin muutetaan onkoTorniLiikkunut arvo (molemmille väreille ja molemmille torneille)
-
-	//päivitetään _siirtovuoro
-
 }
 
 
@@ -279,7 +253,6 @@ int Asema::getSiirtovuoro()
 {
 	return _siirtovuoro;
 }
-
 
 void Asema::setSiirtovuoro(int vuoro) 
 {
@@ -322,39 +295,10 @@ bool Asema::getOnkoMustaKTliikkunut()
 	return _onkoMustaKTliikkunut;
 }
 
-
-/* 1. Laske nappuloiden arvo
-Daami = 9
-Torni = 5
-Lähetti = 3,25
-Ratsu = 3
-Sotilas = 1
-
-2. Kuninkaan hyvyys
-Jos avaus tai keskipeli, niin hyvä että kunigas g1 tai b1/c1
-Loppupelissä vaikea sanoa halutaanko olla auttamassa omaa sotilasta korottumaan
-vai olla estämässä vastustajan korotusta siksi ei oteta kantaa
-3. Arvosta keskustaa sotilailla ja ratsuilla
-4. Arvosta pitkiä linjoja daami, torni ja lähetti
-*/
-
-
-
 double Asema::evaluoi() 
-{
-	//kertoimet asetettu sen takia että niiden avulla asioiden painoarvoa voidaan säätää helposti yhdestä paikasta
-	
-	//1. Nappuloiden arvo
+{	
 	double valkoiset = laskeNappuloidenArvo(0);
 	double mustat = laskeNappuloidenArvo(1);
-	
-	//2. Kuningas turvassa
-	bool ValkuTaiKeski = onkoAvausTaiKeskipeli(0);
-	bool MalkuTaiKeski = onkoAvausTaiKeskipeli(1);
-	
-	//3. Arvosta keskustaa
-	
-	// 4. Arvosta linjoja
 	
 	return valkoiset - mustat;
 }
@@ -375,11 +319,11 @@ double Asema::laskeNappuloidenArvo(int vari)
 			{
 				if (_lauta[y][x]->getVari() == 0)
 				{
-					valkoiset += _lauta[y][x]->annaArvo(y, x, avausTaiKeski);
+					valkoiset += _lauta[y][x]->annaArvo(y, x, avausTaiKeski, 0);
 				}
 				else
 				{
-					mustat += _lauta[y][x]->annaArvo(y, x, avausTaiKeski);
+					mustat += _lauta[y][x]->annaArvo(y, x, avausTaiKeski, 1);
 				}
 			}
 		}
@@ -402,7 +346,7 @@ bool Asema::onkoAvausTaiKeskipeli(int vari)
 
 	bool vDaamiLaudalla = false; 
 	bool mDaamiLaudalla = false;
-	//return 0; // poista returnaus
+
 	for (int y = 0; y < 8; y++)
 	{
 		for (int x = 0; x < 8; x++)
@@ -445,83 +389,6 @@ bool Asema::onkoAvausTaiKeskipeli(int vari)
 		return false; // endgame
 	}
 }
-
-
-double Asema::nappuloitaKeskella(int vari) 
-{
-	return 0;
-
-	//sotilaat ydinkeskustassa + 0.25/napa
-	//ratsut ydinkeskustassa + 0.25/napa
-	//sotilaat laitakeskustassa + 0.11/napa
-	//ratsut laitakeskustassa + 0.11/napa
-	
-	//valkeille ydinkeskusta
-
-	//valkeille laitakeskusta
-	
-	//mustille ydinkeskusta
-	
-	//mustille laitakeskusta
-	
-}
-
-
-double Asema::linjat(int vari) 
-{
-	return 0;
-	
-	//valkoiset
-	
-	//mustat
-}
-
-// https://chessprogramming.wikispaces.com/Minimax MinMax-algoritmin pseudokoodi (lisäsin parametrina aseman)
-//int maxi(int depth, asema a) 
-//	if (depth == 0) return evaluate();
-//	int max = -oo;
-//	for (all moves ) {
-//		score = mini(depth - 1, seuraaja);
-//		if (score > max)
-//			max = score;
-//	}
-//	return max;
-//}
-
-//int mini(int depth, asema a) {
-//	if (depth == 0) return -evaluate();
-//	int min = +oo;
-//	for (all moves) {
-//		score = maxi(depth - 1);
-//		if (score < min)
-//			min = score;
-//	}
-//	return min;
-//}
-MinMaxPaluu Asema::minimax(int syvyys)
-{
-	MinMaxPaluu paluuarvo;
-	if (getSiirtovuoro() == 0)
-	{
-		//paluuarvo = maxi(syvyys);
-	}
-	else
-	{
-		//paluuarvo = mini(syvyys);
-	}
-
-	// Generoidaan aseman lailliset siirrot.
-	
-	// Rekursion kantatapaus 1: peli on loppu
-	
-	// Rekursion kantatapaus 2: katkaisusyvyydessä
-	
-	// Rekursioaskel: kokeillaan jokaista laillista siirtoa s
-	// (alustetaan paluuarvo huonoimmaksi mahdolliseksi).
-	
-	return paluuarvo;
-}
-
 
 MinMaxPaluu Asema::maxi(int syvyys, double alpha, double beta) 
 {

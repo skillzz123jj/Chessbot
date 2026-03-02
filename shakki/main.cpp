@@ -9,6 +9,7 @@
 #include "asema.h"
 
 using namespace std; 
+using std::wcout;
 
 int main()
 {
@@ -24,36 +25,30 @@ int main()
 	system("cls");
 	int koneenVari = peli.getKoneenVari();
 
+	Siirto koneenEdellinenSiirto;
+	bool koneenSiirtoTehty = false;
+
 	while (lopetus != 0) {
 		lista.clear();
 		system("cls");
 		Kayttoliittyma::getInstance()->piirraLauta();
 		wcout << "\n";
+
+		//Printtaa koneen siirto
+		if (koneenSiirtoTehty)
+		{
+			wchar_t letterA = koneenEdellinenSiirto.getAlkuruutu().getSarake() + L'a';
+			wchar_t letterL = koneenEdellinenSiirto.getLoppuruutu().getSarake() + L'a';
+
+			wcout << L"Koneen siirto " << letterA << koneenEdellinenSiirto.getAlkuruutu().getRivi() + 1 << "-"
+			<< letterL << koneenEdellinenSiirto.getLoppuruutu().getRivi() + 1 << endl;
+		}
+			
 		// Tarkasta onko peli loppu?
 		asema.annaLaillisetSiirrot(lista);
 
-		for (Siirto s : lista)
-		{
-			if (s.onkoLyhytLinna())
-			{
-				wcout << "O-O" << endl;
-				continue;
-			}
-			if (s.onkoPitkaLinna())
-			{
-				wcout << "O-O-O" << endl;
-				continue;
-			}
-			wchar_t letterA = s.getAlkuruutu().getSarake() + L'a';
-			wchar_t letterL = s.getLoppuruutu().getSarake() + L'a';
-
-			//wcout << letterA << s.getAlkuruutu().getRivi() + 1 << "-";
-			//wcout << letterL << s.getLoppuruutu().getRivi() + 1 << endl;
-
-		}
 		wcout << lista.size() << endl;
-
-		
+	
 		if (lista.size() == 0) {
 			lopetus = 0;
 			std::wcout << "Peli loppui";
@@ -62,7 +57,7 @@ int main()
 		Siirto siirto;
 		if (asema.getSiirtovuoro() == koneenVari) {
 			MinMaxPaluu paluu;
-			int syvyys = 4;
+			int syvyys = 3;
 			double alpha = -10000;
 			double beta = 10000;
 			if (koneenVari == 0) {
@@ -72,6 +67,9 @@ int main()
 				paluu = asema.mini(syvyys, alpha, beta);
 			}
 			siirto = paluu._parasSiirto;
+			koneenEdellinenSiirto = siirto;
+			koneenSiirtoTehty = true;
+			
 		}
 		else {
 			siirto = Kayttoliittyma::getInstance()->

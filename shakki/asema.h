@@ -36,7 +36,6 @@ public:
 	double evaluoi();										// Aseman numeerinen arviointi.
 	MinMaxPaluu maxi(int syvyys, double alpha, double beta);							// Minimax (max:n siirtovuoro).
 	MinMaxPaluu mini(int syvyys, double alpha, double beta);							// Minimax (min:n siirtovuoro).
-	MinMaxPaluu minimax(int syvyys);						// Minimax-algoritmi.
 	void annaLaillisetSiirrot(std::list<Siirto>& lista);	// Siirtogeneraattori.
 	int getSiirtovuoro();									// Palauttaa siirtovuoron.
 	void setSiirtovuoro(int);								// Asettaa siirtovuoron.
@@ -60,10 +59,7 @@ private:
 
 	double laskeNappuloidenArvo(int);
 	bool onkoAvausTaiKeskipeli(int);
-	double nappuloitaKeskella(int);
-	double linjat(int);
 	bool onkoRuutuUhattu(Ruutu*, int vastustajanVari);
-	void annaLinnoitusSiirrot(std::list<Siirto>& lista, int vari);
 
 	// Karsii siirrot, jotka jättävät oman K:n shakkiin.
 	void huolehdiKuninkaanShakeista(std::list<Siirto>& lista, int vari); 
