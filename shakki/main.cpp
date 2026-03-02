@@ -21,7 +21,8 @@ int main()
 
 	Peli peli(Kayttoliittyma::getInstance()->
 		kysyVastustajanVari());
-	std::list<Siirto> lista;
+	std::vector<Siirto> lista;
+	lista.reserve(64);
 	system("cls");
 	int koneenVari = peli.getKoneenVari();
 

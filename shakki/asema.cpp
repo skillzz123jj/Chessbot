@@ -1,5 +1,6 @@
 #include <iostream>
 #include <algorithm>
+#include <vector>
 #include "asema.h"
 #include "minMaxPaluu.h"
 #include "nappula.h"
@@ -392,7 +393,8 @@ bool Asema::onkoAvausTaiKeskipeli(int vari)
 
 MinMaxPaluu Asema::maxi(int syvyys, double alpha, double beta) 
 {
-	list<Siirto> lista;
+	vector<Siirto> lista;
+	lista.reserve(64);
 	Ruutu kuninkaanRuutu;
 	this->annaLaillisetSiirrot(lista);
 	double arvo;
@@ -461,7 +463,8 @@ MinMaxPaluu Asema::maxi(int syvyys, double alpha, double beta)
 
 MinMaxPaluu Asema::mini(int syvyys, double alpha, double beta) 
 {
-	list<Siirto> lista;
+	vector<Siirto> lista;
+	lista.reserve(64);
 	Ruutu kuninkaanRuutu;
 	this->annaLaillisetSiirrot(lista);
 	double arvo;
@@ -530,7 +533,8 @@ MinMaxPaluu Asema::mini(int syvyys, double alpha, double beta)
 
 bool Asema::onkoRuutuUhattu(Ruutu* ruutu, int vastustajanVari)
 {
-	list<Siirto> raakaLista;
+	vector<Siirto> raakaLista;
+	raakaLista.reserve(64);
 
 	//Käydään lauta läpi ja kasataan kaikki vastustajan raakasiirrot
 	for (int y = 0; y < 8; y++)
@@ -562,9 +566,10 @@ bool Asema::onkoRuutuUhattu(Ruutu* ruutu, int vastustajanVari)
 }
 
 
-void Asema::huolehdiKuninkaanShakeista(std::list<Siirto>& lista, int vari) 
+void Asema::huolehdiKuninkaanShakeista(std::vector<Siirto>& lista, int vari) 
 { 
-	list<Siirto> laillisetSiirrot;
+	vector<Siirto> laillisetSiirrot;
+	laillisetSiirrot.reserve(64);
 	int vastustajanVari = (vari == 0) ? 1 : 0;
 	// Asetetaan ulos laudasta, ettei tule sekannusta tilanteessa jossa kuningasta ei löydy
 	int kuninkaanX = -1;
@@ -667,7 +672,7 @@ void Asema::huolehdiKuninkaanShakeista(std::list<Siirto>& lista, int vari)
 }
 
 
-void Asema::annaLaillisetSiirrot(std::list<Siirto>& lista) {
+void Asema::annaLaillisetSiirrot(std::vector<Siirto>& lista) {
 
 	//Käydään lauta läpi ja otetaan siiron tekevän värin raakasiirrot
 	for (int y = 0; y < 8; y++)

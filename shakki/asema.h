@@ -1,12 +1,12 @@
 #pragma once
 
-#include <list>
+#include <vector>
 #include <string>
 #include "minmaxpaluu.h"
 #include "siirto.h"
 
 
-// Ns. "forward declaration". Nyt Asema-luokassa voidaa esitellä Nappula-osoittimia ilman,
+// Ns. "forward declaration". Nyt Asema-luokassa voida esitellä Nappula-osoittimia ilman,
 // että nappula.h -tiedostoa täytyy includoida.
 class Nappula;
 
@@ -36,7 +36,7 @@ public:
 	double evaluoi();										// Aseman numeerinen arviointi.
 	MinMaxPaluu maxi(int syvyys, double alpha, double beta);							// Minimax (max:n siirtovuoro).
 	MinMaxPaluu mini(int syvyys, double alpha, double beta);							// Minimax (min:n siirtovuoro).
-	void annaLaillisetSiirrot(std::list<Siirto>& lista);	// Siirtogeneraattori.
+	void annaLaillisetSiirrot(std::vector<Siirto>& lista);	// Siirtogeneraattori.
 	int getSiirtovuoro();									// Palauttaa siirtovuoron.
 	void setSiirtovuoro(int);								// Asettaa siirtovuoron.
 	bool getOnkoValkeaKuningasLiikkunut();					// Linnoittuminen mahdollista?
@@ -62,5 +62,5 @@ private:
 	bool onkoRuutuUhattu(Ruutu*, int vastustajanVari);
 
 	// Karsii siirrot, jotka jättävät oman K:n shakkiin.
-	void huolehdiKuninkaanShakeista(std::list<Siirto>& lista, int vari); 
+	void huolehdiKuninkaanShakeista(std::vector<Siirto>& lista, int vari); 
 };

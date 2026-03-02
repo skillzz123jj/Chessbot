@@ -1,4 +1,4 @@
-#include <list>
+#include <vector>
 #include <string>
 #include "asema.h"
 #include "nappula.h"
@@ -14,7 +14,7 @@ Nappula::Nappula(wstring unicode, int vari, int koodi, double arvo)
 }
 
 
-void Torni::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, int vari)
+void Torni::annaSiirrot(std::vector<Siirto>& lista, Ruutu* ruutu, Asema* asema, int vari)
 {
 	int x = ruutu->getSarake();
 	int y = ruutu->getRivi();
@@ -210,7 +210,7 @@ double Torni::annaArvo(int y, int x, bool keskipeli, int vari)
 }
 
 
-void Ratsu::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, int vari)
+void Ratsu::annaSiirrot(std::vector<Siirto>& lista, Ruutu* ruutu, Asema* asema, int vari)
 {
 	int x = ruutu->getSarake();
 	int y = ruutu->getRivi();
@@ -296,7 +296,7 @@ double Ratsu::annaArvo(int y, int x, bool keskipeli, int vari)
 }
 
 
-void Lahetti::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, int vari)
+void Lahetti::annaSiirrot(std::vector<Siirto>& lista, Ruutu* ruutu, Asema* asema, int vari)
 {
 	int x = ruutu->getSarake();
 	int y = ruutu->getRivi();
@@ -492,7 +492,7 @@ double Lahetti::annaArvo(int y, int x, bool keskipeli, int vari)
 }
 
 
-void Daami::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, int vari)
+void Daami::annaSiirrot(std::vector<Siirto>& lista, Ruutu* ruutu, Asema* asema, int vari)
 {
 	Torni::annaSiirrot(lista, ruutu, asema, vari);
 	Lahetti::annaSiirrot(lista, ruutu, asema, vari);
@@ -540,7 +540,7 @@ double Daami::annaArvo(int y, int x, bool keskipeli, int vari)
 }
 
 
-void Kuningas::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, int vari)
+void Kuningas::annaSiirrot(std::vector<Siirto>& lista, Ruutu* ruutu, Asema* asema, int vari)
 {
 	int x = ruutu->getSarake();
 	int y = ruutu->getRivi();
@@ -629,7 +629,7 @@ double Kuningas::annaArvo(int y, int x, bool keskipeli, int vari)
 	}
 }
 
-void Sotilas::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, int vari)
+void Sotilas::annaSiirrot(std::vector<Siirto>& lista, Ruutu* ruutu, Asema* asema, int vari)
 {
 		int x = ruutu->getSarake();
 		int y = ruutu->getRivi();
@@ -855,7 +855,7 @@ void Sotilas::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, 
 	}
 
 
-void Sotilas::lisaaSotilaanKorotukset(Siirto* siirto, std::list<Siirto>& lista, Asema* asema) {
+void Sotilas::lisaaSotilaanKorotukset(Siirto* siirto, std::vector<Siirto>& lista, Asema* asema) {
 	int vari = this->getVari();
 
 	//Alustetaan jokaisen korotustyypin siirto

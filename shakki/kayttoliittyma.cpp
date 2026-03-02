@@ -106,7 +106,8 @@ Siirto Kayttoliittyma::annaVastustajanSiirto()
 		wcin >> move;
 		Asema* asema = _asema;
 
-		std::list<Siirto> lista;
+		std::vector<Siirto> lista;
+		lista.reserve(64);
 		asema->annaLaillisetSiirrot(lista);
 
 
@@ -187,7 +188,8 @@ Siirto Kayttoliittyma::annaVastustajanSiirto()
 
 			Nappula* nappula = _asema->_lauta[lahtoY][lahtoX];
 
-			std::list<Siirto> lista;
+			std::vector<Siirto> lista;
+			lista.reserve(64);
 			lista.clear();
 			nappula->annaSiirrot(lista, lahtoRuutu, _asema, nappula->getVari());
 
