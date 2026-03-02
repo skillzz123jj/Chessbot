@@ -748,7 +748,7 @@ void Sotilas::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, 
 				}
 			}
 
-			if (x - 1 >= 0 && y - 1 <= 0)
+			if (x - 1 >= 0 && y - 1 >= 0)
 			{
 				//Tarkistaa saako vasemmalta syötyä vihollisen nappulan
 				if (asema->_lauta[y - 1][x - 1] != NULL
@@ -769,7 +769,7 @@ void Sotilas::annaSiirrot(std::list<Siirto>& lista, Ruutu* ruutu, Asema* asema, 
 				}
 			}
 
-			if (x - 1 >= 0 && y - 1 <= 8)
+			if (x - 1 >= 0 && y - 1 >= 0)
 			{
 				//Tarkistaa saako oikealta syötyä vihollisen nappulan
 				if (asema->_lauta[y - 1][x + 1] != NULL
