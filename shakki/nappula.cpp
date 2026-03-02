@@ -41,18 +41,14 @@ void Torni::annaSiirrot(std::vector<Siirto>& lista, Ruutu* ruutu, Asema* asema, 
 			//Else, add it to the list and break as rook has to stop on enemy square
 			else
 			{
-				Ruutu loppuRuutu = Ruutu(tempX, tempY);
-				Siirto siirto(*ruutu, loppuRuutu);
-				lista.push_back(siirto);
+				lista.emplace_back(*ruutu, Ruutu(tempX, tempY));
 				break;
 			}
 		}
 		//if square was empty, add it to legal moves
 		else
 		{
-			Ruutu loppuRuutu = Ruutu(tempX, tempY);
-			Siirto siirto(*ruutu, loppuRuutu);
-			lista.push_back(siirto);
+			lista.emplace_back(*ruutu, Ruutu(tempX, tempY));
 		}
 	}
 
@@ -78,18 +74,14 @@ void Torni::annaSiirrot(std::vector<Siirto>& lista, Ruutu* ruutu, Asema* asema, 
 			//Else, add it to the list and break as rook has to stop on enemy square
 			else
 			{
-				Ruutu loppuRuutu = Ruutu(tempX, tempY);
-				Siirto siirto(*ruutu, loppuRuutu);
-				lista.push_back(siirto);
+				lista.emplace_back(*ruutu, Ruutu(tempX, tempY));
 				break;
 			}
 		}
 		//if square was empty, add it to legal moves
 		else
 		{
-			Ruutu loppuRuutu = Ruutu(tempX, tempY);
-			Siirto siirto(*ruutu, loppuRuutu);
-			lista.push_back(siirto);
+			lista.emplace_back(*ruutu, Ruutu(tempX, tempY));
 		}
 	}
 
@@ -115,18 +107,14 @@ void Torni::annaSiirrot(std::vector<Siirto>& lista, Ruutu* ruutu, Asema* asema, 
 			//Else, add it to the list and break as rook has to stop on enemy square
 			else
 			{
-				Ruutu loppuRuutu = Ruutu(tempX, tempY);
-				Siirto siirto(*ruutu, loppuRuutu);
-				lista.push_back(siirto);
+				lista.emplace_back(*ruutu, Ruutu(tempX, tempY));
 				break;
 			}
 		}
 		//if square was empty, add it to legal moves
 		else
 		{
-			Ruutu loppuRuutu = Ruutu(tempX, tempY);
-			Siirto siirto(*ruutu, loppuRuutu);
-			lista.push_back(siirto);
+			lista.emplace_back(*ruutu, Ruutu(tempX, tempY));
 		}
 	}
 
@@ -152,18 +140,14 @@ void Torni::annaSiirrot(std::vector<Siirto>& lista, Ruutu* ruutu, Asema* asema, 
 			//Else, add it to the list and break as rook has to stop on enemy square
 			else
 			{
-				Ruutu loppuRuutu = Ruutu(tempX, tempY);
-				Siirto siirto(*ruutu, loppuRuutu);
-				lista.push_back(siirto);
+				lista.emplace_back(*ruutu, Ruutu(tempX, tempY));
 				break;
 			}
 		}
 		//if square was empty, add it to legal moves
 		else
 		{
-			Ruutu loppuRuutu = Ruutu(tempX, tempY);
-			Siirto siirto(*ruutu, loppuRuutu);
-			lista.push_back(siirto);
+			lista.emplace_back(*ruutu, Ruutu(tempX, tempY));
 		}
 	}
 }
@@ -240,16 +224,12 @@ void Ratsu::annaSiirrot(std::vector<Siirto>& lista, Ruutu* ruutu, Asema* asema, 
 				continue;
 			else //Se lisätään listaan mahdollisista liikkeistä jos nappula on eri värinen
 			{
-				Ruutu loppuRuutu = Ruutu(tempX, tempY);
-				Siirto siirto(*ruutu, loppuRuutu);
-				lista.push_back(siirto);
+				lista.emplace_back(*ruutu, Ruutu(tempX, tempY));
 			}
 		}
 		else
 		{
-			Ruutu loppuRuutu = Ruutu(tempX, tempY);
-			Siirto siirto(*ruutu, loppuRuutu);
-			lista.push_back(siirto);
+			lista.emplace_back(*ruutu, Ruutu(tempX, tempY));
 		}
 	}
 }
@@ -323,18 +303,14 @@ void Lahetti::annaSiirrot(std::vector<Siirto>& lista, Ruutu* ruutu, Asema* asema
 			//Else, add it to the list and break as bishop has to stop on enemy square
 			else
 			{
-				Ruutu loppuRuutu = Ruutu(tempX, tempY);
-				Siirto siirto(*ruutu, loppuRuutu);
-				lista.push_back(siirto);
+				lista.emplace_back(*ruutu, Ruutu(tempX, tempY));
 				break;
 			}
 		}
 		//if square was empty, add it to legal moves
 		else
 		{
-			Ruutu loppuRuutu = Ruutu(tempX, tempY);
-			Siirto siirto(*ruutu, loppuRuutu);
-			lista.push_back(siirto);
+			lista.emplace_back(*ruutu, Ruutu(tempX, tempY));
 		}
 	}
 
@@ -360,18 +336,14 @@ void Lahetti::annaSiirrot(std::vector<Siirto>& lista, Ruutu* ruutu, Asema* asema
 			//Else, add it to the list and break as bishop has to stop on enemy square
 			else
 			{
-				Ruutu loppuRuutu = Ruutu(tempX, tempY);
-				Siirto siirto(*ruutu, loppuRuutu);
-				lista.push_back(siirto);
+				lista.emplace_back(*ruutu, Ruutu(tempX, tempY));
 				break;
 			}
 		}
 		//if square was empty, add it to legal moves
 		else
 		{
-			Ruutu loppuRuutu = Ruutu(tempX, tempY);
-			Siirto siirto(*ruutu, loppuRuutu);
-			lista.push_back(siirto);
+			lista.emplace_back(*ruutu, Ruutu(tempX, tempY));
 		}
 	}
 
@@ -397,18 +369,14 @@ void Lahetti::annaSiirrot(std::vector<Siirto>& lista, Ruutu* ruutu, Asema* asema
 			//Else, add it to the list and break as bishop has to stop on enemy square
 			else
 			{
-				Ruutu loppuRuutu = Ruutu(tempX, tempY);
-				Siirto siirto(*ruutu, loppuRuutu);
-				lista.push_back(siirto);
+				lista.emplace_back(*ruutu, Ruutu(tempX, tempY));
 				break;
 			}
 		}
 		//if square was empty, add it to legal moves
 		else
 		{
-			Ruutu loppuRuutu = Ruutu(tempX, tempY);
-			Siirto siirto(*ruutu, loppuRuutu);
-			lista.push_back(siirto);
+			lista.emplace_back(*ruutu, Ruutu(tempX, tempY));
 		}
 	}
 
@@ -434,18 +402,14 @@ void Lahetti::annaSiirrot(std::vector<Siirto>& lista, Ruutu* ruutu, Asema* asema
 			//Else, add it to the list and break as bishop has to stop on enemy square
 			else
 			{
-				Ruutu loppuRuutu = Ruutu(tempX, tempY);
-				Siirto siirto(*ruutu, loppuRuutu);
-				lista.push_back(siirto);
+				lista.emplace_back(*ruutu, Ruutu(tempX, tempY));
 				break;
 			}
 		}
 		//if square was empty, add it to legal moves
 		else
 		{
-			Ruutu loppuRuutu = Ruutu(tempX, tempY);
-			Siirto siirto(*ruutu, loppuRuutu);
-			lista.push_back(siirto);
+			lista.emplace_back(*ruutu, Ruutu(tempX, tempY));
 		}
 	}
 }
@@ -571,16 +535,12 @@ void Kuningas::annaSiirrot(std::vector<Siirto>& lista, Ruutu* ruutu, Asema* asem
 				continue;
 			else //Se lisätään listaan mahdollisista liikkeistä jos nappula on eri värinen
 			{
-				Ruutu loppuRuutu = Ruutu(tempX, tempY);
-				Siirto siirto(*ruutu, loppuRuutu);
-				lista.push_back(siirto);
+				lista.emplace_back(*ruutu, Ruutu(tempX, tempY));
 			}
 		}
 		else
 		{
-			Ruutu loppuRuutu = Ruutu(tempX, tempY);
-			Siirto siirto(*ruutu, loppuRuutu);
-			lista.push_back(siirto);
+			lista.emplace_back(*ruutu, Ruutu(tempX, tempY));
 		}
 	}
 
@@ -649,15 +609,13 @@ void Sotilas::annaSiirrot(std::vector<Siirto>& lista, Ruutu* ruutu, Asema* asema
 				}
 				else
 				{
-					lista.push_back(siirto);
+					lista.emplace_back(*ruutu, Ruutu(x, y + 1));
 				}
 
 				//Jos sotilaan kahta yläpuolella ei ole nappulaa voidaan liikkua
 				if (y == 1 && asema->_lauta[y + 2][x] == NULL)
 				{
-					Ruutu loppuRuutu = Ruutu(x, y + 2);
-					Siirto siirto(*ruutu, loppuRuutu);
-					lista.push_back(siirto);
+					lista.emplace_back(*ruutu, Ruutu(x, y + 2));
 				}
 			}
 
@@ -676,7 +634,7 @@ void Sotilas::annaSiirrot(std::vector<Siirto>& lista, Ruutu* ruutu, Asema* asema
 					}
 					else
 					{
-						lista.push_back(siirto);
+						lista.emplace_back(*ruutu, Ruutu(x - 1, y + 1));
 					}
 				}
 			}
@@ -696,7 +654,7 @@ void Sotilas::annaSiirrot(std::vector<Siirto>& lista, Ruutu* ruutu, Asema* asema
 					}
 					else
 					{
-						lista.push_back(siirto);
+						lista.emplace_back(*ruutu, Ruutu(x + 1, y + 1));
 					}
 				}
 			}
@@ -708,7 +666,7 @@ void Sotilas::annaSiirrot(std::vector<Siirto>& lista, Ruutu* ruutu, Asema* asema
 					{
 						if (asema->_lauta[y + 1][x + 1] == NULL)
 						{
-							lista.push_back(Siirto(*ruutu, Ruutu(x + 1, y + 1)));
+							lista.emplace_back(*ruutu, Ruutu(x + 1, y + 1));
 						}
 
 					}//Tehdään ohestalyönti vasemmalle
@@ -716,7 +674,7 @@ void Sotilas::annaSiirrot(std::vector<Siirto>& lista, Ruutu* ruutu, Asema* asema
 					{
 						if (asema->_lauta[y + 1][x - 1] == NULL)
 						{
-							lista.push_back(Siirto(*ruutu, Ruutu(x - 1, y + 1)));
+							lista.emplace_back(*ruutu, Ruutu(x - 1, y + 1));
 						}
 					}
 				}
@@ -736,15 +694,13 @@ void Sotilas::annaSiirrot(std::vector<Siirto>& lista, Ruutu* ruutu, Asema* asema
 				}
 				else
 				{
-					lista.push_back(siirto);
+					lista.emplace_back(*ruutu, Ruutu(x, y - 1));
 				}
 
 				//Jos sotilaan kahta yläpuolella ei ole nappulaa voidaan liikkua
 				if (y == 6 && asema->_lauta[y - 2][x] == NULL)
 				{
-					Ruutu loppuRuutu = Ruutu(x, y - 2);
-					Siirto siirto(*ruutu, loppuRuutu);
-					lista.push_back(siirto);
+					lista.emplace_back(*ruutu, Ruutu(x, y - 2));
 				}
 			}
 
@@ -763,7 +719,7 @@ void Sotilas::annaSiirrot(std::vector<Siirto>& lista, Ruutu* ruutu, Asema* asema
 					}
 					else
 					{
-						lista.push_back(siirto);
+						lista.emplace_back(*ruutu, Ruutu(x - 1, y - 1));
 					}
 					
 				}
@@ -784,7 +740,7 @@ void Sotilas::annaSiirrot(std::vector<Siirto>& lista, Ruutu* ruutu, Asema* asema
 					}
 					else
 					{
-						lista.push_back(siirto);
+						lista.emplace_back(*ruutu, Ruutu(x + 1, y - 1));
 					}
 				}
 			}
@@ -797,7 +753,7 @@ void Sotilas::annaSiirrot(std::vector<Siirto>& lista, Ruutu* ruutu, Asema* asema
 				{
 					if (asema->_lauta[y - 1][x + 1] == NULL)
 					{
-						lista.push_back(Siirto(*ruutu, Ruutu(x + 1, y - 1)));
+						lista.emplace_back(*ruutu, Ruutu(x + 1, y - 1));
 					}
 
 				}//Tehdään ohestalyönti vasemmalle
@@ -805,7 +761,7 @@ void Sotilas::annaSiirrot(std::vector<Siirto>& lista, Ruutu* ruutu, Asema* asema
 				{
 					if (asema->_lauta[y - 1][x - 1] == NULL)
 					{
-						lista.push_back(Siirto(*ruutu, Ruutu(x - 1, y - 1)));
+						lista.emplace_back(*ruutu, Ruutu(x - 1, y - 1));
 					}
 				}
 			}
