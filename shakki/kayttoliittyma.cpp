@@ -150,24 +150,27 @@ Siirto Kayttoliittyma::annaVastustajanSiirto()
 	}
 
 	Nappula* korotusNappula = (_asema->getSiirtovuoro() == 0) ? Asema::vd : Asema::md;
+
+
 	if (move.size() == 6)
 	{	
-		if (move[5] == L'D' || move[5] == L'd')
+		wchar_t korotusKirjain = tolower(move[5]);
+		if (move[5] == L'd')
 		{
 			korotusNappula = (_asema->getSiirtovuoro() == 0) ? Asema::vd : Asema::md;
 
 		}
-		else if (move[5] == L'R' || move[5] == L'r')
+		else if (move[5] == L'r')
 		{
 			korotusNappula = (_asema->getSiirtovuoro() == 0) ? Asema::vr : Asema::mr;
 
 		}
-		else if (move[5] == L'T' || move[5] == L't')
+		else if (move[5] == L't')
 		{
 			korotusNappula = (_asema->getSiirtovuoro() == 0) ? Asema::vt : Asema::mt;
 
 		}
-		else if (move[5] == L'L' || move[5] == L'l')
+		else if (move[5] == L'l')
 		{
 			korotusNappula = (_asema->getSiirtovuoro() == 0) ? Asema::vl : Asema::ml;
 
