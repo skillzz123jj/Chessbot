@@ -579,43 +579,68 @@ void Asema::huolehdiKuninkaanShakeista(std::vector<Siirto>& lista, int vari)
 	//K‰yd‰‰n raakasiirrot l‰pi 
 	for (Siirto s : lista)
 	{
-		paivitaAsema(&s);   
-
-		//K‰yd‰‰n lauta l‰pi ja p‰ivitet‰‰n kuninkaan koordinaatit 
-		for (int y = 0; y < 8; y++)
+		if (!s.onkoLyhytLinna() && !s.onkoPitkaLinna())
 		{
-			for (int x = 0; x < 8; x++)
-			{
-				if (_lauta[y][x] && _lauta[y][x]->getKoodi() == VK && vari == 0)
-				{
-					kuninkaanX = x;
-					kuninkaanY = y;
+			paivitaAsema(&s);   
 
-				}
-				else if (_lauta[y][x] && _lauta[y][x]->getKoodi() == MK && vari == 1)
+			//K‰yd‰‰n lauta l‰pi ja p‰ivitet‰‰n kuninkaan koordinaatit 
+			for (int y = 0; y < 8; y++)
+			{
+				for (int x = 0; x < 8; x++)
 				{
-					kuninkaanX = x;
-					kuninkaanY = y;
+					if (_lauta[y][x] && _lauta[y][x]->getKoodi() == VK && vari == 0)
+					{
+						kuninkaanX = x;
+						kuninkaanY = y;
+
+					}
+					else if (_lauta[y][x] && _lauta[y][x]->getKoodi() == MK && vari == 1)
+					{
+						kuninkaanX = x;
+						kuninkaanY = y;
+					}
 				}
 			}
+
+			Ruutu kuninkaanRuutu(kuninkaanX, kuninkaanY);
+			if (!onkoRuutuUhattu(&kuninkaanRuutu, vastustajanVari))
+			{
+				laillisetSiirrot.push_back(s);
+			}
+
+			// Siirron tarkastuksen j‰lkeen palataan alkutilanteeseen
+			*this = asemanKopio;
 		}
 
-		Ruutu kuninkaanRuutu(kuninkaanX, kuninkaanY);
-		if (!onkoRuutuUhattu(&kuninkaanRuutu, vastustajanVari) && !s.onkoLyhytLinna() && !s.onkoPitkaLinna())
-		{
-			laillisetSiirrot.push_back(s);
-		}
-
-		//Tarkistetaan onko ruudut kuninkaan ja tornin v‰liss‰ joko varattuja tai uhattuja
+		//Tarkistetaan linnoitukset alkuper‰isess‰ asemassa
 		if (s.onkoLyhytLinna())
 		{
+			// Etsit‰‰n kuninkaan sijainti alkuper‰isess‰ asemassa
+			for (int y = 0; y < 8; y++)
+			{
+				for (int x = 0; x < 8; x++)
+				{
+					if (asemanKopio._lauta[y][x] && asemanKopio._lauta[y][x]->getKoodi() == VK && vari == 0)
+					{
+						kuninkaanX = x;
+						kuninkaanY = y;
+					}
+					else if (asemanKopio._lauta[y][x] && asemanKopio._lauta[y][x]->getKoodi() == MK && vari == 1)
+					{
+						kuninkaanX = x;
+						kuninkaanY = y;
+					}
+				}
+			}
+			Ruutu kuninkaanRuutu(kuninkaanX, kuninkaanY);
+
 			if (vari == 0)
 			{
 				if (asemanKopio._lauta[0][5] == NULL && asemanKopio._lauta[0][6] == NULL && !asemanKopio.getOnkoValkeaKTliikkunut() && !asemanKopio.getOnkoValkeaKuningasLiikkunut())
 				{
 					Ruutu f1(5, 0);
 					Ruutu g1(6, 0);
-					if (!onkoRuutuUhattu(&f1, 1) && !onkoRuutuUhattu(&g1, 1) && !onkoRuutuUhattu(&kuninkaanRuutu, 1))
+					if (!asemanKopio.onkoRuutuUhattu(&kuninkaanRuutu, 1) && !asemanKopio.onkoRuutuUhattu(&f1, 1) && !asemanKopio.onkoRuutuUhattu(&g1, 1))
 					{
 						laillisetSiirrot.push_back(s);
 					}
@@ -627,7 +652,7 @@ void Asema::huolehdiKuninkaanShakeista(std::vector<Siirto>& lista, int vari)
 				{
 					Ruutu f8(5, 7);
 					Ruutu g8(6, 7);
-					if (!onkoRuutuUhattu(&f8, 0) && !onkoRuutuUhattu(&g8, 0) && !onkoRuutuUhattu(&kuninkaanRuutu, 0) )
+					if (!asemanKopio.onkoRuutuUhattu(&kuninkaanRuutu, 0) && !asemanKopio.onkoRuutuUhattu(&f8, 0) && !asemanKopio.onkoRuutuUhattu(&g8, 0))
 					{
 						laillisetSiirrot.push_back(s);
 					}
@@ -636,14 +661,32 @@ void Asema::huolehdiKuninkaanShakeista(std::vector<Siirto>& lista, int vari)
 		}
 		if (s.onkoPitkaLinna())
 		{
+			// Etsit‰‰n kuninkaan sijainti alkuper‰isess‰ asemassa
+			for (int y = 0; y < 8; y++)
+			{
+				for (int x = 0; x < 8; x++)
+				{
+					if (asemanKopio._lauta[y][x] && asemanKopio._lauta[y][x]->getKoodi() == VK && vari == 0)
+					{
+						kuninkaanX = x;
+						kuninkaanY = y;
+					}
+					else if (asemanKopio._lauta[y][x] && asemanKopio._lauta[y][x]->getKoodi() == MK && vari == 1)
+					{
+						kuninkaanX = x;
+						kuninkaanY = y;
+					}
+				}
+			}
+			Ruutu kuninkaanRuutu(kuninkaanX, kuninkaanY);
+
 			if (vari == 0)
 			{
 				if (asemanKopio._lauta[0][1] == NULL && asemanKopio._lauta[0][2] == NULL && asemanKopio._lauta[0][3] == NULL && !asemanKopio.getOnkoValkeaDTliikkunut() && !asemanKopio.getOnkoValkeaKuningasLiikkunut())
 				{
-					Ruutu b1(1, 0);
 					Ruutu c1(2, 0);
 					Ruutu d1(3, 0);
-					if (!onkoRuutuUhattu(&b1, 1) && !onkoRuutuUhattu(&c1, 1) && !onkoRuutuUhattu(&d1, 1) && !onkoRuutuUhattu(&kuninkaanRuutu, 1))
+					if (!asemanKopio.onkoRuutuUhattu(&kuninkaanRuutu, 1) && !asemanKopio.onkoRuutuUhattu(&c1, 1) && !asemanKopio.onkoRuutuUhattu(&d1, 1))
 					{
 						laillisetSiirrot.push_back(s);
 					}
@@ -653,19 +696,15 @@ void Asema::huolehdiKuninkaanShakeista(std::vector<Siirto>& lista, int vari)
 			{
 				if (asemanKopio._lauta[7][1] == NULL && asemanKopio._lauta[7][2] == NULL && asemanKopio._lauta[7][3] == NULL && !asemanKopio.getOnkoMustaDTliikkunut() && !asemanKopio.getOnkoMustaKuningasLiikkunut())
 				{
-					Ruutu b8(1, 7);
 					Ruutu c8(2, 7);
 					Ruutu d8(3, 7);
-					if (!onkoRuutuUhattu(&b8, 0) && !onkoRuutuUhattu(&c8, 0) && !onkoRuutuUhattu(&d8, 0) && !onkoRuutuUhattu(&kuninkaanRuutu, 0))
+					if (!asemanKopio.onkoRuutuUhattu(&kuninkaanRuutu, 0) && !asemanKopio.onkoRuutuUhattu(&c8, 0) && !asemanKopio.onkoRuutuUhattu(&d8, 0))
 					{
 						laillisetSiirrot.push_back(s);
 					}
 				}
 			}
 		}
-
-		// Siirron tarkastuksen j‰lkeen palataan alkutilanteeseen
-		*this = asemanKopio;
 	}
 
 	lista = laillisetSiirrot;
