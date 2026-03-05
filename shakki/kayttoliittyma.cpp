@@ -91,18 +91,27 @@ void Kayttoliittyma::piirraLauta()
 */
 Siirto Kayttoliittyma::annaVastustajanSiirto()
 {
-	wstring move;
+	wstring raakaSyote;
 	int lahtoX;
 	int lahtoY;
 	int loppuX;
 	int loppuY;
 	bool laillinen = false;
+	wstring syote;
 
 	while (!laillinen)
 	{
+		//Otetaan käyttäjän syöte ja muunnetaan se pieneksi
 		wcout << L"Anna siirtosi:" << endl;
-		wcin >> move;
+		wcin >> raakaSyote;
 		Asema* asema = _asema;
+		syote = L"";
+		for (wchar_t merkki : raakaSyote)
+		{
+			syote.push_back(tolower(merkki));
+		}
+
+		//Pyydetään käyttäjältä siirtoja kunnes syötetty siirto on laillinen
 
 		std::vector<Siirto> lista;
 		lista.reserve(64);
@@ -111,22 +120,22 @@ Siirto Kayttoliittyma::annaVastustajanSiirto()
 
 		for (auto siirto : lista)
 		{
-			if (move == L"O-O" && siirto.onkoLyhytLinna())
+			if (syote == L"o-o" && siirto.onkoLyhytLinna())
 			{
 				laillinen = true;
 
 			}
-			else if (move == L"O-O-O" && siirto.onkoPitkaLinna())
+			else if (syote == L"o-o-o" && siirto.onkoPitkaLinna())
 			{
 				laillinen = true;
 
 			}
-			if (move.size() == 5 || move.size() == 6)
+			if (syote.size() == 5 || syote.size() == 6)
 			{
-				lahtoX = move[0] - 'a';
-				lahtoY = move[1] - '1';
-				loppuX = move[3] - 'a';
-				loppuY = move[4] - '1';
+				lahtoX = syote[0] - 'a';
+				lahtoY = syote[1] - '1';
+				loppuX = syote[3] - 'a';
+				loppuY = syote[4] - '1';
 
 				Ruutu lahtoRuutu = Ruutu(lahtoX, lahtoY);
 				Ruutu loppuRuutu = Ruutu(loppuX, loppuY);
@@ -146,53 +155,55 @@ Siirto Kayttoliittyma::annaVastustajanSiirto()
 			}
 			
 		}
-		wcout << L"Syötä laillinen siirto." << endl;
+		if (!laillinen)wcout << L"Syötä laillinen siirto." << endl;
 	}
-
+	
+	//Hoida mahdolliset korotukset 
 	Nappula* korotusNappula = (_asema->getSiirtovuoro() == 0) ? Asema::vd : Asema::md;
 
-
-	if (move.size() == 6)
+	if (syote.size() == 6)
 	{	
-		wchar_t korotusKirjain = tolower(move[5]);
-		if (move[5] == L'd')
+		wchar_t korotusKirjain = tolower(syote[5]);
+		if (syote[5] == L'd')
 		{
 			korotusNappula = (_asema->getSiirtovuoro() == 0) ? Asema::vd : Asema::md;
 
 		}
-		else if (move[5] == L'r')
+		else if (syote[5] == L'r')
 		{
 			korotusNappula = (_asema->getSiirtovuoro() == 0) ? Asema::vr : Asema::mr;
 
 		}
-		else if (move[5] == L't')
+		else if (syote[5] == L't')
 		{
 			korotusNappula = (_asema->getSiirtovuoro() == 0) ? Asema::vt : Asema::mt;
 
 		}
-		else if (move[5] == L'l')
+		else if (syote[5] == L'l')
 		{
 			korotusNappula = (_asema->getSiirtovuoro() == 0) ? Asema::vl : Asema::ml;
 
 		}
 	}
-		if (move == L"O-O")
+	// Hoida mahdolliset linnoitukset
+		if (syote == L"o-o")
 		{
 			Siirto siirto(true, false);
 			return siirto;
 
 		}
-		else if (move == L"O-O-O")
+		else if (syote == L"o-o-o")
 		{
 			Siirto siirto(false, true);
 			return siirto;
 
 		}
 
-	lahtoX = move[0] - 'a';
-	lahtoY = move[1] - '1';
-	loppuX = move[3] - 'a';
-	loppuY = move[4] - '1';
+	// Luo siirrot
+	lahtoX = syote[0] - 'a';
+	lahtoY = syote[1] - '1';
+	loppuX = syote[3] - 'a';
+	loppuY = syote[4] - '1';
 	
 	Ruutu lahtoRuutu = Ruutu(lahtoX, lahtoY);
 	Ruutu loppuRuutu = Ruutu(loppuX, loppuY);
